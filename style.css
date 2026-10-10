@@ -43,7 +43,7 @@ html, body {
 }
 #main-content.visible { opacity: 1; }
 
-/* প্রিমিয়াম টপ বার গ্লাস এফেক্ট */
+/* টপ বার গ্লাস এফেক্ট */
 .top-bar {
     position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center;
     padding: 12px 18px; border-radius: 0 0 22px 22px; z-index: 100; margin-bottom: 15px;
@@ -74,17 +74,22 @@ html, body {
 h1 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 5px; color: #1a1a1a; }
 p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 
-/* সেকশন হ্যান্ডলিং */
-.page-section { display: none; }
-.page-section.active { display: block; animation: fadeIn 0.3s ease; }
+/* পেজ সেকশন টগলিং (একেবারে আলাদা আলাদা দেখানোর জন্য) */
+.page-section { display: none !important; }
+.page-section.active { display: block !important; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* প্রোডাক্ট গ্রিড */
-.product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px; }
-.product-card { background: rgba(255, 255, 255, 0.8); border-radius: 16px; padding: 12px; text-align: center; border: 1px solid rgba(212, 175, 55, 0.2); }
-.product-img-placeholder { width: 100%; height: 120px; background: #f4efe6; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; color: #b59a30; font-size: 1.5rem; }
-.product-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; color: #2c2c2c; }
-.product-price { font-size: 0.85rem; color: var(--accent-color); font-weight: 600; }
+/* এম্টি স্টেট বা ফাঁকা সেকশনের লুক */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #777;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    border: 1px dashed rgba(212, 175, 55, 0.3);
+    margin-top: 15px;
+}
 
 /* প্রোফাইল ড্যাশবোর্ড কার্ড */
 .profile-main-wrapper { display: flex; justify-content: center; align-items: flex-start; padding-top: 5px; }
@@ -117,7 +122,7 @@ p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 .profile-info-display h3 { font-size: 1.1rem; margin-bottom: 2px; }
 .profile-info-display p { font-size: 0.78rem; color: #666; margin-bottom: 1px; }
 
-/* জুরি কয়েন বক্স */
+/* রিয়েল জুরি কয়েন বক্স (জিরো কয়েন থেকে শুরু) */
 .zuri-coins-box {
     background: linear-gradient(135deg, rgba(212,175,55,0.18), rgba(255,255,255,0.9));
     border: 1px solid rgba(212,175,55,0.4); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 15px;
@@ -125,7 +130,7 @@ p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 .coin-title { font-size: 0.75rem; color: #777; font-weight: 600; margin-bottom: 2px; }
 .zuri-coins-box span { font-size: 1.15rem; font-weight: 700; color: #b59a30; }
 
-/* ই-কমার্স স্ট্যাটস (অর্ডার, উইশলিস্ট, কার্ট) */
+/* জেনুইন স্ট্যাটস (জিরো থেকে শুরু) */
 .profile-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
 .stat-box {
     background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;
@@ -137,7 +142,7 @@ p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 
 .logout-btn { background: #e05353; margin-top: 5px; box-shadow: none; }
 
-/* নিচের প্রিমিয়াম গ্লাস নেভিগেশন বার */
+/* নিচের নেভিগেশন বার */
 .bottom-nav {
     position: fixed; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-around; align-items: center;
     padding: 12px 10px; border-radius: 22px 22px 0 0; z-index: 100;

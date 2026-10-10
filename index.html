@@ -35,46 +35,37 @@
         </header>
 
         <main class="content-area">
-            <!-- হোম পেজ সেকশন -->
+            <!-- হোম পেজ (সম্পূর্ণ ফাঁকা, কোনো ফালতু প্রোডাক্ট নেই) -->
             <div id="home-section" class="page-section active">
-                <h1>Featured Collection</h1>
+                <h1>Welcome to Zuri</h1>
                 <p>Discover the art of handmade luxury jewelry.</p>
-                
-                <div class="product-grid">
-                    <div class="product-card glass-effect">
-                        <div class="product-img-placeholder"><i class="fas fa-gem"></i></div>
-                        <div class="product-title">Royal Gold Earrings</div>
-                        <div class="product-price">₹2,499</div>
-                    </div>
-                    <div class="product-card glass-effect">
-                        <div class="product-img-placeholder"><i class="fas fa-ring"></i></div>
-                        <div class="product-title">Diamond Stud Ring</div>
-                        <div class="product-price">₹3,899</div>
-                    </div>
+                <div class="empty-state">
+                    <i class="fas fa-box-open" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"><span></span></i>
+                    No products added yet. Your collection will appear here.
                 </div>
             </div>
 
-            <!-- অর্ডার্স সেকশন -->
+            <!-- অর্ডার্স পেজ (জিরো অর্ডার) -->
             <div id="orders-section" class="page-section">
                 <h1>My Orders</h1>
                 <p>Track your jewelry purchases.</p>
-                <div class="product-card glass-effect" style="text-align: left; padding: 15px; margin-top: 15px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                        <strong>#ZURI-9481</strong>
-                        <span style="color: #28a745; font-size: 0.8rem; font-weight: 600;">Delivered</span>
-                    </div>
-                    <p style="margin: 0; font-size: 0.8rem;">Royal Gold Earrings (Qty: 1)</p>
-                    <div style="color: var(--accent-color); font-weight: 600; margin-top: 5px;">₹2,499</div>
+                <div class="empty-state">
+                    <i class="fas fa-shopping-bag" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"></i>
+                    You have no active orders yet.
                 </div>
             </div>
 
-            <!-- ক্যাটাগরি সেকশন -->
+            <!-- ক্যাটাগরি পেজ -->
             <div id="category-section" class="page-section">
                 <h1>Categories</h1>
                 <p>Explore exclusive jewelry designs.</p>
+                <div class="empty-state">
+                    <i class="fas fa-th-large" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"></i>
+                    Categories will be available soon.
+                </div>
             </div>
 
-            <!-- প্রোফাইল সেকশন -->
+            <!-- প্রোফাইল পেজ -->
             <div id="profile-section" class="page-section profile-main-wrapper">
                 <div id="auth-container" class="profile-card glass-effect">
                     <h2>Customer Portal</h2>
@@ -109,12 +100,12 @@
                             <label for="signup-password">Password (min 6 chars)</label>
                             <input type="password" id="signup-password" minlength="6" required>
                         </div>
-                        <button type="submit" class="auth-btn">Sign Up & Get 250 Coins</button>
+                        <button type="submit" class="auth-btn">Sign Up</button>
                         <p class="switch-auth">Already have an account? <a href="#" id="show-login">Login</a></p>
                     </form>
                 </div>
 
-                <!-- আসল ফ্লিপকার্ট/মাইন্ট্রা স্টাইল ড্যাশবোর্ড -->
+                <!-- আসল প্রোফাইল ড্যাশবোর্ড (জিরো কয়েন, জিরো অর্ডার থেকে শুরু) -->
                 <div id="profile-dashboard" class="profile-card glass-effect hidden">
                      <div class="profile-header">
                          <div class="profile-avatar">
@@ -127,27 +118,27 @@
                          </div>
                      </div>
                      
-                     <!-- Zuri Coins Wallet -->
+                     <!-- Zuri Coins Wallet (Zero Start) -->
                      <div class="zuri-coins-box">
                          <div class="coin-title">💎 Zuri Coins Wallet</div>
-                         <span>250 Coins Available</span>
+                         <span>0 Coins Available</span>
                      </div>
 
-                     <!-- ই-কমার্স স্ট্যাটস গ্রিড (অর্ডার, উইশলিস্ট, কার্ট) -->
+                     <!-- রিয়েল জিরো স্ট্যাটস -->
                      <div class="profile-stats-grid">
                          <div class="stat-box">
                              <i class="fas fa-box-open"></i>
-                             <strong>1</strong>
+                             <strong>0</strong>
                              <span>Orders</span>
                          </div>
                          <div class="stat-box">
                              <i class="fas fa-heart" style="color: #e05353;"></i>
-                             <strong>3</strong>
+                             <strong>0</strong>
                              <span>Wishlist</span>
                          </div>
                          <div class="stat-box">
-                             <i class="fas fa-shopping-bag"></i>
-                             <strong>2</strong>
+                             <i class="fas fa-shopping-cart"></i>
+                             <strong>0</strong>
                              <span>Cart</span>
                          </div>
                      </div>
