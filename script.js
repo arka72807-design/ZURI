@@ -28,7 +28,7 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    }
+    },
 {
         id: 2,
         name: "Midnight Sparkle Oxidized Jhumka",
@@ -38,7 +38,7 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    }
+    },
 {
         id: 3,
         name: "Royal Golden Pearl Chandbali Earrings",
@@ -48,7 +48,7 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    }
+    },
 {
         id: 4,
         name: "Midnight Black Oxidized Jhumka",
@@ -58,7 +58,7 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    }
+    },
 {
         id: 5,
         name: "Royal Kundan Drops",
@@ -68,7 +68,7 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    }
+    },
 {
         id: 6,
         name: "Starry Pearl Studs",
@@ -78,7 +78,7 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    }
+    },
 {
         id: 7,
         name: "Boho Mirror Jhumka",
@@ -88,7 +88,7 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    }
+    },
 {
         id: 8,
         name: "Silver Gleam jhumka",
@@ -98,7 +98,7 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    }
+    },
 
 ];
 
