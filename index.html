@@ -17,53 +17,71 @@
     </div>
 
     <div id="main-content" class="hidden">
-        <!-- টপ বার - নতুন গ্লাস এফেক্ট ও লোগো -->
-        <header class="top-bar glass-effect">
+        <header class="top-bar">
             <div class="left-section">
                  <img src="image_0.png" alt="Zuri Logo" class="brand-logo-small">
             </div>
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search Earings, Necklaces...">
+                <input type="text" id="search-input" placeholder="Search Earrings, Necklaces...">
                 <i class="fas fa-search search-icon"></i>
-                <div id="search-suggestions" class="hidden glass-effect glass-input">
+                <div id="search-suggestions" class="hidden glass-effect">
                     <ul>
                         <li>Gold Earrings</li>
                         <li>Diamond Necklace</li>
                         <li>Silver Bracelets</li>
-                        <li>Pearl Jhumkas</li>
                     </ul>
                 </div>
             </div>
         </header>
 
-        <!-- মেইন কন্টেন্ট এরিয়া -->
         <main class="content-area">
-            <div id="home-section" class="active-section">
-                <h1>Welcome to Zuri</h1>
-                <p>Discover the art of handmade jewelry.</p>
+            <!-- হোম পেজ সেকশন -->
+            <div id="home-section" class="page-section active">
+                <h1>Featured Collection</h1>
+                <p>Discover the art of handmade luxury jewelry.</p>
+                
+                <div class="product-grid">
+                    <div class="product-card glass-effect">
+                        <div class="product-img-placeholder"><i class="fas fa-gem"></i></div>
+                        <div class="product-title">Royal Gold Earrings</div>
+                        <div class="product-price">₹2,499</div>
+                    </div>
+                    <div class="product-card glass-effect">
+                        <div class="product-img-placeholder"><i class="fas fa-ring"></i></div>
+                        <div class="product-title">Diamond Stud Ring</div>
+                        <div class="product-price">₹3,899</div>
+                    </div>
+                </div>
             </div>
 
             <!-- অর্ডার্স সেকশন -->
-            <div id="orders-section" class="hidden-section">
-                <h1>Your Orders</h1>
-                <p>No orders yet.</p>
+            <div id="orders-section" class="page-section">
+                <h1>My Orders</h1>
+                <p>Track your jewelry purchases.</p>
+                <div class="product-card glass-effect" style="text-align: left; padding: 15px; margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <strong>#ZURI-9481</strong>
+                        <span style="color: #28a745; font-size: 0.8rem; font-weight: 600;">Delivered</span>
+                    </div>
+                    <p style="margin: 0; font-size: 0.8rem;">Royal Gold Earrings (Qty: 1)</p>
+                    <div style="color: var(--accent-color); font-weight: 600; margin-top: 5px;">₹2,499</div>
+                </div>
             </div>
 
             <!-- ক্যাটাগরি সেকশন -->
-            <div id="category-section" class="hidden-section">
+            <div id="category-section" class="page-section">
                 <h1>Categories</h1>
-                <p>Explore by type.</p>
+                <p>Explore exclusive jewelry designs.</p>
             </div>
 
-            <!-- প্রোফাইল সেকশন (লগইন/সাইন-আপ/ড্যাশবোর্ড) -->
-            <div id="profile-section" class="hidden-section profile-main-wrapper">
-                <div id="auth-container" class="glass-effect profile-card">
-                    <h2>My Profile</h2>
+            <!-- প্রোফাইল সেকশন -->
+            <div id="profile-section" class="page-section profile-main-wrapper">
+                <div id="auth-container" class="profile-card glass-effect">
+                    <h2>Customer Portal</h2>
                     
-                    <!-- লগইন ফর্ম -->
                     <form id="login-form" class="auth-form">
                         <div class="form-group">
-                            <label for="login-email">Email</label>
+                            <label for="login-email">Email Address</label>
                             <input type="email" id="login-email" required>
                         </div>
                         <div class="form-group">
@@ -71,37 +89,36 @@
                             <input type="password" id="login-password" required>
                         </div>
                         <button type="submit" class="auth-btn">Login</button>
-                        <p class="switch-auth">New here? <a href="#" id="show-signup">Create an account</a></p>
+                        <p class="switch-auth">New to Zuri? <a href="#" id="show-signup">Create an account</a></p>
                     </form>
 
-                    <!-- সাইন-আপ ফর্ম -->
                     <form id="signup-form" class="auth-form hidden">
                         <div class="form-group">
                             <label for="signup-name">Full Name</label>
                             <input type="text" id="signup-name" required>
                         </div>
                         <div class="form-group">
-                            <label for="signup-email">Email</label>
+                            <label for="signup-email">Email Address</label>
                             <input type="email" id="signup-email" required>
                         </div>
                         <div class="form-group">
                             <label for="signup-phone">Phone Number</label>
-                            <input type="tel" id="signup-phone" pattern="[0-9]{10}" placeholder="1234567890" required>
+                            <input type="tel" id="signup-phone" pattern="[0-9]{10}" placeholder="10-digit number" required>
                         </div>
                         <div class="form-group">
                             <label for="signup-password">Password (min 6 chars)</label>
                             <input type="password" id="signup-password" minlength="6" required>
                         </div>
-                        <button type="submit" class="auth-btn">Sign Up</button>
+                        <button type="submit" class="auth-btn">Sign Up & Get 250 Coins</button>
                         <p class="switch-auth">Already have an account? <a href="#" id="show-login">Login</a></p>
                     </form>
                 </div>
 
-                <!-- প্রোফাইল ড্যাশবোর্ড (লগইন হওয়ার পর দেখাবে) -->
-                <div id="profile-dashboard" class="glass-effect profile-card hidden">
+                <!-- আসল ফ্লিপকার্ট/মাইন্ট্রা স্টাইল ড্যাশবোর্ড -->
+                <div id="profile-dashboard" class="profile-card glass-effect hidden">
                      <div class="profile-header">
                          <div class="profile-avatar">
-                             <i class="fas fa-user"></i>
+                             <i class="fas fa-crown"></i>
                          </div>
                          <div class="profile-info-display">
                              <h3 id="display-name">User Name</h3>
@@ -109,22 +126,47 @@
                              <p id="display-email">Email: N/A</p>
                          </div>
                      </div>
+                     
+                     <!-- Zuri Coins Wallet -->
+                     <div class="zuri-coins-box">
+                         <div class="coin-title">💎 Zuri Coins Wallet</div>
+                         <span>250 Coins Available</span>
+                     </div>
+
+                     <!-- ই-কমার্স স্ট্যাটস গ্রিড (অর্ডার, উইশলিস্ট, কার্ট) -->
+                     <div class="profile-stats-grid">
+                         <div class="stat-box">
+                             <i class="fas fa-box-open"></i>
+                             <strong>1</strong>
+                             <span>Orders</span>
+                         </div>
+                         <div class="stat-box">
+                             <i class="fas fa-heart" style="color: #e05353;"></i>
+                             <strong>3</strong>
+                             <span>Wishlist</span>
+                         </div>
+                         <div class="stat-box">
+                             <i class="fas fa-shopping-bag"></i>
+                             <strong>2</strong>
+                             <span>Cart</span>
+                         </div>
+                     </div>
+
                      <button id="logout-btn" class="auth-btn logout-btn">Logout</button>
                 </div>
             </div>
         </main>
 
-        <!-- নিচের নেভিগেশন বার -->
         <nav class="bottom-nav glass-effect">
-            <a href="#home" class="nav-item active" data-target="home-section">
+            <a class="nav-item active" data-target="home-section">
                 <div class="icon home-icon"></div>
                 <span>Home</span>
             </a>
-            <a href="#orders" class="nav-item" data-target="orders-section">
+            <a class="nav-item" data-target="orders-section">
                 <div class="icon order-icon"></div>
                 <span>Orders</span>
             </a>
-             <a href="#categories" class="nav-item order-menu" data-target="category-section">
+             <a class="nav-item" data-target="category-section">
                 <div class="category-icon">
                     <div class="cat-box"></div>
                     <div class="cat-box"></div>
@@ -133,13 +175,12 @@
                 </div>
                 <span>Category</span>
              </a>
-            <a href="#profile" class="nav-item" data-target="profile-section">
+            <a class="nav-item" data-target="profile-section">
                  <div class="icon profile-icon"></div>
                 <span>Profile</span>
             </a>
         </nav>
 
-        <!-- ফ্লোটিং WhatsApp বাটন -->
         <a href="https://wa.me/918910377745" target="_blank" class="floating-whatsapp glass-effect">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
         </a>

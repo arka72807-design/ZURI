@@ -1,39 +1,28 @@
 :root {
     --bg-off-white: #fcfbfa;
-    --accent-color: #d4af37; /* গোল্ডেন */
-    --glass-bg: rgba(255, 255, 255, 0.3);
-    --glass-border: rgba(255, 255, 255, 0.3);
+    --accent-color: #d4af37;
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(212, 175, 55, 0.25);
     --text-color: #2c2c2c;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-body {
+html, body {
+    background-color: var(--bg-off-white) !important;
     font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-off-white);
     color: var(--text-color);
     overflow-x: hidden;
     height: 100vh;
     position: relative;
 }
 
-/* লোডিং স্ক্রিন স্টাইল */
+/* লোডিং স্ক্রিন */
 #loading-screen {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: var(--bg-off-white);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    transition: opacity 0.5s ease-out;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--bg-off-white); display: flex; justify-content: center; align-items: center;
+    z-index: 1000; transition: opacity 0.5s ease-out;
 }
-
 .logo-reveal-wrapper { text-align: center; }
 .loading-logo { max-width: 250px; height: auto; margin-bottom: 5px; }
 .loading-slogan { font-family: 'Playfair Display', serif; font-size: 0.7rem; letter-spacing: 3px; color: #666; }
@@ -48,143 +37,138 @@ body {
 
 .hidden { display: none !important; }
 
-/* মেইন কন্টেন্ট */
 #main-content {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-    background-color: var(--bg-off-white);
+    display: flex; flex-direction: column; height: 100vh;
+    opacity: 0; transition: opacity 0.5s ease-in; background-color: var(--bg-off-white) !important;
 }
-
 #main-content.visible { opacity: 1; }
 
-/* টপ বার - নতুন গ্লাস এফেক্ট ও লোগো প্লেসমেন্ট */
+/* প্রিমিয়াম টপ বার গ্লাস এফেক্ট */
 .top-bar {
-    position: sticky; top: 0;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 15px 20px;
-    border-radius: 0 0 25px 25px;
-    z-index: 100; margin-bottom: 15px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 18px; border-radius: 0 0 22px 22px; z-index: 100; margin-bottom: 15px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
 }
+.brand-logo-small { max-height: 35px; width: auto; display: block; }
 
-/* নতুন লোগো সাইজ ও পজিশন */
-.brand-logo-small { max-height: 40px; width: auto; display: block; }
-
-/* গ্লাস এফেক্ট */
 .glass-effect {
     background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
 }
 
-/* সার্চ কন্টেইনার */
-.search-container { position: relative; flex: 1; margin-left: 20px; }
+.search-container { position: relative; flex: 1; margin-left: 15px; }
 #search-input {
-    width: 100%; padding: 10px 15px 10px 40px;
-    border-radius: 25px; font-size: 0.9rem;
-    border: 1px solid rgba(0,0,0,0.05); outline: none;
-    background: rgba(255,255,255,0.6);
+    width: 100%; padding: 9px 15px 9px 38px; border-radius: 22px; font-size: 0.85rem;
+    border: 1px solid rgba(212, 175, 55, 0.3); outline: none; background: rgba(255, 255, 255, 0.85);
 }
-.search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999; font-size: 0.9rem; }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #888; font-size: 0.85rem; }
 
-/* সার্চ সাজেশন */
-#search-suggestions {
-    position: absolute; top: 100%; left: 0; width: 100%;
-    margin-top: 10px; border-radius: 15px; padding: 10px;
-}
-#search-suggestions ul { list-style: none; }
-#search-suggestions li {
-    padding: 8px 10px; cursor: pointer; font-size: 0.85rem;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-#search-suggestions li:last-child { border-bottom: none; }
+.content-area { flex: 1; padding: 20px; overflow-y: auto; padding-bottom: 110px; background-color: var(--bg-off-white); }
+h1 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 5px; color: #1a1a1a; }
+p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 
-/* কন্টেন্ট এরিয়া */
-.content-area { flex: 1; padding: 20px; overflow-y: auto; padding-bottom: 90px; }
-h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px; }
-p { font-size: 0.9rem; color: #555; }
-
-.hidden-section { display: none; }
-.active-section { display: block; animation: fadeIn 0.3s ease; }
+/* সেকশন হ্যান্ডলিং */
+.page-section { display: none; }
+.page-section.active { display: block; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* নিচের নেভিগেশন বার */
+/* প্রোডাক্ট গ্রিড */
+.product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px; }
+.product-card { background: rgba(255, 255, 255, 0.8); border-radius: 16px; padding: 12px; text-align: center; border: 1px solid rgba(212, 175, 55, 0.2); }
+.product-img-placeholder { width: 100%; height: 120px; background: #f4efe6; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; color: #b59a30; font-size: 1.5rem; }
+.product-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; color: #2c2c2c; }
+.product-price { font-size: 0.85rem; color: var(--accent-color); font-weight: 600; }
+
+/* প্রোফাইল ড্যাশবোর্ড কার্ড */
+.profile-main-wrapper { display: flex; justify-content: center; align-items: flex-start; padding-top: 5px; }
+.profile-card {
+    width: 100%; max-width: 380px; padding: 22px; border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+.profile-card h2 { margin-bottom: 18px; text-align: center; font-family: 'Playfair Display', serif; color: #1a1a1a; }
+
+.auth-form .form-group { margin-bottom: 12px; }
+.auth-form label { display: block; margin-bottom: 4px; font-size: 0.8rem; color: #555; font-weight: 500; }
+.auth-form input {
+    width: 100%; padding: 10px 14px; border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.95); outline: none; font-size: 0.85rem;
+}
+.auth-btn {
+    width: 100%; padding: 11px; border-radius: 22px; background: var(--accent-color); color: white;
+    border: none; font-weight: 600; cursor: pointer; margin-top: 12px; font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+.switch-auth { text-align: center; margin-top: 12px; font-size: 0.8rem; }
+.switch-auth a { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+
+.profile-header { display: flex; align-items: center; margin-bottom: 15px; }
+.profile-avatar {
+    width: 55px; height: 55px; border-radius: 50%; background: rgba(212, 175, 55, 0.2);
+    display: flex; justify-content: center; align-items: center; font-size: 1.3rem; color: var(--accent-color); margin-right: 15px;
+}
+.profile-info-display h3 { font-size: 1.1rem; margin-bottom: 2px; }
+.profile-info-display p { font-size: 0.78rem; color: #666; margin-bottom: 1px; }
+
+/* জুরি কয়েন বক্স */
+.zuri-coins-box {
+    background: linear-gradient(135deg, rgba(212,175,55,0.18), rgba(255,255,255,0.9));
+    border: 1px solid rgba(212,175,55,0.4); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 15px;
+}
+.coin-title { font-size: 0.75rem; color: #777; font-weight: 600; margin-bottom: 2px; }
+.zuri-coins-box span { font-size: 1.15rem; font-weight: 700; color: #b59a30; }
+
+/* ই-কমার্স স্ট্যাটস (অর্ডার, উইশলিস্ট, কার্ট) */
+.profile-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
+.stat-box {
+    background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;
+    padding: 10px 5px; text-align: center;
+}
+.stat-box i { font-size: 1.1rem; color: var(--accent-color); margin-bottom: 4px; display: block; }
+.stat-box strong { display: block; font-size: 0.95rem; color: #1a1a1a; }
+.stat-box span { font-size: 0.7rem; color: #666; }
+
+.logout-btn { background: #e05353; margin-top: 5px; box-shadow: none; }
+
+/* নিচের প্রিমিয়াম গ্লাস নেভিগেশন বার */
 .bottom-nav {
-    position: fixed; bottom: 0; left: 0; width: 100%;
-    display: flex; justify-content: space-around; align-items: center;
-    padding: 12px 10px;
-    border-radius: 25px 25px 0 0; z-index: 100;
+    position: fixed; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-around; align-items: center;
+    padding: 12px 10px; border-radius: 22px 22px 0 0; z-index: 100;
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-top: 1px solid var(--glass-border);
+    box-shadow: -4px -4px 20px rgba(0, 0, 0, 0.03);
 }
-
-.nav-item {
-    text-decoration: none; color: #999;
-    display: flex; flex-direction: column; align-items: center;
-    font-size: 0.7rem; font-weight: 500;
-    transition: color 0.2s;
-}
+.nav-item { text-decoration: none; color: #888; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; font-weight: 500; cursor: pointer; }
 .nav-item.active { color: var(--accent-color); }
+.icon { width: 22px; height: 22px; margin-bottom: 3px; background-size: contain; background-repeat: no-repeat; background-position: center; }
 
-.icon { width: 24px; height: 24px; margin-bottom: 3px; background-size: contain; background-repeat: no-repeat; background-position: center; }
-
-/* নেভিগেশন আইকন (অ্যাক্টিভ ও ইন-অ্যাক্টিভ) */
-.home-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'%3E%3C/path%3E%3C/svg%3E"); }
+.home-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23888'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'%3E%3C/svg%3E"); }
 .nav-item.active .home-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4af37' viewBox='0 0 24 24'%3E%3Cpath d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'%3E%3C/path%3E%3C/svg%3E"); }
 
-.order-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'%3E%3C/path%3E%3C/svg%3E"); }
+.order-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23888'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'%3E%3C/path%3E%3C/svg%3E"); }
 .nav-item.active .order-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4af37' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'%3E%3C/path%3E%3C/svg%3E"); }
 
-.profile-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'%3E%3C/path%3E%3C/svg%3E"); }
-.nav-item.active .profile-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4af37' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'%3E%3C/path%3E%3C/svg%3E"); }
+.profile-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23888'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'%3E%3C/svg%3E"); }
+.nav-item.active .profile-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4af37' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'%3E%3C/svg%3E"); }
 
 .category-icon {
     display: grid; grid-template-columns: repeat(2, 7px); grid-template-rows: repeat(2, 7px); gap: 2px;
-    width: 24px; height: 24px; margin-bottom: 3px; place-content: center;
+    width: 22px; height: 22px; margin-bottom: 3px; place-content: center;
 }
-.cat-box { width: 7px; height: 7px; background-color: #999; border-radius: 1.5px; }
+.cat-box { width: 7px; height: 7px; background-color: #888; border-radius: 1px; }
 .nav-item.active .cat-box { background-color: var(--accent-color); }
 
-/* ফ্লোটিং WhatsApp */
 .floating-whatsapp {
-    position: fixed; right: 20px; bottom: 90px;
-    width: 55px; height: 55px; border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    z-index: 90; box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+    position: fixed; right: 20px; bottom: 85px; width: 50px; height: 50px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center; z-index: 90; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
-.floating-whatsapp img { width: 30px; height: 30px; }
-
-/* প্রোফাইল সেকশন স্টাইল */
-.profile-main-wrapper { display: flex; justify-content: center; align-items: center; min-height: 80%; }
-.profile-card { width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; margin: auto; }
-.profile-card h2 { margin-bottom: 20px; text-align: center; font-family: 'Playfair Display', serif; }
-
-.auth-form .form-group { margin-bottom: 15px; }
-.auth-form label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: #555; }
-.auth-form input {
-    width: 100%; padding: 10px; border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.7);
-    outline: none; font-size: 0.9rem;
-}
-
-.auth-btn {
-    width: 100%; padding: 12px; border-radius: 25px;
-    background: var(--accent-color); color: white;
-    border: none; font-weight: 600; cursor: pointer; margin-top: 15px;
-}
-.switch-auth { text-align: center; margin-top: 15px; font-size: 0.8rem; }
-.switch-auth a { color: var(--accent-color); text-decoration: none; font-weight: 600; }
-
-/* প্রোফাইল ড্যাশবোর্ড */
-.profile-header { display: flex; align-items: center; margin-bottom: 20px; }
-.profile-avatar {
-    width: 60px; height: 60px; border-radius: 50%;
-    background: rgba(212, 175, 55, 0.2); display: flex;
-    justify-content: center; align-items: center;
-    font-size: 1.5rem; color: var(--accent-color); margin-right: 20px;
-}
-.profile-info-display h3 { font-size: 1.2rem; margin-bottom: 2px; }
-.profile-info-display p { font-size: 0.8rem; color: #777; margin-bottom: 1px; }
-.logout-btn { background: #ff4d4d; margin-top: 10px; }
+.floating-whatsapp img { width: 28px; height: 28px; }
