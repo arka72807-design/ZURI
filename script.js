@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
     loadProducts();
 });
 
-// প্রোডাক্ট ডেটাবেস: এখানে স্টক, রেটিং ও রিভিউ কাউন্ট একদম জিরো/খালি রাখা হয়েছে। তুই নিজের মতো ডেটা দিবি।
+// প্রোডাক্ট ডেটাবেস: তোর প্রোডাক্টগুলো এখানে পর পর সাজাবি
 const productsData = [
     {
         id: 1,
@@ -29,7 +29,7 @@ const productsData = [
         rating: 0,
         reviewsCount: 0
     },
-{
+    {
         id: 2,
         name: "Midnight Sparkle Oxidized Jhumka",
         image: "earings_2.jpg",
@@ -39,17 +39,17 @@ const productsData = [
         rating: 0,
         reviewsCount: 0
     },
-{
+    {
         id: 3,
         name: "Royal Golden Pearl Chandbali Earrings",
         image: "earings_3.jpg",
         currentPrice: 129,
-        originalPrice: 160,
+        originalPrice: 169,
         stock: 1,
         rating: 0,
         reviewsCount: 0
     },
-{
+    {
         id: 4,
         name: "Midnight Black Oxidized Jhumka",
         image: "earings_4.jpg",
@@ -59,7 +59,7 @@ const productsData = [
         rating: 0,
         reviewsCount: 0
     },
-{
+    {
         id: 5,
         name: "Royal Kundan Drops",
         image: "earings_5.jpg",
@@ -69,7 +69,7 @@ const productsData = [
         rating: 0,
         reviewsCount: 0
     },
-{
+    {
         id: 6,
         name: "Starry Pearl Studs",
         image: "earings_6.jpg",
@@ -79,7 +79,7 @@ const productsData = [
         rating: 0,
         reviewsCount: 0
     },
-{
+    {
         id: 7,
         name: "Boho Mirror Jhumka",
         image: "earings_7.jpg",
@@ -89,7 +89,7 @@ const productsData = [
         rating: 0,
         reviewsCount: 0
     },
-{
+    {
         id: 8,
         name: "Silver Gleam jhumka",
         image: "earings_8.jpg",
@@ -98,11 +98,10 @@ const productsData = [
         stock: 1,
         rating: 0,
         reviewsCount: 0
-    },
+    }
+]; // <-- দেখ, এই কমাগুলো আর সবার শেষে এই '}]' ব্র্যাকেটটা ঠিক আছে!
 
-];
-
-// ক্যাটাগরি পেজে প্রোডাক্টগুলো অটো রেন্ডার করার ফাংশন
+// ক্যাটাগরি পেজে প্রোডাক্টগুলো অটো রেন্ডার করার একমাত্র ও ফাইনাল ফাংশন
 function loadProducts() {
     const gridContainer = document.getElementById('dynamic-product-grid');
     if (!gridContainer) return;
@@ -320,4 +319,4 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         showAuth();
     }
-});
+});s
