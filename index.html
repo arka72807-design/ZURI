@@ -53,44 +53,13 @@
                 </div>
             </div>
 
-            <!-- অর্ডার্স পেজ (ফুল পেজ লেআউট) -->
+            <!-- অর্ডার্স পেজ (ক্লিন ও ট্র্যাকিং উপযোগী) -->
             <div id="orders-section" class="page-section">
                 <h1>My Orders</h1>
                 <p>Track all your ongoing and past jewelry orders here.</p>
-                
-                <div class="full-page-container">
-                    <div class="catalog-card" id="orders-list-card">
-                        <div class="catalog-left">
-                            <i class="fas fa-box-open"></i>
-                            <div class="catalog-info">
-                                <h3>Order History</h3>
-                                <p>0 Orders placed yet</p>
-                            </div>
-                        </div>
-                        <div class="catalog-right">View <i class="fas fa-chevron-right"></i></div>
-                    </div>
-
-                    <div class="catalog-card" id="wishlist-list-card">
-                        <div class="catalog-left">
-                            <i class="fas fa-heart" style="color: #e05353;"></i>
-                            <div class="catalog-info">
-                                <h3>My Wishlist</h3>
-                                <p>0 Items saved</p>
-                            </div>
-                        </div>
-                        <div class="catalog-right">View <i class="fas fa-chevron-right"></i></div>
-                    </div>
-
-                    <div class="catalog-card" id="cart-list-card">
-                        <div class="catalog-left">
-                            <i class="fas fa-shopping-cart"></i>
-                            <div class="catalog-info">
-                                <h3>Shopping Cart</h3>
-                                <p>0 Items in cart</p>
-                            </div>
-                        </div>
-                        <div class="catalog-right">View <i class="fas fa-chevron-right"></i></div>
-                    </div>
+                <div class="empty-state">
+                    <i class="fas fa-box-open" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"></i>
+                    No orders yet. Once you place an order, you can track it and view your invoice here.
                 </div>
             </div>
 
@@ -152,7 +121,7 @@
                     </form>
                 </div>
 
-                <!-- প্রোফাইল ড্যাশবোর্ড (হাইলাইটেড জুরি কয়েন ও ফুল পেজ অপশনসহ) -->
+                <!-- প্রোফাইল ড্যাশবোর্ড -->
                 <div id="profile-dashboard" class="profile-card hidden">
                      <div class="profile-header">
                          <div class="profile-avatar">
@@ -165,13 +134,19 @@
                          </div>
                      </div>
                      
-                     <!-- হাইলাইটেড জুরি কয়েন বক্স -->
-                     <div class="zuri-coins-highlight-box" id="coins-box-btn">
-                         <div class="coin-title">💎 Zuri Coins Wallet</div>
-                         <span>0 Coins Available</span>
+                     <!-- হাইলাইটেড জুরি কয়েন বক্স (পাশে স্পষ্ট 'View >' অপশন সহ) -->
+                     <div class="catalog-card zuri-coins-highlight-box" id="coins-box-btn">
+                         <div class="catalog-left">
+                             <i class="fas fa-gem" style="color: #d4af37; font-size: 1.3rem;"></i>
+                             <div class="catalog-info" style="text-align: left;">
+                                 <h3 class="coin-title" style="margin: 0;">Zuri Coins Wallet</h3>
+                                 <p style="color: #fff; font-weight: 700; font-size: 1.1rem; margin: 0;">0 Coins Available</p>
+                             </div>
+                         </div>
+                         <div class="catalog-right" style="color: #d4af37; font-size: 0.85rem;">View <i class="fas fa-chevron-right"></i></div>
                      </div>
 
-                     <!-- ফুল-পেজ স্টাইল অপশন লিস্ট (অর্ডার, উইশলিস্ট, কার্ট) -->
+                     <!-- প্রোফাইলের ভেতরের অপশন লিস্ট (অর্ডার, উইশলিস্ট, কার্ট) -->
                      <div class="full-page-container" style="margin-bottom: 15px;">
                          <div class="catalog-card" id="profile-stat-orders" style="padding: 12px 15px;">
                              <div class="catalog-left">
@@ -212,20 +187,23 @@
             </div>
         </main>
 
-        <!-- পপ-আপ মডাল -->
+        <!-- জুরি কয়েন পপ-আপ মডাল (নিখুঁত ইংলিশ এক্সপ্লানেশনসহ) -->
         <div id="coins-modal" class="custom-modal hidden">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3><i class="fas fa-gem" style="color: #d4af37;"></i> Zuri Coins Reward</h3>
+                    <h3><i class="fas fa-gem" style="color: #d4af37;"></i> Zuri Coins Rewards</h3>
                     <span id="close-modal-btn">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <p>Earn <strong>100 Zuri Coins</strong> and unlock an exclusive <strong>70% Discount</strong> on any Earrings!</p>
-                    <p style="font-size: 0.75rem; color: #888; margin-top: 10px;">Select coin-boost option during checkout to earn coins instantly.</p>
+                    <p style="margin-bottom: 8px;">Earn <strong>100 Zuri Coins</strong> and unlock an exclusive <strong>70% Discount on Any Product!</strong></p>
+                    <p style="font-size: 0.78rem; color: #666; background: #fdfcf8; padding: 8px; border-radius: 8px; border: 1px solid rgba(212,175,55,0.2);">
+                        <strong>How to earn:</strong> A standard ₹100 product gives 0 coins. But if you choose the coin-boost option at ₹105, you instantly earn 5 to 10 Zuri Coins!
+                    </p>
                 </div>
             </div>
         </div>
 
+        <!-- ডিটেইলস মডাল -->
         <div id="detail-modal" class="custom-modal hidden">
             <div class="modal-content">
                 <div class="modal-header">

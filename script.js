@@ -47,7 +47,7 @@ if (closeModalBtn) {
     closeModalBtn.addEventListener('click', () => { coinsModal.classList.add('hidden'); });
 }
 
-// ডিটেইলস পপ-আপ (Orders, Wishlist, Cart)
+// ডিটেইলস পপ-আপ
 const detailModal = document.getElementById('detail-modal');
 const closeDetailModal = document.getElementById('close-detail-modal');
 const detailModalTitle = document.getElementById('detail-modal-title');
@@ -59,12 +59,8 @@ function openDetail(title, text) {
     detailModal.classList.remove('hidden');
 }
 
-document.getElementById('orders-list-card').addEventListener('click', () => openDetail("My Orders", "You have no active orders yet. Once placed, order tracking will appear here."));
-document.getElementById('wishlist-list-card').addEventListener('click', () => openDetail("My Wishlist", "Your wishlist is empty. Save your favorite jewelry items to view them here."));
-document.getElementById('cart-list-card').addEventListener('click', () => openDetail("Shopping Cart", "Your shopping cart is currently empty."));
-
-document.getElementById('profile-stat-orders').addEventListener('click', () => openDetail("My Orders", "You have no active orders yet."));
-document.getElementById('profile-stat-wishlist').addEventListener('click', () => openDetail("My Wishlist", "Your wishlist is empty."));
+document.getElementById('profile-stat-orders').addEventListener('click', () => openDetail("My Orders", "You have no active orders yet. Track your ongoing and past jewelry orders here."));
+document.getElementById('profile-stat-wishlist').addEventListener('click', () => openDetail("My Wishlist", "Your wishlist is empty. Save your favorite jewelry items to view them here."));
 document.getElementById('profile-stat-cart').addEventListener('click', () => openDetail("Shopping Cart", "Your shopping cart is currently empty."));
 
 if (closeDetailModal) {
