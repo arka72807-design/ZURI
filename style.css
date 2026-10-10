@@ -1,8 +1,7 @@
 :root {
-    --primary-color: #1a1a1a;
-    --accent-color: #d4af37;
-    --bg-off-white: #fcfbfa; /* তোর লোগোর অফ-হোয়াইট ব্যাকগ্রাউন্ড */
-    --glass-bg: rgba(255, 255, 255, 0.65);
+    --bg-off-white: #fcfbfa;
+    --accent-color: #d4af37; /* গোল্ডেন */
+    --glass-bg: rgba(255, 255, 255, 0.3);
     --glass-border: rgba(255, 255, 255, 0.3);
     --text-color: #2c2c2c;
 }
@@ -14,20 +13,20 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-    background-color: #fcfbfa !important;
+body {
     font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-off-white);
     color: var(--text-color);
     overflow-x: hidden;
     height: 100vh;
     position: relative;
 }
 
-/* লোডিং স্ক্রিন */
+/* লোডিং স্ক্রিন স্টাইল */
 #loading-screen {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #fcfbfa;
+    background-color: var(--bg-off-white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,47 +34,16 @@ html, body {
     transition: opacity 0.5s ease-out;
 }
 
-.logo-reveal-wrapper {
-    text-align: center;
-}
-
-.loading-logo {
-    max-width: 280px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.loading-slogan {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.75rem;
-    letter-spacing: 4px;
-    color: #666;
-}
-
-.fade-in-out {
-    animation: revealAndFade 1.5s forwards;
-}
+.logo-reveal-wrapper { text-align: center; }
+.loading-logo { max-width: 250px; height: auto; margin-bottom: 5px; }
+.loading-slogan { font-family: 'Playfair Display', serif; font-size: 0.7rem; letter-spacing: 3px; color: #666; }
+.fade-in-out { animation: revealAndFade 1.5s forwards; }
 
 @keyframes revealAndFade {
     0% { opacity: 0; transform: translateY(15px); }
     30% { opacity: 1; transform: translateY(0); }
     80% { opacity: 1; }
     100% { opacity: 0; }
-}
-
-/* গ্লাস এফেক্ট */
-.glass-effect {
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 25px rgba(0,0,0,0.05);
-}
-
-.glass-input {
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(5px);
 }
 
 .hidden { display: none !important; }
@@ -87,171 +55,136 @@ html, body {
     height: 100vh;
     opacity: 0;
     transition: opacity 0.5s ease-in;
-    background-color: #fcfbfa;
+    background-color: var(--bg-off-white);
 }
 
 #main-content.visible { opacity: 1; }
 
-/* টপ বার */
+/* টপ বার - নতুন গ্লাস এফেক্ট ও লোগো প্লেসমেন্ট */
 .top-bar {
-    position: sticky;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: sticky; top: 0;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 15px 20px;
     border-radius: 0 0 25px 25px;
-    z-index: 100;
-    margin-bottom: 20px;
+    z-index: 100; margin-bottom: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
-.brand-logo-small {
-    max-height: 35px;
-    width: auto;
+/* নতুন লোগো সাইজ ও পজিশন */
+.brand-logo-small { max-height: 40px; width: auto; display: block; }
+
+/* গ্লাস এফেক্ট */
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
 }
 
-.search-container {
-    position: relative;
-    flex: 1;
-    margin-left: 15px;
-}
-
+/* সার্চ কন্টেইনার */
+.search-container { position: relative; flex: 1; margin-left: 20px; }
 #search-input {
-    width: 100%;
-    padding: 10px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    border: none;
-    color: var(--text-color);
-    outline: none;
+    width: 100%; padding: 10px 15px 10px 40px;
+    border-radius: 25px; font-size: 0.9rem;
+    border: 1px solid rgba(0,0,0,0.05); outline: none;
+    background: rgba(255,255,255,0.6);
 }
+.search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999; font-size: 0.9rem; }
 
+/* সার্চ সাজেশন */
 #search-suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    margin-top: 8px;
-    border-radius: 12px;
-    padding: 10px;
+    position: absolute; top: 100%; left: 0; width: 100%;
+    margin-top: 10px; border-radius: 15px; padding: 10px;
 }
-
 #search-suggestions ul { list-style: none; }
 #search-suggestions li {
-    padding: 8px 10px;
-    cursor: pointer;
-    font-size: 0.85rem;
+    padding: 8px 10px; cursor: pointer; font-size: 0.85rem;
     border-bottom: 1px solid rgba(0,0,0,0.05);
 }
+#search-suggestions li:last-child { border-bottom: none; }
 
 /* কন্টেন্ট এরিয়া */
-.content-area {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    padding-bottom: 90px;
-}
-
-h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 10px; }
+.content-area { flex: 1; padding: 20px; overflow-y: auto; padding-bottom: 90px; }
+h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px; }
 p { font-size: 0.9rem; color: #555; }
+
+.hidden-section { display: none; }
+.active-section { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* নিচের নেভিগেশন বার */
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    display: flex; justify-content: space-around; align-items: center;
     padding: 12px 10px;
-    border-radius: 25px 25px 0 0;
-    z-index: 100;
+    border-radius: 25px 25px 0 0; z-index: 100;
 }
 
 .nav-item {
-    text-decoration: none;
-    color: #666;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.7rem;
-    font-weight: 500;
-    position: relative;
+    text-decoration: none; color: #999;
+    display: flex; flex-direction: column; align-items: center;
+    font-size: 0.7rem; font-weight: 500;
+    transition: color 0.2s;
 }
-
 .nav-item.active { color: var(--accent-color); }
 
-.icon {
-    width: 22px; height: 22px;
-    margin-bottom: 4px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
+.icon { width: 24px; height: 24px; margin-bottom: 3px; background-size: contain; background-repeat: no-repeat; background-position: center; }
 
-.home-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%23666"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>'); }
-.nav-item.active .home-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23d4af37" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>'); }
+/* নেভিগেশন আইকন (অ্যাক্টিভ ও ইন-অ্যাক্টিভ) */
+.home-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'%3E%3C/path%3E%3C/svg%3E"); }
+.nav-item.active .home-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4af37' viewBox='0 0 24 24'%3E%3Cpath d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'%3E%3C/path%3E%3C/svg%3E"); }
 
-.order-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%23666"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>'); }
-.nav-item.active .order-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23d4af37" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>'); }
+.order-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'%3E%3C/path%3E%3C/svg%3E"); }
+.nav-item.active .order-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4af37' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z'%3E%3C/path%3E%3C/svg%3E"); }
+
+.profile-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23999'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'%3E%3C/path%3E%3C/svg%3E"); }
+.nav-item.active .profile-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d4af37' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'%3E%3C/path%3E%3C/svg%3E"); }
 
 .category-icon {
-    display: grid;
-    grid-template-columns: repeat(2, 7px);
-    grid-template-rows: repeat(2, 7px);
-    gap: 2px;
-    width: 22px; height: 22px;
-    margin-bottom: 4px;
-    place-content: center;
+    display: grid; grid-template-columns: repeat(2, 7px); grid-template-rows: repeat(2, 7px); gap: 2px;
+    width: 24px; height: 24px; margin-bottom: 3px; place-content: center;
 }
-.cat-box { width: 7px; height: 7px; background-color: #666; border-radius: 2px; }
+.cat-box { width: 7px; height: 7px; background-color: #999; border-radius: 1.5px; }
 .nav-item.active .cat-box { background-color: var(--accent-color); }
-
-.profile-pic-placeholder {
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background-color: #ddd;
-    border: 2px solid #fff;
-    margin-bottom: 4px;
-}
-.nav-item.active .profile-pic-placeholder { border-color: var(--accent-color); }
-
-/* সাব-মেনু */
-.sub-menu {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    width: 150px;
-    border-radius: 12px;
-    padding: 8px;
-    margin-bottom: 12px;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    opacity: 0;
-}
-
-.sub-menu.open {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.sub-menu ul { list-style: none; }
-.sub-menu li { padding: 8px 12px; cursor: pointer; font-size: 0.85rem; }
-.sub-menu li:hover { background-color: rgba(212, 175, 55, 0.1); border-radius: 6px; }
 
 /* ফ্লোটিং WhatsApp */
 .floating-whatsapp {
-    position: fixed;
-    right: 20px;
-    bottom: 90px;
-    width: 50px; height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 90;
+    position: fixed; right: 20px; bottom: 90px;
+    width: 55px; height: 55px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 90; box-shadow: 0 4px 25px rgba(0,0,0,0.15);
 }
-.floating-whatsapp img { width: 26px; height: 26px; }
+.floating-whatsapp img { width: 30px; height: 30px; }
+
+/* প্রোফাইল সেকশন স্টাইল */
+.profile-main-wrapper { display: flex; justify-content: center; align-items: center; min-height: 80%; }
+.profile-card { width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; margin: auto; }
+.profile-card h2 { margin-bottom: 20px; text-align: center; font-family: 'Playfair Display', serif; }
+
+.auth-form .form-group { margin-bottom: 15px; }
+.auth-form label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: #555; }
+.auth-form input {
+    width: 100%; padding: 10px; border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.7);
+    outline: none; font-size: 0.9rem;
+}
+
+.auth-btn {
+    width: 100%; padding: 12px; border-radius: 25px;
+    background: var(--accent-color); color: white;
+    border: none; font-weight: 600; cursor: pointer; margin-top: 15px;
+}
+.switch-auth { text-align: center; margin-top: 15px; font-size: 0.8rem; }
+.switch-auth a { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+
+/* প্রোফাইল ড্যাশবোর্ড */
+.profile-header { display: flex; align-items: center; margin-bottom: 20px; }
+.profile-avatar {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: rgba(212, 175, 55, 0.2); display: flex;
+    justify-content: center; align-items: center;
+    font-size: 1.5rem; color: var(--accent-color); margin-right: 20px;
+}
+.profile-info-display h3 { font-size: 1.2rem; margin-bottom: 2px; }
+.profile-info-display p { font-size: 0.8rem; color: #777; margin-bottom: 1px; }
+.logout-btn { background: #ff4d4d; margin-top: 10px; }
