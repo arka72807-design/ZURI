@@ -24,7 +24,7 @@
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Search Earrings, Necklaces...">
                 <i class="fas fa-search search-icon"></i>
-                <div id="search-suggestions" class="hidden glass-effect">
+                <div id="search-suggestions" class="hidden">
                     <ul>
                         <li>Gold Earrings</li>
                         <li>Diamond Necklace</li>
@@ -35,17 +35,17 @@
         </header>
 
         <main class="content-area">
-            <!-- হোম পেজ (সম্পূর্ণ ফাঁকা, কোনো ফালতু প্রোডাক্ট নেই) -->
+            <!-- হোম পেজ -->
             <div id="home-section" class="page-section active">
                 <h1>Welcome to Zuri</h1>
                 <p>Discover the art of handmade luxury jewelry.</p>
                 <div class="empty-state">
-                    <i class="fas fa-box-open" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"><span></span></i>
+                    <i class="fas fa-box-open" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"></i>
                     No products added yet. Your collection will appear here.
                 </div>
             </div>
 
-            <!-- অর্ডার্স পেজ (জিরো অর্ডার) -->
+            <!-- অর্ডার্স পেজ -->
             <div id="orders-section" class="page-section">
                 <h1>My Orders</h1>
                 <p>Track your jewelry purchases.</p>
@@ -65,9 +65,9 @@
                 </div>
             </div>
 
-            <!-- প্রোফাইল পেজ -->
+            <!-- প্রোফাইল পেজ (শুধুমাত্র এখানে প্রোফাইল ও কয়েন ড্যাশবোর্ড দেখাবে) -->
             <div id="profile-section" class="page-section profile-main-wrapper">
-                <div id="auth-container" class="profile-card glass-effect">
+                <div id="auth-container" class="profile-card">
                     <h2>Customer Portal</h2>
                     
                     <form id="login-form" class="auth-form">
@@ -105,8 +105,8 @@
                     </form>
                 </div>
 
-                <!-- আসল প্রোফাইল ড্যাশবোর্ড (জিরো কয়েন, জিরো অর্ডার থেকে শুরু) -->
-                <div id="profile-dashboard" class="profile-card glass-effect hidden">
+                <!-- প্রোফাইল ড্যাশবোর্ড (জিরো কয়েন এবং কয়েন আর্নিং গাইডসহ) -->
+                <div id="profile-dashboard" class="profile-card hidden">
                      <div class="profile-header">
                          <div class="profile-avatar">
                              <i class="fas fa-crown"></i>
@@ -118,13 +118,22 @@
                          </div>
                      </div>
                      
-                     <!-- Zuri Coins Wallet (Zero Start) -->
+                     <!-- Zuri Coins Wallet -->
                      <div class="zuri-coins-box">
                          <div class="coin-title">💎 Zuri Coins Wallet</div>
                          <span>0 Coins Available</span>
                      </div>
 
-                     <!-- রিয়েল জিরো স্ট্যাটস -->
+                     <!-- কয়েন আর্নিং অপশন গাইড (যা তুই অর্ডার করার সময় সিলেক্ট করতে পারবি) -->
+                     <div class="earn-guide-box">
+                         <h4><i class="fas fa-coins"></i> How to Earn Zuri Coins?</h4>
+                         <ul>
+                             <li><strong>Standard Order:</strong> Pay normal price (e.g., ₹100) -> Get 0 Coins.</li>
+                             <li><strong>Coin-Boost Order:</strong> Pay slightly extra (e.g., ₹105) -> Earn 5 to 10 Zuri Coins instantly!</li>
+                         </ul>
+                     </div>
+
+                     <!-- স্ট্যাটস -->
                      <div class="profile-stats-grid">
                          <div class="stat-box">
                              <i class="fas fa-box-open"></i>
@@ -148,7 +157,7 @@
             </div>
         </main>
 
-        <nav class="bottom-nav glass-effect">
+        <nav class="bottom-nav">
             <a class="nav-item active" data-target="home-section">
                 <div class="icon home-icon"></div>
                 <span>Home</span>
@@ -172,7 +181,7 @@
             </a>
         </nav>
 
-        <a href="https://wa.me/918910377745" target="_blank" class="floating-whatsapp glass-effect">
+        <a href="https://wa.me/918910377745" target="_blank" class="floating-whatsapp">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
         </a>
     </div>

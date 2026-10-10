@@ -1,7 +1,7 @@
 :root {
     --bg-off-white: #fcfbfa;
     --accent-color: #d4af37;
-    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-bg: rgba(255, 255, 255, 0.85);
     --glass-border: rgba(212, 175, 55, 0.25);
     --text-color: #2c2c2c;
 }
@@ -43,30 +43,20 @@ html, body {
 }
 #main-content.visible { opacity: 1; }
 
-/* টপ বার গ্লাস এফেক্ট */
+/* টপ বার */
 .top-bar {
     position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center;
     padding: 12px 18px; border-radius: 0 0 22px 22px; z-index: 100; margin-bottom: 15px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+    background: var(--bg-off-white);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 .brand-logo-small { max-height: 35px; width: auto; display: block; }
-
-.glass-effect {
-    background: var(--glass-bg);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
-}
 
 .search-container { position: relative; flex: 1; margin-left: 15px; }
 #search-input {
     width: 100%; padding: 9px 15px 9px 38px; border-radius: 22px; font-size: 0.85rem;
-    border: 1px solid rgba(212, 175, 55, 0.3); outline: none; background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.3); outline: none; background: #fff;
 }
 .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #888; font-size: 0.85rem; }
 
@@ -74,29 +64,22 @@ html, body {
 h1 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 5px; color: #1a1a1a; }
 p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 
-/* পেজ সেকশন টগলিং (একেবারে আলাদা আলাদা দেখানোর জন্য) */
+/* গুরুত্বপূর্ণ: সেকশন টগলিং যেন নিখুঁতভাবে আলাদা থাকে */
 .page-section { display: none !important; }
 .page-section.active { display: block !important; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* এম্টি স্টেট বা ফাঁকা সেকশনের লুক */
 .empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: #777;
-    font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 16px;
-    border: 1px dashed rgba(212, 175, 55, 0.3);
-    margin-top: 15px;
+    text-align: center; padding: 40px 20px; color: #777; font-size: 0.9rem;
+    background: #fff; border-radius: 16px; border: 1px dashed rgba(212, 175, 55, 0.3); margin-top: 15px;
 }
 
-/* প্রোফাইল ড্যাশবোর্ড কার্ড */
+/* প্রোফাইল ড্যাশবোর্ড কার্ড (শুধুমাত্র প্রোফাইল পেজেই দেখাবে) */
 .profile-main-wrapper { display: flex; justify-content: center; align-items: flex-start; padding-top: 5px; }
 .profile-card {
     width: 100%; max-width: 380px; padding: 22px; border-radius: 20px;
-    background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(212, 175, 55, 0.3);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    background: #fff; border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: 0 auto;
 }
 .profile-card h2 { margin-bottom: 18px; text-align: center; font-family: 'Playfair Display', serif; color: #1a1a1a; }
 
@@ -104,12 +87,11 @@ p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 .auth-form label { display: block; margin-bottom: 4px; font-size: 0.8rem; color: #555; font-weight: 500; }
 .auth-form input {
     width: 100%; padding: 10px 14px; border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.95); outline: none; font-size: 0.85rem;
+    border: 1px solid rgba(0,0,0,0.1); background: #fdfdfd; outline: none; font-size: 0.85rem;
 }
 .auth-btn {
     width: 100%; padding: 11px; border-radius: 22px; background: var(--accent-color); color: white;
     border: none; font-weight: 600; cursor: pointer; margin-top: 12px; font-size: 0.9rem;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
 }
 .switch-auth { text-align: center; margin-top: 12px; font-size: 0.8rem; }
 .switch-auth a { color: var(--accent-color); text-decoration: none; font-weight: 600; }
@@ -122,34 +104,39 @@ p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 .profile-info-display h3 { font-size: 1.1rem; margin-bottom: 2px; }
 .profile-info-display p { font-size: 0.78rem; color: #666; margin-bottom: 1px; }
 
-/* রিয়েল জুরি কয়েন বক্স (জিরো কয়েন থেকে শুরু) */
+/* জুরি কয়েন ও আর্নিং গাইড বক্স */
 .zuri-coins-box {
-    background: linear-gradient(135deg, rgba(212,175,55,0.18), rgba(255,255,255,0.9));
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), #fff);
     border: 1px solid rgba(212,175,55,0.4); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 15px;
 }
 .coin-title { font-size: 0.75rem; color: #777; font-weight: 600; margin-bottom: 2px; }
 .zuri-coins-box span { font-size: 1.15rem; font-weight: 700; color: #b59a30; }
 
-/* জেনুইন স্ট্যাটস (জিরো থেকে শুরু) */
+.earn-guide-box {
+    background: #f9f8f5; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;
+    padding: 12px; margin-bottom: 15px; font-size: 0.8rem; color: #444;
+}
+.earn-guide-box h4 { font-size: 0.85rem; color: var(--accent-color); margin-bottom: 5px; font-family: 'Playfair Display', serif; }
+.earn-guide-box ul { padding-left: 15px; }
+.earn-guide-box li { margin-bottom: 3px; }
+
 .profile-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
 .stat-box {
-    background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;
+    background: #fdfdfd; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;
     padding: 10px 5px; text-align: center;
 }
 .stat-box i { font-size: 1.1rem; color: var(--accent-color); margin-bottom: 4px; display: block; }
 .stat-box strong { display: block; font-size: 0.95rem; color: #1a1a1a; }
 .stat-box span { font-size: 0.7rem; color: #666; }
 
-.logout-btn { background: #e05353; margin-top: 5px; box-shadow: none; }
+.logout-btn { background: #e05353; margin-top: 5px; }
 
 /* নিচের নেভিগেশন বার */
 .bottom-nav {
     position: fixed; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-around; align-items: center;
     padding: 12px 10px; border-radius: 22px 22px 0 0; z-index: 100;
-    background: var(--glass-bg);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-top: 1px solid var(--glass-border);
+    background: #fff;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
     box-shadow: -4px -4px 20px rgba(0, 0, 0, 0.03);
 }
 .nav-item { text-decoration: none; color: #888; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; font-weight: 500; cursor: pointer; }
@@ -174,6 +161,6 @@ p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 
 .floating-whatsapp {
     position: fixed; right: 20px; bottom: 85px; width: 50px; height: 50px; border-radius: 50%;
-    display: flex; justify-content: center; align-items: center; z-index: 90; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: flex; justify-content: center; align-items: center; z-index: 90; box-shadow: 0 4px 20px rgba(0,0,0,0.1); background: #fff;
 }
 .floating-whatsapp img { width: 28px; height: 28px; }
