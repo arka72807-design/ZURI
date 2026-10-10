@@ -15,11 +15,13 @@ window.addEventListener('load', () => {
     }, 1500);
 });
 
+// ন্যাভিগেশন ট্যাব সুইচিং
 const navItems = document.querySelectorAll('.bottom-nav .nav-item');
 const sections = document.querySelectorAll('.page-section');
 
 navItems.forEach(item => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', (e) => {
+        e.preventDefault();
         navItems.forEach(nav => nav.classList.remove('active'));
         item.classList.add('active');
         
@@ -59,9 +61,13 @@ function openDetail(title, text) {
     detailModal.classList.remove('hidden');
 }
 
-document.getElementById('profile-stat-orders').addEventListener('click', () => openDetail("My Orders", "You have no active orders yet. Track your ongoing and past jewelry orders here."));
-document.getElementById('profile-stat-wishlist').addEventListener('click', () => openDetail("My Wishlist", "Your wishlist is empty. Save your favorite jewelry items to view them here."));
-document.getElementById('profile-stat-cart').addEventListener('click', () => openDetail("Shopping Cart", "Your shopping cart is currently empty."));
+const statOrders = document.getElementById('profile-stat-orders');
+const statWishlist = document.getElementById('profile-stat-wishlist');
+const statCart = document.getElementById('profile-stat-cart');
+
+if(statOrders) statOrders.addEventListener('click', () => openDetail("My Orders", "You have no active orders yet. Track your ongoing and past jewelry orders here."));
+if(statWishlist) statWishlist.addEventListener('click', () => openDetail("My Wishlist", "Your wishlist is empty. Save your favorite jewelry items to view them here."));
+if(statCart) statCart.addEventListener('click', () => openDetail("Shopping Cart", "Your shopping cart is currently empty."));
 
 if (closeDetailModal) {
     closeDetailModal.addEventListener('click', () => { detailModal.classList.add('hidden'); });
@@ -72,7 +78,7 @@ window.addEventListener('click', (e) => {
     if (e.target === detailModal) detailModal.classList.add('hidden');
 });
 
-// প্রোফাইল লগইন ও সাইন-আপ
+// প্রোফাইল লগইন ও সাইন-আপ ফিক্সড লজিক
 const authContainer = document.getElementById('auth-container');
 const profileDashboard = document.getElementById('profile-dashboard');
 const loginForm = document.getElementById('login-form');
@@ -84,16 +90,16 @@ const logoutBtn = document.getElementById('logout-btn');
 if (showSignupLink) {
     showSignupLink.addEventListener('click', (e) => {
         e.preventDefault();
-        loginForm.classList.add('hidden');
-        signupForm.classList.remove('hidden');
+        if(loginForm) loginForm.classList.add('hidden');
+        if(signupForm) signupForm.classList.remove('hidden');
     });
 }
 
 if (showLoginLink) {
     showLoginLink.addEventListener('click', (e) => {
         e.preventDefault();
-        signupForm.classList.add('hidden');
-        loginForm.classList.remove('hidden');
+        if(signupForm) signupForm.classList.add('hidden');
+        if(loginForm) loginForm.classList.remove('hidden');
     });
 }
 
@@ -118,15 +124,26 @@ if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
-        if(email) {
+        const password = document.getElementById('login-password').value;
+        
+        if(email && password) {
+            // ইউজারের ইমেইল থেকে নাম বের করে নেওয়া বা ডিফল্ট রাখা
+            let userName = email.split('@')[0];
+            userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+            
+            localStorage.setItem('zuriUserName', userName);
+            localStorage.setItem('zuriUserEmail', email);
+            localStorage.setItem('zuriUserPhone', '9432131316'); // তোর দেওয়া ফোন নম্বর
             localStorage.setItem('zuriUserLoggedIn', 'true');
+            
             showDashboard();
         }
     });
 }
 
 if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
+    logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         localStorage.removeItem('zuriUserLoggedIn');
         showAuth();
     });
@@ -137,9 +154,13 @@ function showDashboard() {
         authContainer.classList.add('hidden');
         profileDashboard.classList.remove('hidden');
         
-        document.getElementById('display-name').innerText = localStorage.getItem('zuriUserName') || 'User';
-        document.getElementById('display-phone').innerText = `Phone: ${localStorage.getItem('zuriUserPhone') || 'N/A'}`;
-        document.getElementById('display-email').innerText = `Email: ${localStorage.getItem('zuriUserEmail') || 'N/A'}`;
+        const displayName = document.getElementById('display-name');
+        const displayPhone = document.getElementById('display-phone');
+        const displayEmail = document.getElementById('display-email');
+        
+        if(displayName) displayName.innerText = localStorage.getItem('zuriUserName') || 'User';
+        if(displayPhone) displayPhone.innerText = `Phone: ${localStorage.getItem('zuriUserPhone') || 'N/A'}`;
+        if(displayEmail) displayEmail.innerText = `Email: ${localStorage.getItem('zuriUserEmail') || 'N/A'}`;
     }
 }
 
@@ -147,9 +168,12 @@ function showAuth() {
     if (authContainer && profileDashboard) {
         profileDashboard.classList.add('hidden');
         authContainer.classList.remove('hidden');
+        if(loginForm) loginForm.reset();
+        if(signupForm) signupForm.reset();
     }
 }
 
+// পেজ লোড হওয়ার সাথে সাথে চেক করবে ইউজার অলরেডি লগড-ইন কি না
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('zuriUserLoggedIn') === 'true') {
         showDashboard();
