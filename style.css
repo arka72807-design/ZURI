@@ -1,9 +1,9 @@
 :root {
     --primary-color: #1a1a1a;
-    --accent-color: #d4af37; /* গোল্ডেন কালার */
-    --bg-off-white: #fcfbfa; /* লোগোর পেছনের রঙ */
+    --accent-color: #d4af37;
+    --bg-off-white: #fcfbfa; /* তোর লোগোর অফ-হোয়াইট ব্যাকগ্রাউন্ড */
     --glass-bg: rgba(255, 255, 255, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.3);
     --text-color: #2c2c2c;
 }
 
@@ -14,20 +14,20 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-body {
+html, body {
+    background-color: #fcfbfa !important;
     font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-off-white);
     color: var(--text-color);
     overflow-x: hidden;
     height: 100vh;
     position: relative;
 }
 
-/* লোডিং স্ক্রিন স্টাইল */
+/* লোডিং স্ক্রিন */
 #loading-screen {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-color: var(--bg-off-white);
+    background-color: #fcfbfa;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,58 +40,59 @@ body {
 }
 
 .loading-logo {
-    max-width: 250px;
+    max-width: 280px;
     height: auto;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .loading-slogan {
     font-family: 'Playfair Display', serif;
-    font-size: 0.8rem;
-    letter-spacing: 5px;
-    color: #777;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: #666;
 }
 
 .fade-in-out {
-    animation: revealAndFade 1.5s forwards; /* ১.৫ সেকেন্ড ধরে চলবে */
+    animation: revealAndFade 1.5s forwards;
 }
 
 @keyframes revealAndFade {
-    0% { opacity: 0; transform: translateY(20px); }
+    0% { opacity: 0; transform: translateY(15px); }
     30% { opacity: 1; transform: translateY(0); }
     80% { opacity: 1; }
     100% { opacity: 0; }
 }
 
-/* গ্লাস এফেক্ট ক্লাসেস */
+/* গ্লাস এফেক্ট */
 .glass-effect {
     background: var(--glass-bg);
     backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); /* Safari-র জন্য */
+    -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
     box-shadow: 0 4px 25px rgba(0,0,0,0.05);
 }
 
 .glass-input {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(5px);
 }
 
 .hidden { display: none !important; }
 
-/* মেইন কন্টেন্ট লেআউট */
+/* মেইন কন্টেন্ট */
 #main-content {
     display: flex;
     flex-direction: column;
     height: 100vh;
     opacity: 0;
     transition: opacity 0.5s ease-in;
+    background-color: #fcfbfa;
 }
 
 #main-content.visible { opacity: 1; }
 
-/* ১. টপ বার */
+/* টপ বার */
 .top-bar {
     position: sticky;
     top: 0;
@@ -99,26 +100,26 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    border-radius: 0 0 30px 30px; /* নিচের দিকটা কার্ভ */
+    border-radius: 0 0 25px 25px;
     z-index: 100;
     margin-bottom: 20px;
 }
 
 .brand-logo-small {
-    max-height: 40px;
+    max-height: 35px;
     width: auto;
 }
 
 .search-container {
     position: relative;
     flex: 1;
-    margin-left: 20px;
+    margin-left: 15px;
 }
 
 #search-input {
     width: 100%;
     padding: 10px 15px;
-    border-radius: 25px;
+    border-radius: 20px;
     font-size: 0.9rem;
     border: none;
     color: var(--text-color);
@@ -130,8 +131,8 @@ body {
     top: 100%;
     left: 0;
     width: 100%;
-    margin-top: 10px;
-    border-radius: 15px;
+    margin-top: 8px;
+    border-radius: 12px;
     padding: 10px;
 }
 
@@ -139,21 +140,22 @@ body {
 #search-suggestions li {
     padding: 8px 10px;
     cursor: pointer;
+    font-size: 0.85rem;
     border-bottom: 1px solid rgba(0,0,0,0.05);
 }
-#search-suggestions li:last-child { border-bottom: none; }
 
-/* ২. কন্টেন্ট এরিয়া */
+/* কন্টেন্ট এরিয়া */
 .content-area {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    padding-bottom: 80px; /* নিচের বারের জন্য জায়গা */
+    padding-bottom: 90px;
 }
 
-h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 10px; }
+h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 10px; }
+p { font-size: 0.9rem; color: #555; }
 
-/* ৩. নিচের নেভিগেশন বার */
+/* নিচের নেভিগেশন বার */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -162,118 +164,94 @@ h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 10p
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 15px 10px;
-    border-radius: 30px 30px 0 0; /* ওপরের দিকটা কার্ভ */
+    padding: 12px 10px;
+    border-radius: 25px 25px 0 0;
     z-index: 100;
-    border-bottom: none; /* ফিক্সড বারের জন্য */
 }
 
 .nav-item {
     text-decoration: none;
-    color: #555;
+    color: #666;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 500;
     position: relative;
-    transition: color 0.3s;
 }
 
 .nav-item.active { color: var(--accent-color); }
 
 .icon {
-    width: 24px; height: 24px;
-    margin-bottom: 5px;
+    width: 22px; height: 22px;
+    margin-bottom: 4px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-/* আইকন ডিজাইনগুলি */
-.home-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%23555"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>'); }
+.home-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%23666"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>'); }
 .nav-item.active .home-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23d4af37" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>'); }
 
-.order-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%23555"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>'); }
+.order-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="%23666"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>'); }
 .nav-item.active .order-icon { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23d4af37" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>'); }
 
 .category-icon {
     display: grid;
-    grid-template-columns: repeat(2, 8px);
-    grid-template-rows: repeat(2, 8px);
+    grid-template-columns: repeat(2, 7px);
+    grid-template-rows: repeat(2, 7px);
     gap: 2px;
-    width: 24px; height: 24px;
-    margin-bottom: 5px;
+    width: 22px; height: 22px;
+    margin-bottom: 4px;
     place-content: center;
 }
-.cat-box { width: 8px; height: 8px; background-color: #555; border-radius: 2px; }
+.cat-box { width: 7px; height: 7px; background-color: #666; border-radius: 2px; }
 .nav-item.active .cat-box { background-color: var(--accent-color); }
 
-/* প্রোফাইল আইকন বা ছবি */
 .profile-pic-placeholder {
-    width: 24px; height: 24px;
+    width: 22px; height: 22px;
     border-radius: 50%;
     background-color: #ddd;
     border: 2px solid #fff;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 .nav-item.active .profile-pic-placeholder { border-color: var(--accent-color); }
 
-/* সাব-মেনু (অর্ডার মেনু) */
+/* সাব-মেনু */
 .sub-menu {
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    width: 160px;
-    border-radius: 15px;
-    padding: 10px;
-    margin-bottom: 15px;
+    width: 150px;
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 12px;
     transition: all 0.3s ease;
+    pointer-events: none;
+    opacity: 0;
 }
 
-.sub-menu::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 8px solid transparent;
-    border-top-color: var(--glass-bg); /* মেনুর তীরের রঙ ফিক্সড */
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.03));
-}
-
-.sub-menu ul { list-style: none; }
-.sub-menu li { padding: 10px 15px; cursor: pointer; font-size: 0.9rem; }
-.sub-menu li:hover { background-color: rgba(212, 175, 55, 0.1); border-radius: 8px; }
-
-/* সাব-মেনু যখন ওপেন হবে */
 .sub-menu.open {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
     pointer-events: auto;
 }
 
-/* ফ্লোটিং WhatsApp বাটন */
+.sub-menu ul { list-style: none; }
+.sub-menu li { padding: 8px 12px; cursor: pointer; font-size: 0.85rem; }
+.sub-menu li:hover { background-color: rgba(212, 175, 55, 0.1); border-radius: 6px; }
+
+/* ফ্লোটিং WhatsApp */
 .floating-whatsapp {
     position: fixed;
     right: 20px;
-    bottom: 100px; /* নিচের বারের ওপরে */
-    width: 55px; height: 55px;
+    bottom: 90px;
+    width: 50px; height: 50px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 90;
-    transition: transform 0.3s;
 }
-.floating-whatsapp:hover { transform: scale(1.05); }
-.floating-whatsapp img { width: 30px; height: 30px; }
-
-/* রেসপন্সিভ ফিক্স */
-@media (min-width: 768px) {
-    .top-bar { padding: 20px 40px; }
-    .bottom-nav { padding: 20px; max-width: 600px; left: 50%; transform: translateX(-50%); border-radius: 30px; bottom: 30px; }
-    .floating-whatsapp { bottom: 40px; right: 40px; }
-    .content-area { padding-bottom: 120px; }
-}
+.floating-whatsapp img { width: 26px; height: 26px; }
