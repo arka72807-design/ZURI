@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zuri | Handcrafted Artisanal Jewelry</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- লোডিং স্ক্রিন -->
+    <div id="loading-screen">
+        <div class="logo-reveal-wrapper">
+            <img src="image_0.png" alt="Zuri Logo" class="loading-logo fade-in-out">
+            <p class="loading-slogan fade-in-out">QUIET LUXURY DESIGN</p>
+        </div>
+    </div>
+
+    <!-- মূল ওয়েবসাইট কন্টেন্ট -->
+    <div id="main-content" class="hidden">
+        
+        <!-- ১. উপরের বার (লোগো ও সার্চ) -->
+        <header class="top-bar glass-effect">
+            <img src="image_0.png" alt="Zuri Logo" class="brand-logo-small">
+            <div class="search-container">
+                <input type="search" id="search-input" placeholder="Search earrings, necklaces..." class="glass-input">
+                <div id="search-suggestions" class="glass-effect hidden">
+                    <ul>
+                        <li>New Arrivals</li>
+                        <li>Popular Picks</li>
+                        <li>Bridal Collection</li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- ২. মূল পেজের কন্টেন্ট -->
+        <main class="content-area">
+            <h1>Welcome to Zuri</h1>
+            <p>Discover the art of handmade jewelry.</p>
+            <!-- এখানে তোর প্রোডাক্ট গ্রিড বা অন্যান্য সেকশন আসবে -->
+        </main>
+
+        <!-- ৩. নিচের নেভিগেশন বার -->
+        <nav class="bottom-nav glass-effect">
+            <a href="#" class="nav-item active">
+                <span class="icon home-icon"></span>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item order-menu">
+                <span class="icon order-icon"></span>
+                <span>Orders</span>
+                <!-- অর্ডারের সাব-মেনু (JS দিয়ে কন্ট্রোল হবে) -->
+                <div class="sub-menu glass-effect hidden">
+                    <ul>
+                        <li>Add to Cart</li>
+                        <li>Wishlist</li>
+                        <li>Track Order</li>
+                        <li>Order History</li>
+                        <li>Invoice</li>
+                    </ul>
+                </div>
+            </a>
+            <a href="#" class="nav-item category-menu">
+                <span class="icon category-icon">
+                    <div class="cat-box"></div><div class="cat-box"></div>
+                    <div class="cat-box"></div><div class="cat-box"></div>
+                </span>
+                <span>Category</span>
+            </a>
+            <a href="#" class="nav-item profile-icon">
+                <div class="profile-pic-placeholder"></div>
+                <span>Profile</span>
+            </a>
+        </nav>
+
+        <!-- ফ্লোটিং WhatsApp বাটন -->
+        <a href="https://wa.me/918910377745" target="_blank" class="floating-whatsapp glass-effect">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        </a>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
