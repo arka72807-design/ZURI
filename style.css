@@ -1,8 +1,6 @@
 :root {
     --bg-off-white: #fcfbfa;
     --accent-color: #d4af37;
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    --glass-border: rgba(212, 175, 55, 0.25);
     --text-color: #2c2c2c;
 }
 
@@ -17,7 +15,6 @@ html, body {
     position: relative;
 }
 
-/* লোডিং স্ক্রিন */
 #loading-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--bg-off-white); display: flex; justify-content: center; align-items: center;
@@ -43,13 +40,10 @@ html, body {
 }
 #main-content.visible { opacity: 1; }
 
-/* টপ বার */
 .top-bar {
     position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center;
     padding: 12px 18px; border-radius: 0 0 22px 22px; z-index: 100; margin-bottom: 15px;
-    background: var(--bg-off-white);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    background: #fff; border-bottom: 1px solid rgba(212, 175, 55, 0.15);
 }
 .brand-logo-small { max-height: 35px; width: auto; display: block; }
 
@@ -64,20 +58,41 @@ html, body {
 h1 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 5px; color: #1a1a1a; }
 p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 
-/* গুরুত্বপূর্ণ: সেকশন টগলিং যেন নিখুঁতভাবে আলাদা থাকে */
 .page-section { display: none !important; }
 .page-section.active { display: block !important; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-.empty-state {
-    text-align: center; padding: 40px 20px; color: #777; font-size: 0.9rem;
-    background: #fff; border-radius: 16px; border: 1px dashed rgba(212, 175, 55, 0.3); margin-top: 15px;
+/* ফুল-পেজ লেআউট ও ক্যাটালগ কার্ড স্টাইল */
+.full-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
 }
 
-/* প্রোফাইল ড্যাশবোর্ড কার্ড (শুধুমাত্র প্রোফাইল পেজেই দেখাবে) */
+.catalog-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+.catalog-card:active { transform: scale(0.98); background: #fdfcf8; }
+.catalog-left { display: flex; align-items: center; gap: 15px; }
+.catalog-left i { font-size: 1.4rem; color: var(--accent-color); }
+.catalog-info h3 { font-size: 0.95rem; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+.catalog-info p { font-size: 0.78rem; color: #777; margin: 0; }
+.catalog-right { font-size: 0.9rem; color: #999; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+
+/* প্রোফাইল ড্যাশবোর্ড কার্ড */
 .profile-main-wrapper { display: flex; justify-content: center; align-items: flex-start; padding-top: 5px; }
 .profile-card {
-    width: 100%; max-width: 380px; padding: 22px; border-radius: 20px;
+    width: 100%; max-width: 400px; padding: 22px; border-radius: 20px;
     background: #fff; border: 1px solid rgba(212, 175, 55, 0.3);
     box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: 0 auto;
 }
@@ -104,39 +119,46 @@ p { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
 .profile-info-display h3 { font-size: 1.1rem; margin-bottom: 2px; }
 .profile-info-display p { font-size: 0.78rem; color: #666; margin-bottom: 1px; }
 
-/* জুরি কয়েন ও আর্নিং গাইড বক্স */
-.zuri-coins-box {
-    background: linear-gradient(135deg, rgba(212,175,55,0.15), #fff);
-    border: 1px solid rgba(212,175,55,0.4); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 15px;
+/* প্রিমিয়াম হাইলাইটেড জুরি কয়েন বক্স (অন্য কালার ও গ্লোয়িং ফিল) */
+.zuri-coins-highlight-box {
+    background: linear-gradient(135deg, #2c2c2c, #4a4220);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 14px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+    transition: transform 0.2s;
 }
-.coin-title { font-size: 0.75rem; color: #777; font-weight: 600; margin-bottom: 2px; }
-.zuri-coins-box span { font-size: 1.15rem; font-weight: 700; color: #b59a30; }
+.zuri-coins-highlight-box:active { transform: scale(0.98); }
+.zuri-coins-highlight-box .coin-title { font-size: 0.75rem; color: #d4af37; font-weight: 600; margin-bottom: 3px; letter-spacing: 1px; text-transform: uppercase; }
+.zuri-coins-highlight-box span { font-size: 1.25rem; font-weight: 700; color: #fff; }
 
-.earn-guide-box {
-    background: #f9f8f5; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;
-    padding: 12px; margin-bottom: 15px; font-size: 0.8rem; color: #444;
+.logout-btn { background: #e05353; margin-top: 10px; }
+
+/* পপ-আপ মডাল */
+.custom-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center;
+    z-index: 2000; backdrop-filter: blur(5px);
 }
-.earn-guide-box h4 { font-size: 0.85rem; color: var(--accent-color); margin-bottom: 5px; font-family: 'Playfair Display', serif; }
-.earn-guide-box ul { padding-left: 15px; }
-.earn-guide-box li { margin-bottom: 3px; }
-
-.profile-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
-.stat-box {
-    background: #fdfdfd; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px;
-    padding: 10px 5px; text-align: center;
+.modal-content {
+    background: #fff; width: 90%; max-width: 320px; padding: 20px; border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 1px solid rgba(212,175,55,0.3);
+    animation: scaleUp 0.3s ease;
 }
-.stat-box i { font-size: 1.1rem; color: var(--accent-color); margin-bottom: 4px; display: block; }
-.stat-box strong { display: block; font-size: 0.95rem; color: #1a1a1a; }
-.stat-box span { font-size: 0.7rem; color: #666; }
+@keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+.modal-header h3 { font-size: 1rem; font-family: 'Playfair Display', serif; }
+#close-modal-btn, #close-detail-modal { font-size: 1.3rem; cursor: pointer; color: #888; }
+.modal-body p { font-size: 0.85rem; color: #444; line-height: 1.4; }
 
-.logout-btn { background: #e05353; margin-top: 5px; }
-
-/* নিচের নেভিগেশন বার */
+/* নেভিগেশন বার */
 .bottom-nav {
     position: fixed; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-around; align-items: center;
     padding: 12px 10px; border-radius: 22px 22px 0 0; z-index: 100;
-    background: #fff;
-    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    background: #fff; border-top: 1px solid rgba(212, 175, 55, 0.2);
     box-shadow: -4px -4px 20px rgba(0, 0, 0, 0.03);
 }
 .nav-item { text-decoration: none; color: #888; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; font-weight: 500; cursor: pointer; }

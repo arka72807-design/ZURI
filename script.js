@@ -15,7 +15,6 @@ window.addEventListener('load', () => {
     }, 1500);
 });
 
-// নিখুঁতভাবে ট্যাব টগল করার লজিক (যাতে এক পেজের জিনিস অন্য পেজে না যায়)
 const navItems = document.querySelectorAll('.bottom-nav .nav-item');
 const sections = document.querySelectorAll('.page-section');
 
@@ -36,7 +35,48 @@ navItems.forEach(item => {
     });
 });
 
-// প্রোফাইল লগইন ও সাইন-আপ লজিক
+// কয়েন পপ-আপ মডাল
+const coinsBoxBtn = document.getElementById('coins-box-btn');
+const coinsModal = document.getElementById('coins-modal');
+const closeModalBtn = document.getElementById('close-modal-btn');
+
+if (coinsBoxBtn) {
+    coinsBoxBtn.addEventListener('click', () => { coinsModal.classList.remove('hidden'); });
+}
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => { coinsModal.classList.add('hidden'); });
+}
+
+// ডিটেইলস পপ-আপ (Orders, Wishlist, Cart)
+const detailModal = document.getElementById('detail-modal');
+const closeDetailModal = document.getElementById('close-detail-modal');
+const detailModalTitle = document.getElementById('detail-modal-title');
+const detailModalBody = document.getElementById('detail-modal-body');
+
+function openDetail(title, text) {
+    detailModalTitle.innerText = title;
+    detailModalBody.innerHTML = `<p>${text}</p>`;
+    detailModal.classList.remove('hidden');
+}
+
+document.getElementById('orders-list-card').addEventListener('click', () => openDetail("My Orders", "You have no active orders yet. Once placed, order tracking will appear here."));
+document.getElementById('wishlist-list-card').addEventListener('click', () => openDetail("My Wishlist", "Your wishlist is empty. Save your favorite jewelry items to view them here."));
+document.getElementById('cart-list-card').addEventListener('click', () => openDetail("Shopping Cart", "Your shopping cart is currently empty."));
+
+document.getElementById('profile-stat-orders').addEventListener('click', () => openDetail("My Orders", "You have no active orders yet."));
+document.getElementById('profile-stat-wishlist').addEventListener('click', () => openDetail("My Wishlist", "Your wishlist is empty."));
+document.getElementById('profile-stat-cart').addEventListener('click', () => openDetail("Shopping Cart", "Your shopping cart is currently empty."));
+
+if (closeDetailModal) {
+    closeDetailModal.addEventListener('click', () => { detailModal.classList.add('hidden'); });
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target === coinsModal) coinsModal.classList.add('hidden');
+    if (e.target === detailModal) detailModal.classList.add('hidden');
+});
+
+// প্রোফাইল লগইন ও সাইন-আপ
 const authContainer = document.getElementById('auth-container');
 const profileDashboard = document.getElementById('profile-dashboard');
 const loginForm = document.getElementById('login-form');

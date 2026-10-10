@@ -39,33 +39,80 @@
             <div id="home-section" class="page-section active">
                 <h1>Welcome to Zuri</h1>
                 <p>Discover the art of handmade luxury jewelry.</p>
-                <div class="empty-state">
-                    <i class="fas fa-box-open" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"></i>
-                    No products added yet. Your collection will appear here.
+                <div class="full-page-container">
+                    <div class="catalog-card">
+                        <div class="catalog-left">
+                            <i class="fas fa-gem"></i>
+                            <div class="catalog-info">
+                                <h3>Featured Collection</h3>
+                                <p>Explore our exclusive handmade artisan jewelry.</p>
+                            </div>
+                        </div>
+                        <div class="catalog-right">Explore <i class="fas fa-chevron-right"></i></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- অর্ডার্স পেজ -->
+            <!-- অর্ডার্স পেজ (ফুল পেজ লেআউট) -->
             <div id="orders-section" class="page-section">
                 <h1>My Orders</h1>
-                <p>Track your jewelry purchases.</p>
-                <div class="empty-state">
-                    <i class="fas fa-shopping-bag" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"></i>
-                    You have no active orders yet.
+                <p>Track all your ongoing and past jewelry orders here.</p>
+                
+                <div class="full-page-container">
+                    <div class="catalog-card" id="orders-list-card">
+                        <div class="catalog-left">
+                            <i class="fas fa-box-open"></i>
+                            <div class="catalog-info">
+                                <h3>Order History</h3>
+                                <p>0 Orders placed yet</p>
+                            </div>
+                        </div>
+                        <div class="catalog-right">View <i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+                    <div class="catalog-card" id="wishlist-list-card">
+                        <div class="catalog-left">
+                            <i class="fas fa-heart" style="color: #e05353;"></i>
+                            <div class="catalog-info">
+                                <h3>My Wishlist</h3>
+                                <p>0 Items saved</p>
+                            </div>
+                        </div>
+                        <div class="catalog-right">View <i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+                    <div class="catalog-card" id="cart-list-card">
+                        <div class="catalog-left">
+                            <i class="fas fa-shopping-cart"></i>
+                            <div class="catalog-info">
+                                <h3>Shopping Cart</h3>
+                                <p>0 Items in cart</p>
+                            </div>
+                        </div>
+                        <div class="catalog-right">View <i class="fas fa-chevron-right"></i></div>
+                    </div>
                 </div>
             </div>
 
             <!-- ক্যাটাগরি পেজ -->
             <div id="category-section" class="page-section">
                 <h1>Categories</h1>
-                <p>Explore exclusive jewelry designs.</p>
-                <div class="empty-state">
-                    <i class="fas fa-th-large" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px; display: block;"></i>
-                    Categories will be available soon.
+                <p>Browse jewelry by specific types.</p>
+                <div class="full-page-container">
+                    <div class="catalog-card">
+                        <div class="catalog-left">
+                            <i class="fas fa-ring"></i>
+                            <div class="catalog-info">
+                                <h3>Earrings & Necklaces</h3>
+                                <p>Handcrafted luxury designs</p>
+                            </div>
+                        </div>
+                        <div class="catalog-right">Browse <i class="fas fa-chevron-right"></i></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- প্রোফাইল পেজ (শুধুমাত্র এখানে প্রোফাইল ও কয়েন ড্যাশবোর্ড দেখাবে) -->
+            <!-- প্রোফাইল পেজ -->
             <div id="profile-section" class="page-section profile-main-wrapper">
                 <div id="auth-container" class="profile-card">
                     <h2>Customer Portal</h2>
@@ -105,7 +152,7 @@
                     </form>
                 </div>
 
-                <!-- প্রোফাইল ড্যাশবোর্ড (জিরো কয়েন এবং কয়েন আর্নিং গাইডসহ) -->
+                <!-- প্রোফাইল ড্যাশবোর্ড (হাইলাইটেড জুরি কয়েন ও ফুল পেজ অপশনসহ) -->
                 <div id="profile-dashboard" class="profile-card hidden">
                      <div class="profile-header">
                          <div class="profile-avatar">
@@ -118,37 +165,45 @@
                          </div>
                      </div>
                      
-                     <!-- Zuri Coins Wallet -->
-                     <div class="zuri-coins-box">
+                     <!-- হাইলাইটেড জুরি কয়েন বক্স -->
+                     <div class="zuri-coins-highlight-box" id="coins-box-btn">
                          <div class="coin-title">💎 Zuri Coins Wallet</div>
                          <span>0 Coins Available</span>
                      </div>
 
-                     <!-- কয়েন আর্নিং অপশন গাইড (যা তুই অর্ডার করার সময় সিলেক্ট করতে পারবি) -->
-                     <div class="earn-guide-box">
-                         <h4><i class="fas fa-coins"></i> How to Earn Zuri Coins?</h4>
-                         <ul>
-                             <li><strong>Standard Order:</strong> Pay normal price (e.g., ₹100) -> Get 0 Coins.</li>
-                             <li><strong>Coin-Boost Order:</strong> Pay slightly extra (e.g., ₹105) -> Earn 5 to 10 Zuri Coins instantly!</li>
-                         </ul>
-                     </div>
+                     <!-- ফুল-পেজ স্টাইল অপশন লিস্ট (অর্ডার, উইশলিস্ট, কার্ট) -->
+                     <div class="full-page-container" style="margin-bottom: 15px;">
+                         <div class="catalog-card" id="profile-stat-orders" style="padding: 12px 15px;">
+                             <div class="catalog-left">
+                                 <i class="fas fa-box-open" style="font-size: 1.1rem;"></i>
+                                 <div class="catalog-info">
+                                     <h3 style="font-size: 0.85rem;">My Orders</h3>
+                                     <p style="font-size: 0.72rem;">0 orders placed</p>
+                                 </div>
+                             </div>
+                             <div class="catalog-right" style="font-size: 0.8rem;">View <i class="fas fa-chevron-right"></i></div>
+                         </div>
 
-                     <!-- স্ট্যাটস -->
-                     <div class="profile-stats-grid">
-                         <div class="stat-box">
-                             <i class="fas fa-box-open"></i>
-                             <strong>0</strong>
-                             <span>Orders</span>
+                         <div class="catalog-card" id="profile-stat-wishlist" style="padding: 12px 15px;">
+                             <div class="catalog-left">
+                                 <i class="fas fa-heart" style="color: #e05353; font-size: 1.1rem;"></i>
+                                 <div class="catalog-info">
+                                     <h3 style="font-size: 0.85rem;">Wishlist</h3>
+                                     <p style="font-size: 0.72rem;">0 items saved</p>
+                                 </div>
+                             </div>
+                             <div class="catalog-right" style="font-size: 0.8rem;">View <i class="fas fa-chevron-right"></i></div>
                          </div>
-                         <div class="stat-box">
-                             <i class="fas fa-heart" style="color: #e05353;"></i>
-                             <strong>0</strong>
-                             <span>Wishlist</span>
-                         </div>
-                         <div class="stat-box">
-                             <i class="fas fa-shopping-cart"></i>
-                             <strong>0</strong>
-                             <span>Cart</span>
+
+                         <div class="catalog-card" id="profile-stat-cart" style="padding: 12px 15px;">
+                             <div class="catalog-left">
+                                 <i class="fas fa-shopping-cart" style="font-size: 1.1rem;"></i>
+                                 <div class="catalog-info">
+                                     <h3 style="font-size: 0.85rem;">Shopping Cart</h3>
+                                     <p style="font-size: 0.72rem;">0 items in cart</p>
+                                 </div>
+                             </div>
+                             <div class="catalog-right" style="font-size: 0.8rem;">View <i class="fas fa-chevron-right"></i></div>
                          </div>
                      </div>
 
@@ -156,6 +211,32 @@
                 </div>
             </div>
         </main>
+
+        <!-- পপ-আপ মডাল -->
+        <div id="coins-modal" class="custom-modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-gem" style="color: #d4af37;"></i> Zuri Coins Reward</h3>
+                    <span id="close-modal-btn">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Earn <strong>100 Zuri Coins</strong> and unlock an exclusive <strong>70% Discount</strong> on any Earrings!</p>
+                    <p style="font-size: 0.75rem; color: #888; margin-top: 10px;">Select coin-boost option during checkout to earn coins instantly.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="detail-modal" class="custom-modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="detail-modal-title">Details</h3>
+                    <span id="close-detail-modal">&times;</span>
+                </div>
+                <div class="modal-body" id="detail-modal-body">
+                    <p>No items found here yet.</p>
+                </div>
+            </div>
+        </div>
 
         <nav class="bottom-nav">
             <a class="nav-item active" data-target="home-section">
