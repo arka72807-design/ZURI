@@ -65,8 +65,6 @@
             font-size: 0.75rem;
             cursor: pointer;
             flex: 1;
-            background: none;
-            border: none;
         }
         .bottom-nav .nav-item i {
             font-size: 1.2rem;
@@ -117,7 +115,7 @@
     <!-- ৩. ক্যাটাগরি পেজ সেকশন -->
     <div id="category-section" class="page-section" style="padding: 15px;">
         <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Select Category</h3>
-        <div onclick="switchTab('category-section');" style="background: #fff; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 15px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); cursor: pointer; margin-bottom: 15px;">
+        <div style="background: #fff; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 15px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); margin-bottom: 15px;">
             <img src="earings_1.jpg" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
             <span style="font-weight: 600; font-size: 1rem; color: #333;">Earrings Collection</span>
         </div>
@@ -131,18 +129,165 @@
 
     <!-- বটম ন্যাভিগেশন বার -->
     <div class="bottom-nav">
-        <button class="nav-item active" onclick="switchTab('home-section', this)">
+        <a class="nav-item active" onclick="switchTab('home-section', this)">
             <i class="fas fa-home"></i> Home
-        </button>
-        <button class="nav-item" onclick="switchTab('orders-section', this)">
+        </a>
+        <a class="nav-item" onclick="switchTab('orders-section', this)">
             <i class="fas fa-box"></i> Orders
-        </button>
-        <button class="nav-item" onclick="switchTab('category-section', this)">
+        </a>
+        <a class="nav-item" onclick="switchTab('category-section', this)">
             <i class="fas fa-th-large"></i> Category
-        </button>
-        <button class="nav-item" onclick="switchTab('profile-section', this)">
+        </a>
+        <a class="nav-item" onclick="switchTab('profile-section', this)">
             <i class="fas fa-user"></i> Profile
-        </button>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zuri - Luxury Handmade Jewelry</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            padding-bottom: 80px;
+        }
+        .top-header {
+            background: #fff;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .search-bar {
+            flex: 1;
+            background: #f1f3f6;
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        /* বটম ন্যাভিগেশন বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+            z-index: 1000;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+        }
+        .bottom-nav .nav-item {
+            text-align: center;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.75rem;
+            cursor: pointer;
+            flex: 1;
+        }
+        .bottom-nav .nav-item i {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .bottom-nav .nav-item.active {
+            color: #d4af37;
+            font-weight: 700;
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- টপ সার্চ হেডার -->
+    <div class="top-header">
+        <div style="font-family: serif; font-weight: bold; margin-right: 15px; color: #d4af37; font-size: 1.1rem;">ZURI</div>
+        <div class="search-bar">
+            <i class="fas fa-search" style="color: #888;"></i>
+            <input type="text" placeholder="Search Earrings...">
+        </div>
+    </div>
+
+    <!-- ১. হোম পেজ সেকশন -->
+    <div id="home-section" class="page-section active" style="padding: 15px;">
+        <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 5px;">Welcome to Zuri</h2>
+        <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Discover the art of handmade luxury jewelry.</p>
+        
+        <!-- ডাইনামিক প্রোডাক্ট গ্রিড -->
+        <div id="home-product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;"></div>
+    </div>
+
+    <!-- ২. অর্ডার পেজ সেকশন -->
+    <div id="orders-section" class="page-section" style="padding: 15px;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">My Orders</h3>
+        <div style="background: #fff; padding: 20px; border-radius: 12px; text-align: center; color: #666; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <i class="fas fa-box-open" style="font-size: 2rem; color: #d4af37; margin-bottom: 10px;"></i>
+            <p>You have no active orders yet.</p>
+        </div>
+    </div>
+
+    <!-- ৩. ক্যাটাগরি পেজ সেকশন -->
+    <div id="category-section" class="page-section" style="padding: 15px;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Select Category</h3>
+        <div style="background: #fff; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 15px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); margin-bottom: 15px;">
+            <img src="earings_1.jpg" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
+            <span style="font-weight: 600; font-size: 1rem; color: #333;">Earrings Collection</span>
+        </div>
+        <div id="category-product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;"></div>
+    </div>
+
+    <!-- ৪. প্রোফাইল পেজ সেকশন -->
+    <div id="profile-section" class="page-section">
+        <div id="profile-dashboard"></div>
+    </div>
+
+    <!-- বটম ন্যাভিগেশন বার -->
+    <div class="bottom-nav">
+        <a class="nav-item active" onclick="switchTab('home-section', this)">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a class="nav-item" onclick="switchTab('orders-section', this)">
+            <i class="fas fa-box"></i> Orders
+        </a>
+        <a class="nav-item" onclick="switchTab('category-section', this)">
+            <i class="fas fa-th-large"></i> Category
+        </a>
+        <a class="nav-item" onclick="switchTab('profile-section', this)">
+            <i class="fas fa-user"></i> Profile
+        </a>
     </div>
 
     <script src="script.js"></script>
