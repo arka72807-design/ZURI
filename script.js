@@ -219,35 +219,107 @@ function buyProduct(id) {
     }
 }
 
-// প্রোফাইল ড্যাশবোর্ড
+// প্রিমিয়াম ফ্লিপকার্ট স্টাইল প্রোফাইল ড্যাশবোর্ড
 function showDashboard() {
     const profileDashboard = document.getElementById('profile-dashboard');
     if (!profileDashboard) return;
 
     profileDashboard.innerHTML = `
-        <div style="background: #f1f3f6; min-height: 100vh; padding-bottom: 40px;">
-            <div style="background: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <h2 style="font-size: 1.2rem; font-weight: 700; color: #111; margin: 0;"><i class="fas fa-user-circle" style="color: #2874f0; margin-right: 8px;"></i> Hey, Arka</h2>
+        <div style="background: #f1f3f6; min-height: 100vh; padding-bottom: 60px; position: relative;">
+            <!-- হেডার -->
+            <div style="background: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 10;">
+                <h2 style="font-size: 1.2rem; font-weight: 700; color: #111; margin: 0;"><i class="fas fa-user-circle" style="color: #2874f0; margin-right: 8px;"></i> Hey, Arka[span_0](start_span)[span_0](end_span)</h2>
+                <button onclick="window.open('https://wa.me/919432131316?text=Hello%20Zuri%20Team,%20I%20need%20help', '_blank')" style="background: #fff; border: 1px solid #ccc; border-radius: 20px; padding: 5px 12px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                    <i class="fas fa-headset" style="color: #2874f0;"></i> Help[span_1](start_span)[span_1](end_span)
+                </button>
             </div>
+
             <div style="padding: 12px;">
-                <div style="background: linear-gradient(135deg, #232526, #414345); color: #fff; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
-                    <div style="font-size: 0.85rem; color: #ddd;"><i class="fas fa-wallet" style="margin-right: 5px;"></i> ZURI COINS WALLET</div>
-                    <div style="font-size: 1.3rem; font-weight: 700; margin-top: 5px;"><i class="fas fa-coins" style="color: #ffd700;"></i> 0 Coins Available</div>
+                <!-- প্রিমিয়াম জুড়ি কয়েন ওয়ালেট -->
+                <div style="background: linear-gradient(135deg, #1a1a1a, #333333); color: #fff; padding: 18px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: 1px solid #d4af37;">
+                    <div style="font-size: 0.8rem; color: #d4af37; font-weight: 600; letter-spacing: 1px;">ZURI COINS WALLET</div>
+                    <div style="font-size: 1.3rem; font-weight: 700; margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="fas fa-coins" style="color: #ffd700;"></i> 0 Coins Available[span_2](start_span)[span_2](end_span)</span>
+                        <span style="font-size: 0.75rem; background: rgba(212, 175, 55, 0.2); color: #ffd700; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-weight: 600;" onclick="alert('Wallet balance: 0 coins')">View Wallet</span>
+                    </div>
                 </div>
+
+                <!-- অর্ডার ও উইশলিস্ট কার্ড -->
                 <div style="display: flex; gap: 12px; margin-bottom: 12px;">
-                    <div style="flex: 1; background: #fff; padding: 15px; border-radius: 12px; text-align: center;" onclick="alert('No active orders')">
+                    <div style="flex: 1; background: #fff; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer;" onclick="switchTab('orders-section')">
                         <i class="fas fa-box" style="font-size: 1.3rem; color: #2874f0; margin-bottom: 5px;"></i>
-                        <div style="font-weight: 600; font-size: 0.9rem;">Orders</div>
+                        <div style="font-weight: 600; font-size: 0.9rem;">Orders[span_3](start_span)[span_3](end_span)</div>
                     </div>
-                    <div style="flex: 1; background: #fff; padding: 15px; border-radius: 12px; text-align: center;" onclick="alert('Wishlist is empty')">
+                    <div style="flex: 1; background: #fff; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer;" onclick="alert('Wishlist is empty')">
                         <i class="fas fa-heart" style="font-size: 1.3rem; color: #ff6161; margin-bottom: 5px;"></i>
-                        <div style="font-weight: 600; font-size: 0.9rem;">Wishlist</div>
+                        <div style="font-weight: 600; font-size: 0.9rem;">Wishlist[span_4](start_span)[span_4](end_span)</div>
                     </div>
                 </div>
-                <button onclick="location.reload();" style="width: 100%; background: #fff; border: 1px solid #2874f0; color: #2874f0; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer;">
+
+                <!-- সম্প্রতি ভিউ করা প্রোডাক্টস (Recently Viewed) -->
+                <div style="background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 10px;">Recently Viewed Stores[span_5](start_span)[span_5](end_span)</div>
+                    <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px;">
+                        <div style="text-align: center; min-width: 80px; cursor: pointer;" onclick="openProductDetail(1)">
+                            <img src="earings_1.jpg" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover;">
+                            <div style="font-size: 0.75rem; margin-top: 4px; color: #333; white-space: nowrap;">Earrings</div>
+                        </div>
+                        <div style="text-align: center; min-width: 80px; cursor: pointer;" onclick="openProductDetail(2)">
+                            <img src="earings_2.jpg" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover;">
+                            <div style="font-size: 0.75rem; margin-top: 4px; color: #333; white-space: nowrap;">Jhumka</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- রেটিংস অ্যান্ড রিভিউস -->
+                <div style="background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-weight: 700; font-size: 0.95rem;">Ratings & Reviews</span>
+                        <span style="color: #2874f0; font-size: 0.85rem; font-weight: 600; cursor: pointer;" onclick="alert('No reviews yet')">View all</span>
+                    </div>
+                    <div style="background: #fafafa; padding: 12px; border-radius: 8px; font-size: 0.85rem; color: #666; text-align: center;">
+                        No ratings given yet
+                    </div>
+                </div>
+
+                <!-- পেমেন্টস অ্যান্ড ওয়ালেট অপশন -->
+                <div style="background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="padding: 14px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer;" onclick="alert('Add payment method feature')">
+                        <span><i class="fas fa-wallet" style="color: #2874f0; margin-right: 10px;"></i> Saved payment methods</span>
+                        <i class="fas fa-chevron-right" style="color: #bbb; font-size: 0.8rem;"></i>
+                    </div>
+                    <div style="padding: 14px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer;" onclick="alert('Gift card feature coming soon')">
+                        <span><i class="fas fa-gift" style="color: #2874f0; margin-right: 10px;"></i> Add Gift Card</span>
+                        <i class="fas fa-chevron-right" style="color: #bbb; font-size: 0.8rem;"></i>
+                    </div>
+                </div>
+
+                <!-- প্রোফাইল সেটিংস লিস্ট -->
+                <div style="background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="padding: 14px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer;" onclick="alert('Edit profile option')">
+                        <span><i class="fas fa-user-edit" style="color: #2874f0; margin-right: 10px;"></i> Edit profile</span>
+                        <i class="fas fa-chevron-right" style="color: #bbb; font-size: 0.8rem;"></i>
+                    </div>
+                    <div style="padding: 14px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer;" onclick="alert('Saved addresses')">
+                        <span><i class="fas fa-map-marker-alt" style="color: #2874f0; margin-right: 10px;"></i> Saved addresses</span>
+                        <i class="fas fa-chevron-right" style="color: #bbb; font-size: 0.8rem;"></i>
+                    </div>
+                    <div style="padding: 14px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer;" onclick="window.open('https://wa.me/919432131316?text=Hello%20Zuri%20Support', '_blank')">
+                        <span><i class="fab fa-whatsapp" style="color: #25d366; margin-right: 10px; font-size: 1.1rem;"></i> WhatsApp Support</span>
+                        <i class="fas fa-chevron-right" style="color: #bbb; font-size: 0.8rem;"></i>
+                    </div>
+                </div>
+
+                <!-- লগআউট বাটন -->
+                <button onclick="location.reload();" style="width: 100%; background: #fff; border: 1px solid #2874f0; color: #2874f0; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
                     <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> Log out
                 </button>
             </div>
+
+            <!-- ভাসমান WhatsApp হেল্প বাটন -->
+            <a href="https://wa.me/919432131316?text=Hello%20Zuri%20Team" target="_blank" style="position: fixed; bottom: 85px; right: 20px; background: #25d366; color: #fff; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.6rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 999; text-decoration: none;">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
     `;
 }
