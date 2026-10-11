@@ -1,26 +1,10 @@
 window.addEventListener('load', () => {
-    const loadingScreen = document.getElementById('loading-screen');
-    const mainContent = document.getElementById('main-content');
-    
-    setTimeout(() => {
-        if (loadingScreen) {
-            loadingScreen.style.opacity = '0';
-            setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
-        }
-        if (mainContent) {
-            mainContent.classList.remove('hidden');
-            mainContent.classList.add('visible');
-            mainContent.style.opacity = '1';
-        }
-    }, 1000);
-    
     loadHomeProducts();
-    filterCategory('earrings');
-    setupNavigation();
+    loadCategoryProducts();
     showDashboard();
 });
 
-// প্রোডাক্ট ডেটাবেস: তোর সঠিক প্রাইস ও স্টক অনুযায়ী
+// আটটি প্রোডাক্টের ডেটাসহ সম্পূর্ণ ডেটাবেস
 const productsData = [
     {
         id: 1,
@@ -66,40 +50,74 @@ const productsData = [
         currentPrice: 159,
         originalPrice: 199,
         stock: 1
+    },
+    {
+        id: 6,
+        category: "earrings",
+        name: "Traditional Temple Jhumka",
+        image: "earings_6.jpg",
+        currentPrice: 139,
+        originalPrice: 189,
+        stock: 1
+    },
+    {
+        id: 7,
+        category: "earrings",
+        name: "Antique Peacock Earrings",
+        image: "earings_7.jpg",
+        currentPrice: 149,
+        originalPrice: 199,
+        stock: 1
+    },
+    {
+        id: 8,
+        category: "earrings",
+        name: "Boho Silver Statement Drops",
+        image: "earings_8.jpg",
+        currentPrice: 129,
+        originalPrice: 179,
+        stock: 1
     }
 ];
+
+// ট্যাব সুইচিং ফাংশন
+function switchTab(sectionId, element) {
+    document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+
+    if (element) {
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(nav => nav.classList.remove('active'));
+        element.classList.add('active');
+    }
+}
 
 // হোম পেজে প্রোডাক্ট রেন্ডার করা
 function loadHomeProducts() {
     const homeGrid = document.getElementById('home-product-grid');
     if (!homeGrid) return;
     
-    homeGrid.innerHTML = '';
-    productsData.forEach(product => {
+    homeGrid.innerHTML = productsData.map(product => {
         const discount = Math.round(((product.originalPrice - product.currentPrice) / product.originalPrice) * 100);
-        const card = document.createElement('div');
-        card.style = "background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer;";
-        card.onclick = () => openProductDetail(product.id);
-        card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 130px; object-fit: cover; border-radius: 8px;">
-            <div style="font-size: 0.85rem; font-weight: 600; margin-top: 8px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${product.name}</div>
-            <div style="margin-top: 4px; display: flex; align-items: baseline; gap: 6px;">
-                <span style="font-size: 0.95rem; font-weight: 700; color: #111;">₹${product.currentPrice}</span>
-                <span style="font-size: 0.75rem; text-decoration: line-through; color: #888;">₹${product.originalPrice}</span>
-                <span style="font-size: 0.7rem; color: #388e3c; font-weight: 600;">${discount}% off</span>
+        return `
+            <div onclick="openProductDetail(${product.id})" style="background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer;">
+                <img src="${product.image}" style="width: 100%; height: 130px; object-fit: cover; border-radius: 8px;">
+                <div style="font-size: 0.85rem; font-weight: 600; margin-top: 8px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${product.name}</div>
+                <div style="margin-top: 4px; display: flex; align-items: baseline; gap: 6px;">
+                    <span style="font-size: 0.95rem; font-weight: 700; color: #111;">₹${product.currentPrice}</span>
+                    <span style="font-size: 0.75rem; text-decoration: line-through; color: #888;">₹${product.originalPrice}</span>
+                    <span style="font-size: 0.7rem; color: #388e3c; font-weight: 600;">${discount}% off</span>
+                </div>
             </div>
         `;
-        homeGrid.appendChild(card);
-    });
+    }).join('');
 }
 
-// ক্যাটাগরি ফিল্টার করা
-function filterCategory(slug) {
-    const filtered = productsData.filter(p => p.category === slug);
-    const grid = document.getElementById('category-product-grid');
-    if (!grid) return;
+// ক্যাটাগরি পেজে প্রোডাক্ট রেন্ডার করা
+function loadCategoryProducts() {
+    const catGrid = document.getElementById('category-product-grid');
+    if (!catGrid) return;
     
-    grid.innerHTML = filtered.map(product => {
+    catGrid.innerHTML = productsData.map(product => {
         const discount = Math.round(((product.originalPrice - product.currentPrice) / product.originalPrice) * 100);
         return `
             <div onclick="openProductDetail(${product.id})" style="background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer;">
@@ -115,31 +133,7 @@ function filterCategory(slug) {
     }).join('');
 }
 
-// নেভিগেশন ট্যাব সুইচিং
-function setupNavigation() {
-    const navItems = document.querySelectorAll('.bottom-nav .nav-item');
-    const sections = document.querySelectorAll('.page-section');
-
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            navItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
-            
-            const targetId = item.getAttribute('data-target');
-            sections.forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-            }
-        });
-    });
-}
-
-// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোডাক্ট ডিটেইল পেজ (বড় ছবি, ডিসকাউন্ট, কাটা অরিজিনাল প্রাইস ও বোল্ড সেল প্রাইস সহ)
+// ফ্লিপকার্ট স্টাইল প্রোডাক্ট ডিটেইল পেজ
 function openProductDetail(id) {
     const product = productsData.find(p => p.id === id);
     if (!product) return;
@@ -153,7 +147,14 @@ function openProductDetail(id) {
         buyBtnHtml = `<button style="flex: 1; background: #ccc; color: #666; border: none; padding: 15px; font-weight: 600; cursor: not-allowed;" disabled>Sold Out</button>`;
     }
 
-    const detailModal = document.getElementById('product-detail-page') || createDetailPageContainer();
+    let detailModal = document.getElementById('product-detail-page');
+    if (!detailModal) {
+        detailModal = document.createElement('div');
+        detailModal.id = 'product-detail-page';
+        detailModal.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999; overflow-y: auto; display: none;";
+        document.body.appendChild(detailModal);
+    }
+    
     detailModal.style.display = 'block';
     detailModal.innerHTML = `
         <div style="background: #fff; min-height: 100vh; padding-bottom: 80px; position: relative;">
@@ -172,7 +173,7 @@ function openProductDetail(id) {
                 
                 <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 10px;">
                     <span style="color: #388e3c; font-weight: 700; font-size: 1.2rem;">↓${discount}%</span>
-                    <span style="color: #888; text-decoration: line-through; font-size: 1rem;">₹${product.originalPrice}</span>
+                    <span style="font-size: 1rem; text-decoration: line-through; color: #888;">₹${product.originalPrice}</span>
                     <span style="font-size: 1.4rem; font-weight: 700; color: #111;">₹${product.currentPrice}</span>
                 </div>
                 
@@ -193,14 +194,18 @@ function openProductDetail(id) {
             </div>
 
             <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; z-index: 1000;">
-                <button onclick="addToCart(${product.id})" style="flex: 1; background: #fff; color: #111; border: none; padding: 15px; font-weight: 600; cursor: pointer;">Add to cart</button>
+                <button onclick="alert('Successfully added to cart!')" style="flex: 1; background: #fff; color: #111; border: none; padding: 15px; font-weight: 600; cursor: pointer;">Add to cart</button>
                 ${buyBtnHtml}
             </div>
         </div>
     `;
 }
 
-// শুধুমাত্র ফাইনাল অর্ডার প্লেস (Buy Now) করলেই স্টক থেকে ১ কমে যাবে
+function closeProductDetail() {
+    const modal = document.getElementById('product-detail-page');
+    if (modal) modal.style.display = 'none';
+}
+
 function buyProduct(id) {
     const product = productsData.find(p => p.id === id);
     if (product && product.stock > 0) {
@@ -208,31 +213,10 @@ function buyProduct(id) {
         alert(`Order placed successfully for ${product.name}! Stock remaining: ${product.stock}`);
         closeProductDetail();
         loadHomeProducts();
-        filterCategory('earrings');
+        loadCategoryProducts();
     } else {
         alert("Sorry, this item is out of stock!");
     }
-}
-
-// কার্টে যোগ করলে স্টক কমবে না
-function addToCart(id) {
-    const product = productsData.find(p => p.id === id);
-    if (product) {
-        alert(`Successfully added ${product.name} to your cart!`);
-    }
-}
-
-function createDetailPageContainer() {
-    const div = document.createElement('div');
-    div.id = 'product-detail-page';
-    div.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999; overflow-y: auto; display: none;";
-    document.body.appendChild(div);
-    return div;
-}
-
-function closeProductDetail() {
-    const modal = document.getElementById('product-detail-page');
-    if (modal) modal.style.display = 'none';
 }
 
 // প্রোফাইল ড্যাশবোর্ড
