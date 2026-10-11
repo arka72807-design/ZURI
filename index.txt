@@ -1,0 +1,29 @@
+<!-- হোম পেজ সেকশন -->
+<div id="home-section" class="page-section active" style="padding: 15px;">
+    <h2 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 5px;">Welcome to Zuri</h2>
+    <p style="color: #666; font-size: 0.85rem; margin-bottom: 15px;">Discover the art of handmade luxury jewelry.</p>
+    
+    <!-- এখানে সরাসরি প্রোডাক্টের ছোট ছোট থাম্বনেইল গ্রিড আসবে -->
+    <div id="home-product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;"></div>
+</div>
+
+<!-- ক্যাটাগরি পেজ সেকশন -->
+<div id="category-section" class="page-section" style="display: none; padding: 15px;">
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Select Category</h3>
+    <div id="category-options-container"></div>
+    <div id="category-product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px;"></div>
+</div>
+
+<!-- অর্ডার পেজ সেকশন -->
+<div id="orders-section" class="page-section" style="display: none; padding: 15px;">
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">My Orders</h3>
+    <div style="background: #fff; padding: 20px; border-radius: 12px; text-align: center; color: #666; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        You have no active orders yet.
+    </div>
+</div>
+
+<!-- প্রোফাইল পেজ সেকশন -->
+<div id="profile-section" class="page-section" style="display: none;">
+    <div id="auth-container"></div>
+    <div id="profile-dashboard"></div>
+</div>

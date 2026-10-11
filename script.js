@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
             mainContent.classList.add('visible');
             mainContent.style.opacity = '1';
         }
-    }, 1500);
+    }, 1000);
     
     loadHomeProducts();
     loadCategories();
@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
     checkAuthStatus();
 });
 
-// প্রোডাক্ট ডেটাবেস: তোর দেওয়া সঠিক প্রাইস ও স্টক অনুযায়ী
+// প্রোডাক্ট ডেটাবেস
 const productsData = [
     {
         id: 1,
@@ -79,17 +79,12 @@ const productsData = [
     }
 ];
 
-// হোম পেজে ছোট ছোট থাম্বনেইল কার্ডে প্রোডাক্ট রেন্ডার করা
+// হোম পেজে ছোট থাম্বনেইলে প্রোডাক্ট রেন্ডার করা
 function loadHomeProducts() {
-    const homeGrid = document.getElementById('home-product-grid') || document.getElementById('dynamic-product-grid');
+    const homeGrid = document.getElementById('home-product-grid');
     if (!homeGrid) return;
     
     homeGrid.innerHTML = '';
-    homeGrid.style.display = 'grid';
-    homeGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-    homeGrid.style.gap = '12px';
-    homeGrid.style.padding = '10px';
-
     productsData.forEach(product => {
         const discount = Math.round(((product.originalPrice - product.currentPrice) / product.originalPrice) * 100);
         const card = document.createElement('div');
@@ -110,29 +105,15 @@ function loadHomeProducts() {
 
 // ক্যাটাগরি পেজ লোড করা
 function loadCategories() {
-    const catContainer = document.getElementById('category-options-container') || document.getElementById('category-section');
+    const catContainer = document.getElementById('category-options-container');
     if (!catContainer) return;
     
-    const categories = [
-        { name: "Earrings", slug: "earrings", img: "earings_1.jpg" }
-    ];
-    
     catContainer.innerHTML = `
-        <div style="padding: 15px;">
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Select Category</h3>
-            <div id="cat-list"></div>
-            <div id="category-product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px;"></div>
+        <div onclick="filterCategory('earrings')" style="background: #fff; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 15px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); cursor: pointer;">
+            <img src="earings_1.jpg" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
+            <span style="font-weight: 600; font-size: 1rem; color: #333;">Earrings</span>
         </div>
     `;
-
-    const catList = document.getElementById('cat-list');
-    catList.innerHTML = categories.map(cat => `
-        <div onclick="filterCategory('${cat.slug}')" style="background: #fff; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); cursor: pointer;">
-            <img src="${cat.img}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
-            <span style="font-weight: 600; font-size: 1rem; color: #333;">${cat.name}</span>
-        </div>
-    `).join('');
-
     filterCategory('earrings');
 }
 
@@ -153,7 +134,7 @@ function filterCategory(slug) {
     `).join('');
 }
 
-// নেভিগেশন ট্যাব সুইচিং লজিক
+// নেভিগেশন ট্যাব সুইচিং লজিক (ক্লিক কাজ করার জন্য পাকাপোক্ত কোড)
 function setupNavigation() {
     const navItems = document.querySelectorAll('.bottom-nav .nav-item');
     const sections = document.querySelectorAll('.page-section');
@@ -166,20 +147,18 @@ function setupNavigation() {
             
             const targetId = item.getAttribute('data-target');
             sections.forEach(section => {
-                section.classList.remove('active');
                 section.style.display = 'none';
             });
             
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
-                targetSection.classList.add('active');
                 targetSection.style.display = 'block';
             }
         });
     });
 }
 
-// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোডাক্ট ডিটেইল পেজ[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)
+// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোডাক্ট ডিটেইল পেজ
 function openProductDetail(id) {
     const product = productsData.find(p => p.id === id);
     if (!product) return;
@@ -217,15 +196,9 @@ function openProductDetail(id) {
                     <div style="font-size: 0.85rem; color: #555;"><i class="fas fa-map-marker-alt"></i> Delivery by 3-5 business days</div>
                     <div style="font-size: 0.85rem; color: #555; margin-top: 5px;"><i class="fas fa-undo"></i> 10-Day Return Policy</div>
                 </div>
-
-                <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
-                    <div style="font-weight: 600; margin-bottom: 8px;">Ratings & Reviews</div>
-                    <div style="font-size: 0.85rem; color: #777;">No ratings yet. Be the first to review!</div>
-                </div>
             </div>
 
-            <!-- ফিক্সড বটম বাটন (Add to cart & Buy now) -->
-            <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 1000;">
+            <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; display: flex; border-top: 1px solid #ddd; z-index: 1000;">
                 <button onclick="alert('Added to cart successfully!')" style="flex: 1; background: #fff; color: #111; border: none; padding: 15px; font-weight: 600; font-size: 1rem; cursor: pointer;">Add to cart</button>
                 <button onclick="alert('Order placed successfully!')" style="flex: 1; background: #ffd814; color: #111; border: none; padding: 15px; font-weight: 600; font-size: 1rem; cursor: pointer;">Buy now</button>
             </div>
@@ -246,82 +219,32 @@ function closeProductDetail() {
     if (modal) modal.style.display = 'none';
 }
 
-// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোফাইল ড্যাশবোর্ড[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span)
+// ফ্লিপকার্ট স্টাইল প্রোফাইল ড্যাশবোর্ড
 function showDashboard() {
-    const authContainer = document.getElementById('auth-container');
     const profileDashboard = document.getElementById('profile-dashboard');
-    if (!authContainer || !profileDashboard) return;
-
-    authContainer.classList.add('hidden');
-    profileDashboard.classList.remove('hidden');
-
-    const userName = localStorage.getItem('zuriUserName') || 'Arka';
+    if (!profileDashboard) return;
 
     profileDashboard.innerHTML = `
         <div style="background: #f1f3f6; min-height: 100vh; padding-bottom: 40px;">
             <div style="background: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <h2 style="font-size: 1.2rem; font-weight: 700; color: #111; margin: 0;">Hey, ${userName}</h2>
-                <button style="background: #fff; border: 1px solid #ccc; border-radius: 20px; padding: 5px 12px; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 5px; cursor: pointer;">
-                    <i class="fas fa-headset"></i> Help
-                </button>
+                <h2 style="font-size: 1.2rem; font-weight: 700; color: #111; margin: 0;">Hey, Arka</h2>
             </div>
-
             <div style="padding: 12px;">
-                <div style="background: linear-gradient(135deg, #232526, #414345); color: #fff; padding: 15px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <div style="background: linear-gradient(135deg, #232526, #414345); color: #fff; padding: 15px; border-radius: 12px; margin-bottom: 12px;">
                     <div style="font-size: 0.85rem; color: #ddd;">ZURI COINS WALLET</div>
-                    <div style="font-size: 1.3rem; font-weight: 700; margin-top: 5px; display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="fas fa-coins" style="color: #ffd700;"></i> 0 Coins Available</span>
-                        <span style="font-size: 0.8rem; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 6px; cursor: pointer;">View</span>
-                    </div>
+                    <div style="font-size: 1.3rem; font-weight: 700; margin-top: 5px;"><i class="fas fa-coins" style="color: #ffd700;"></i> 0 Coins Available</div>
                 </div>
-
                 <div style="display: flex; gap: 12px; margin-bottom: 12px;">
-                    <div style="flex: 1; background: #fff; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer;" onclick="alert('No active orders')">
+                    <div style="flex: 1; background: #fff; padding: 15px; border-radius: 12px; text-align: center;" onclick="alert('No active orders')">
                         <i class="fas fa-box" style="font-size: 1.3rem; color: #2874f0; margin-bottom: 5px;"></i>
                         <div style="font-weight: 600; font-size: 0.9rem;">Orders</div>
                     </div>
-                    <div style="flex: 1; background: #fff; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer;" onclick="alert('Wishlist is empty')">
+                    <div style="flex: 1; background: #fff; padding: 15px; border-radius: 12px; text-align: center;" onclick="alert('Wishlist is empty')">
                         <i class="fas fa-heart" style="font-size: 1.3rem; color: #ff6161; margin-bottom: 5px;"></i>
                         <div style="font-weight: 600; font-size: 0.9rem;">Wishlist</div>
                     </div>
                 </div>
-
-                <div style="background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                    <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 10px;">Recently Viewed Stores</div>
-                    <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px;">
-                        <div style="text-align: center; min-width: 80px;" onclick="openProductDetail(1)">
-                            <img src="earings_1.jpg" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover;">
-                            <div style="font-size: 0.75rem; margin-top: 4px; color: #333; white-space: nowrap;">Earrings</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <span style="font-weight: 700; font-size: 0.95rem;">Ratings & Reviews</span>
-                        <span style="color: #2874f0; font-size: 0.85rem; font-weight: 600; cursor: pointer;">View all</span>
-                    </div>
-                    <div style="background: #fafafa; padding: 10px; border-radius: 8px; font-size: 0.85rem; color: #666; text-align: center;">
-                        No ratings yet
-                    </div>
-                </div>
-
-                <div style="background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                    <div style="padding: 14px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer;">
-                        <span><i class="fas fa-user-circle" style="color: #2874f0; margin-right: 10px;"></i> Edit profile</span>
-                        <i class="fas fa-chevron-right" style="color: #bbb; font-size: 0.8rem;"></i>
-                    </div>
-                    <div style="padding: 14px 15px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer;">
-                        <span><i class="fas fa-map-marker-alt" style="color: #2874f0; margin-right: 10px;"></i> Saved addresses</span>
-                        <i class="fas fa-chevron-right" style="color: #bbb; font-size: 0.8rem;"></i>
-                    </div>
-                    <div style="padding: 14px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer;">
-                        <span><i class="fas fa-question-circle" style="color: #2874f0; margin-right: 10px;"></i> FAQs & Terms</span>
-                        <i class="fas fa-chevron-right" style="color: #bbb; font-size: 0.8rem;"></i>
-                    </div>
-                </div>
-
-                <button onclick="logoutUser()" style="width: 100%; background: #fff; border: 1px solid #2874f0; color: #2874f0; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <button onclick="localStorage.removeItem('zuriUserLoggedIn'); location.reload();" style="width: 100%; background: #fff; border: 1px solid #2874f0; color: #2874f0; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer;">
                     Log out
                 </button>
             </div>
@@ -329,13 +252,7 @@ function showDashboard() {
     `;
 }
 
-function logoutUser() {
-    localStorage.removeItem('zuriUserLoggedIn');
-    location.reload();
-}
-
 function checkAuthStatus() {
-    if (localStorage.getItem('zuriUserLoggedIn') === 'true') {
-        showDashboard();
-    }
+    localStorage.setItem('zuriUserLoggedIn', 'true');
+    showDashboard();
 }
