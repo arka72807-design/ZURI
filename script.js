@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
     checkAuthStatus();
 });
 
-// প্রোডাক্ট ডেটাবেস: তোর দেওয়া সঠিক প্রাইস, স্টক ও নাম অনুযায়ী সেট করা
+// প্রোডাক্ট ডেটাবেস: তোর দেওয়া সঠিক প্রাইস ও স্টক অনুযায়ী
 const productsData = [
     {
         id: 1,
@@ -79,7 +79,7 @@ const productsData = [
     }
 ];
 
-// হোম পেজে ছোট থাম্বনেইলে প্রোডাক্ট রেন্ডার করা (পুরো গ্রিড সাজানো)
+// হোম পেজে ছোট ছোট থাম্বনেইল কার্ডে প্রোডাক্ট রেন্ডার করা
 function loadHomeProducts() {
     const homeGrid = document.getElementById('home-product-grid') || document.getElementById('dynamic-product-grid');
     if (!homeGrid) return;
@@ -133,7 +133,6 @@ function loadCategories() {
         </div>
     `).join('');
 
-    // ডিফল্টভাবে ইয়াররিংস ফিল্টার করে দেখিয়ে দেওয়া
     filterCategory('earrings');
 }
 
@@ -154,7 +153,7 @@ function filterCategory(slug) {
     `).join('');
 }
 
-// নেভিগেশন বার সুইচিং ফিক্স
+// নেভিগেশন ট্যাব সুইচিং লজিক
 function setupNavigation() {
     const navItems = document.querySelectorAll('.bottom-nav .nav-item');
     const sections = document.querySelectorAll('.page-section');
@@ -180,7 +179,7 @@ function setupNavigation() {
     });
 }
 
-// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোডাক্ট ডিটেইল পেজ[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)[span_2](start_span)[span_2](end_span)
+// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোডাক্ট ডিটেইল পেজ[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)
 function openProductDetail(id) {
     const product = productsData.find(p => p.id === id);
     if (!product) return;
@@ -247,7 +246,7 @@ function closeProductDetail() {
     if (modal) modal.style.display = 'none';
 }
 
-// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোফাইল ড্যাশবোর্ড[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)
+// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোফাইল ড্যাশবোর্ড[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span)
 function showDashboard() {
     const authContainer = document.getElementById('auth-container');
     const profileDashboard = document.getElementById('profile-dashboard');
