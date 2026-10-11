@@ -16,6 +16,7 @@ window.addEventListener('load', () => {
     
     loadHomeProducts();
     loadCategories();
+    setupNavigation();
     checkAuthStatus();
 });
 
@@ -78,19 +79,24 @@ const productsData = [
     }
 ];
 
-// হোম পেজে ছোট থাম্বনেইলে প্রোডাক্ট রেন্ডার করা (হোম পেজ ফাঁকা থাকবে না)
+// হোম পেজে ছোট থাম্বনেইলে প্রোডাক্ট রেন্ডার করা (পুরো গ্রিড সাজানো)
 function loadHomeProducts() {
-    const homeGrid = document.getElementById('home-product-grid');
+    const homeGrid = document.getElementById('home-product-grid') || document.getElementById('dynamic-product-grid');
     if (!homeGrid) return;
     
     homeGrid.innerHTML = '';
+    homeGrid.style.display = 'grid';
+    homeGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    homeGrid.style.gap = '12px';
+    homeGrid.style.padding = '10px';
+
     productsData.forEach(product => {
         const discount = Math.round(((product.originalPrice - product.currentPrice) / product.originalPrice) * 100);
         const card = document.createElement('div');
         card.style = "background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer;";
         card.onclick = () => openProductDetail(product.id);
         card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 140px; object-fit: cover; border-radius: 8px;">
+            <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 130px; object-fit: cover; border-radius: 8px;">
             <div style="font-size: 0.85rem; font-weight: 600; margin-top: 8px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${product.name}</div>
             <div style="margin-top: 4px;">
                 <span style="font-size: 0.9rem; font-weight: 700; color: #111;">₹${product.currentPrice}</span>
@@ -102,21 +108,33 @@ function loadHomeProducts() {
     });
 }
 
-// ক্যাটাগরি পেজ লোড করা (প্রথমে অপশন দেখাবে)
+// ক্যাটাগরি পেজ লোড করা
 function loadCategories() {
-    const catContainer = document.getElementById('category-options-container');
+    const catContainer = document.getElementById('category-options-container') || document.getElementById('category-section');
     if (!catContainer) return;
     
     const categories = [
         { name: "Earrings", slug: "earrings", img: "earings_1.jpg" }
     ];
     
-    catContainer.innerHTML = categories.map(cat => `
+    catContainer.innerHTML = `
+        <div style="padding: 15px;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Select Category</h3>
+            <div id="cat-list"></div>
+            <div id="category-product-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px;"></div>
+        </div>
+    `;
+
+    const catList = document.getElementById('cat-list');
+    catList.innerHTML = categories.map(cat => `
         <div onclick="filterCategory('${cat.slug}')" style="background: #fff; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); cursor: pointer;">
             <img src="${cat.img}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
             <span style="font-weight: 600; font-size: 1rem; color: #333;">${cat.name}</span>
         </div>
     `).join('');
+
+    // ডিফল্টভাবে ইয়াররিংস ফিল্টার করে দেখিয়ে দেওয়া
+    filterCategory('earrings');
 }
 
 function filterCategory(slug) {
@@ -126,7 +144,7 @@ function filterCategory(slug) {
     
     grid.innerHTML = filtered.map(product => `
         <div onclick="openProductDetail(${product.id})" style="background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer;">
-            <img src="${product.image}" style="width: 100%; height: 140px; object-fit: cover; border-radius: 8px;">
+            <img src="${product.image}" style="width: 100%; height: 130px; object-fit: cover; border-radius: 8px;">
             <div style="font-size: 0.85rem; font-weight: 600; margin-top: 8px; color: #333;">${product.name}</div>
             <div style="margin-top: 4px;">
                 <span style="font-size: 0.9rem; font-weight: 700;">₹${product.currentPrice}</span>
@@ -136,7 +154,33 @@ function filterCategory(slug) {
     `).join('');
 }
 
-// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোডাক্ট ডিটেইল পেজ (বড় ছবি, কাটা দাম, সেল প্রাইস, ডেলিভারি ও বটম বাটন)[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)[span_2](start_span)[span_2](end_span)
+// নেভিগেশন বার সুইচিং ফিক্স
+function setupNavigation() {
+    const navItems = document.querySelectorAll('.bottom-nav .nav-item');
+    const sections = document.querySelectorAll('.page-section');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            navItems.forEach(nav => nav.classList.remove('active'));
+            item.classList.add('active');
+            
+            const targetId = item.getAttribute('data-target');
+            sections.forEach(section => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            });
+            
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                targetSection.style.display = 'block';
+            }
+        });
+    });
+}
+
+// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোডাক্ট ডিটেইল পেজ[span_0](start_span)[span_0](end_span)[span_1](start_span)[span_1](end_span)[span_2](start_span)[span_2](end_span)
 function openProductDetail(id) {
     const product = productsData.find(p => p.id === id);
     if (!product) return;
@@ -203,7 +247,7 @@ function closeProductDetail() {
     if (modal) modal.style.display = 'none';
 }
 
-// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোফাইল ড্যাশবোর্ড (নিচে ফুল-উইথ আউটলাইন লগআউট বাটন সহ)[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)
+// ফ্লিপকার্ট স্টাইল প্রিমিয়াম প্রোফাইল ড্যাশবোর্ড[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)
 function showDashboard() {
     const authContainer = document.getElementById('auth-container');
     const profileDashboard = document.getElementById('profile-dashboard');
