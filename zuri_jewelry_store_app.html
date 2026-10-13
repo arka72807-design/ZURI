@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="bn" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Zuri (জুড়ি) - Premium Fashion Jewelry</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Noto Serif Bengali -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        bengali: ['Noto Serif Bengali', 'serif'],
+                    },
+                    colors: {
+                        zuri: {
+                            50: '#fdf8f6',
+                            100: '#fbe8e6',
+                            500: '#d97706',
+                            600: '#b45309',
+                            700: '#92400e',
+                            900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Serif Bengali', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Custom scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 h-full flex flex-col antialiased selection:bg-amber-100 selection:text-amber-900">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-stone-900 text-stone-200 text-xs py-2 px-4 text-center font-medium tracking-wide">
+        🔥 <span class="text-amber-400 font-bold">CLEARANCE SALE:</span> শেষ ৮ পিস ইয়ারিংস মাত্র ₹১০৫-₹১১০! জলদি বুক করুন।
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <button id="mobile-menu-btn" class="sm:hidden text-stone-700 p-2 rounded-lg hover:bg-stone-100 focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+                <a href="#" class="flex items-center gap-2">
+                    <div class="w-9 h-9 bg-amber-700 text-white rounded-full flex items-center justify-center font-bengali font-bold text-lg shadow-md">জু</div>
+                    <span class="font-bengali text-2xl font-bold tracking-wider text-stone-900">Zuri <span class="text-xs font-sans text-amber-700 tracking-widest uppercase block -mt-1 font-semibold">জুড়ি</span></span>
+                </a>
+            </div>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden sm:flex items-center gap-6 text-sm font-medium text-stone-600">
+                <a href="#shop" class="hover:text-amber-700 transition">কালেকশন</a>
+                <a href="#offers" class="hover:text-amber-700 transition">অফার ও কম্বো</a>
+                <a href="#about" class="hover:text-amber-700 transition">আমাদের সম্পর্কে</a>
+                <button onclick="openAdminModal()" class="text-xs bg-stone-100 hover:bg-stone-200 text-stone-700 px-3 py-1.5 rounded-full font-semibold transition border border-stone-300">
+                    <i class="fa-solid fa-lock mr-1 text-amber-700"></i> এডমিন অর্ডার্স
+                </button>
+            </nav>
+
+            <!-- Cart & Actions -->
+            <div class="flex items-center gap-3">
+                <button onclick="openAdminModal()" class="sm:hidden text-xs bg-stone-100 text-stone-700 p-2 rounded-lg border border-stone-300">
+                    <i class="fa-solid fa-lock text-amber-700"></i>
+                </button>
+                <button onclick="toggleCart()" class="relative bg-amber-50 hover:bg-amber-100 text-amber-900 px-4 py-2 rounded-full font-medium text-sm flex items-center gap-2 transition border border-amber-200 shadow-sm">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="hidden sm:inline">ব্যাগ</span>
+                    <span id="cart-badge" class="bg-amber-700 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-stone-900 text-white overflow-hidden py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
+        <div class="absolute inset-0 opacity-35 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1600')"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-900/80 to-transparent"></div>
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <span class="inline-block bg-amber-600/30 border border-amber-500/50 text-amber-300 text-xs px-3 py-1 rounded-full uppercase tracking-widest font-semibold mb-4">এক্সক্লুসিভ ফ্যাশন জুয়েলারি</span>
+                <h1 class="font-bengali text-3xl sm:text-5xl font-bold tracking-tight leading-tight mb-4 text-stone-100">
+                    প্রতিদিনের স্টাইল হোক আরও আকর্ষণীয় <span class="text-amber-400">Zuri</span>-র সাথে
+                </h1>
+                <p class="text-stone-300 text-sm sm:text-base mb-6 font-light leading-relaxed">
+                    স্পেশাল ডেইলি ইউজ ইয়ারিংস কালেকশন। প্রিমিয়াম ফিনিশিং, নিখুঁত ডিজাইন যা আপনার প্রতিটি লুককে করবে পরিপাটি ও সুন্দর।
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#shop" class="bg-amber-600 hover:bg-amber-700 text-white font-medium px-6 py-3 rounded-full text-sm shadow-lg transition flex items-center gap-2">
+                        <span>কেনাকাটা করুন</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    <a href="#offers" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-medium px-6 py-3 rounded-full text-sm border border-white/20 transition">
+                        কম্বো অফার দেখুন
+                    </a>
+                </div>
+            </div>
+            <div class="hidden md:flex justify-center">
+                <div class="relative w-72 h-96 rounded-2xl overflow-hidden shadow-2xl border-4 border-amber-600/30 transform rotate-2 hover:rotate-0 transition duration-500">
+                    <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=600" alt="Zuri Jewelry" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-stone-950 p-4 text-center">
+                        <span class="text-xs text-amber-300 font-semibold uppercase tracking-wider">লিমিটেড স্টক</span>
+                        <p class="text-white font-bengali text-lg font-bold">মাত্র ৮ পিস অবশিষ্ট!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Shop Catalog -->
+    <main id="shop" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow w-full">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-stone-200 pb-4">
+            <div>
+                <span class="text-amber-700 text-xs font-bold uppercase tracking-wider">রিসেন্ট স্টক ক্লিয়ারেন্স</span>
+                <h2 class="font-bengali text-2xl sm:text-3xl font-bold text-stone-900 mt-1">স্পেশাল ইয়ারিংস কালেকশন</h2>
+            </div>
+            <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-amber-900 text-xs sm:text-sm font-medium">
+                <i class="fa-solid fa-bolt text-amber-600"></i>
+                <span>দুটো কিনলে ১০% অতিরিক্ত ছাড় বা কম্বো অফার প্রযোজ্য!</span>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Dynamic products will be injected via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Offers Section -->
+    <section id="offers" class="bg-amber-900 text-stone-100 py-12 my-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left items-center">
+            <div class="md:col-span-2">
+                <span class="bg-amber-800 text-amber-200 text-xs font-semibold px-3 py-1 rounded-full uppercase">স্পেশাল ডিসকাউন্ট</span>
+                <h3 class="font-bengali text-2xl sm:text-3xl font-bold mt-3 mb-2">যেকোনো ২ পিস বা তার বেশি কিনলে মোট দামের ওপর এক্সট্রা ১০% ছাড়!</h3>
+                <p class="text-amber-100 text-sm font-light">লোকাল মার্কেটের সমকক্ষ নয়, চমৎকার ফিনিশিং এবং ডেইলি ইউজ করার জন্য একদম পারফেক্ট। স্টক সীমিত!</p>
+            </div>
+            <div class="flex justify-center md:justify-end">
+                <a href="#shop" class="bg-white text-amber-900 hover:bg-amber-50 font-bold px-8 py-3.5 rounded-full shadow-lg transition transform hover:-translate-y-0.5">
+                    এখনই লুফে নিন
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Drawer Modal -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" role="dialog">
+        <div class="absolute inset-0 bg-stone-950/60 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <!-- Cart Header -->
+                <div class="p-4 sm:p-6 bg-stone-900 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-amber-400"></i>
+                        <h3 class="font-bengali text-lg font-bold">আপনার শপিং ব্যাগ</h3>
+                    </div>
+                    <button onclick="toggleCart()" class="text-stone-400 hover:text-white p-2 rounded-lg">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 divide-y divide-stone-100">
+                    <!-- Dynamic Cart Items -->
+                </div>
+
+                <!-- Cart Footer & Checkout Button -->
+                <div class="border-t border-stone-200 p-4 sm:p-6 bg-stone-50 space-y-3">
+                    <div class="space-y-1 text-sm">
+                        <div class="flex justify-between text-stone-600">
+                            <span>সাবটোটাল</span>
+                            <span id="cart-subtotal">₹0</span>
+                        </div>
+                        <div class="flex justify-between text-stone-600">
+                            <span>ডেলিভারি চার্জ (অটো ক্যালকুলেটেড)</span>
+                            <span id="cart-shipping">₹0</span>
+                        </div>
+                        <div class="flex justify-between text-stone-900 font-bold text-base pt-2 border-t border-stone-200">
+                            <span>সর্বমোট (Total)</span>
+                            <span id="cart-total" class="text-amber-700">₹0</span>
+                        </div>
+                    </div>
+                    <button onclick="openCheckoutModal()" id="checkout-btn" class="w-full bg-amber-700 hover:bg-amber-800 disabled:bg-stone-300 text-white font-medium py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
+                        <span>অর্ডার কনফার্ম করুন</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Checkout Modal with Phone Validation, Smart Distance & UPI Gateway -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" role="dialog">
+        <div class="min-h-screen px-4 text-center flex items-center justify-center">
+            <div class="fixed inset-0 bg-stone-950/70 backdrop-blur-sm transition-opacity" onclick="closeCheckoutModal()"></div>
+            
+            <div class="inline-block w-full max-w-xl text-left align-middle transition-all transform bg-white shadow-2xl rounded-2xl overflow-hidden relative z-10 my-8">
+                <!-- Header -->
+                <div class="bg-stone-900 text-white px-6 py-4 flex items-center justify-between">
+                    <h3 class="font-bengali text-lg font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-amber-400"></i> নিরাপদ চেকআউট ও পেমেন্ট
+                    </h3>
+                    <button onclick="closeCheckoutModal()" class="text-stone-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Form Content -->
+                <form id="order-form" onsubmit="submitOrder(event)" class="p-6 space-y-5">
+                    <!-- Customer Basic Info -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 uppercase mb-1">আপনার নাম *</label>
+                            <input type="text" id="cust-name" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-amber-600 focus:outline-none text-sm" placeholder="পূর্ণ নাম লিখুন">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 uppercase mb-1">ফোন নম্বর (১০ ডিজিট) *</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-500 text-sm font-medium">+91</span>
+                                <input type="tel" id="cust-phone" maxlength="10" required oninput="validatePhoneInput(this)" class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-amber-600 focus:outline-none text-sm tracking-wider" placeholder="9876543210">
+                            </div>
+                            <p id="phone-error" class="text-red-500 text-xs mt-1 hidden">সঠিক ১০ ডিজিটের ভারতীয় মোবাইল নম্বর দিন (৬-৯ দিয়ে শুরু)।</p>
+                        </div>
+                    </div>
+
+                    <!-- Smart Area & Auto Distance Calculation -->
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-3">
+                        <label class="block text-xs font-bold text-stone-700 uppercase">ডেলিভারি লোকেশন / এরিয়া (কোলকাতা জোন) *</label>
+                        <select id="delivery-area" onchange="calculateDistance()" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-amber-600 focus:outline-none text-sm bg-white">
+                            <option value="" disabled selected>আপনার নিকটবর্তী লোকেশন বা এরিয়া সিলেক্ট করুন</option>
+                            <option value="kolkata_central" data-km="1.5">কোলকাতা সেন্টার (Esplanade / Park Street)</option>
+                            <option value="howrah_station" data-km="3.5">হাওড়া স্টেশন এলাকা (Howrah)</option>
+                            <option value="south_kolkata" data-km="5.0">সাউথ কোলকাতা (Gariahat / Jadavpur)</option>
+                            <option value="north_kolkata" data-km="4.0">নর্থ কোলকাতা (Shyambazar / Hatibagan)</option>
+                            <option value="salt_lake" data-km="6.5">সল্টলেক / নিউ টাউন (Salt Lake / Newtown)</option>
+                            <option value="outer_wb" data-km="10.0">অন্যান্য জেলা / ওয়েস্ট বেঙ্গল (Other Districts)</option>
+                        </select>
+
+                        <div class="flex items-center justify-between text-xs text-stone-600 pt-2 border-t border-stone-200">
+                            <span>অটো ক্যালকুলেটেড ডিস্টেন্স (Locked): <strong id="display-km" class="text-stone-900">0 KM</strong></span>
+                            <span>ডেলিভারি ফি (₹10/KM): <strong id="display-shipping-fee" class="text-amber-700">₹0</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Street Address -->
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase mb-1">সম্পূর্ণ ঠিকানা ও ল্যান্ডমার্ক *</label>
+                        <textarea id="cust-address" rows="2" required class="w-full px-4 py-2.5 rounded-lg border border-stone-300 focus:ring-2 focus:ring-amber-600 focus:outline-none text-sm" placeholder="বাড়ি নং, রাস্তা, ল্যান্ডমার্ক ও পিনকোড দিন..."></textarea>
+                    </div>
+
+                    <!-- Flipkart-Style Interactive Payment Gateway Selection -->
+                    <div class="space-y-3 pt-2 border-t border-stone-200">
+                        <label class="block text-xs font-bold text-stone-700 uppercase">পেমেন্ট মেথড সিলেক্ট করুন *</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="border border-stone-300 rounded-xl p-3.5 flex items-center gap-3 cursor-pointer hover:border-amber-600 transition bg-stone-50 has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50/50">
+                                <input type="radio" name="payment-method" value="online" onclick="togglePaymentOptions('online')" required class="text-amber-600 focus:ring-amber-500">
+                                <div>
+                                    <span class="block text-xs font-bold text-stone-900">অনলাইন পেমেন্ট / UPI</span>
+                                    <span class="block text-[10px] text-stone-500">GPay, PhonePay, Paytm, Cards</span>
+                                </div>
+                            </label>
+                            <label class="border border-stone-300 rounded-xl p-3.5 flex items-center gap-3 cursor-pointer hover:border-amber-600 transition bg-stone-50 has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50/50">
+                                <input type="radio" name="payment-method" value="cod" onclick="togglePaymentOptions('cod')" class="text-amber-600 focus:ring-amber-500">
+                                <div>
+                                    <span class="block text-xs font-bold text-stone-900">ক্যাশ অন ডেলিভারি (COD)</span>
+                                    <span class="block text-[10px] text-stone-500">পণ্য হাতে পেয়ে পেমেন্ট</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Dynamic Online Payment Gateway Expandable Drawer (Flipkart Style) -->
+                        <div id="online-payment-drawer" class="hidden bg-amber-50/60 border border-amber-200 p-4 rounded-xl space-y-3 mt-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-amber-900 uppercase"><i class="fa-solid fa-qrcode mr-1"></i> ইনস্ট্যান্ট ইউপিআই / স্ক্যানার পেমেন্ট</span>
+                                <span class="text-[10px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded">সুরক্ষিত গেটওয়ে</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="selectUpiApp('gpay')" id="btn-gpay" class="upi-app-btn border border-stone-300 bg-white hover:border-amber-600 p-2 rounded-lg text-center text-xs font-medium transition">
+                                    <i class="fa-brands fa-google-pay text-lg text-blue-600 block mb-1"></i> Google Pay
+                                </button>
+                                <button type="button" onclick="selectUpiApp('phonepe')" id="btn-phonepe" class="upi-app-btn border border-stone-300 bg-white hover:border-amber-600 p-2 rounded-lg text-center text-xs font-medium transition">
+                                    <i class="fa-solid fa-mobile-screen text-lg text-purple-600 block mb-1"></i> PhonePe
+                                </button>
+                                <button type="button" onclick="selectUpiApp('paytm')" id="btn-paytm" class="upi-app-btn border border-stone-300 bg-white hover:border-amber-600 p-2 rounded-lg text-center text-xs font-medium transition">
+                                    <i class="fa-solid fa-wallet text-lg text-cyan-600 block mb-1"></i> Paytm / UPI
+                                </button>
+                            </div>
+                            <div id="upi-qr-box" class="hidden text-center bg-white p-3 rounded-lg border border-stone-200 space-y-2">
+                                <div class="w-28 h-28 mx-auto bg-stone-100 border border-stone-300 rounded flex items-center justify-center p-2">
+                                    <i class="fa-solid fa-qrcode text-6xl text-stone-800"></i>
+                                </div>
+                                <p class="text-[11px] text-stone-600">স্ক্যান করুন অথবা ইউপিআই আইডি তে পে করুন: <strong class="text-stone-900">zuri.store@upi</strong></p>
+                                <div class="flex items-center justify-center gap-2">
+                                    <input type="text" id="upi-txn-id" placeholder="টানজেকশন ID বা UPI Ref No দিন (যেমন: UPI/1234...)" class="w-full text-xs px-3 py-1.5 border rounded border-stone-300 focus:outline-none focus:ring-1 focus:ring-amber-600">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Submit Action -->
+                    <div class="pt-4 border-t border-stone-200 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-stone-500 block">টোটাল পেবেল অ্যামাউন্ট</span>
+                            <span id="modal-final-total" class="text-lg font-bold text-stone-900">₹0</span>
+                        </div>
+                        <button type="submit" id="confirm-order-action-btn" class="bg-amber-700 hover:bg-amber-800 text-white font-bold px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-check"></i> অর্ডার ফাইনাল করুন
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Orders Management Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" role="dialog">
+        <div class="min-h-screen px-4 text-center flex items-center justify-center">
+            <div class="fixed inset-0 bg-stone-950/70 backdrop-blur-sm transition-opacity" onclick="closeAdminModal()"></div>
+            <div class="inline-block w-full max-w-3xl text-left align-middle transition-all transform bg-white shadow-2xl rounded-2xl overflow-hidden relative z-10 my-8">
+                <div class="bg-stone-900 text-white px-6 py-4 flex items-center justify-between">
+                    <h3 class="font-bengali text-lg font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-lock text-amber-400"></i> এডমিন প্যানেল: অর্ডারের তালিকা (Orders Tab)
+                    </h3>
+                    <button onclick="closeAdminModal()" class="text-stone-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+                <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+                    <div class="flex items-center justify-between bg-amber-50 p-4 rounded-xl border border-amber-200">
+                        <div>
+                            <h4 class="font-bold text-amber-900 text-sm">লাইভ অর্ডার কন্ট্রোল প্যানেল</h4>
+                            <p class="text-xs text-stone-600">এখানে কাস্টমারদের সমস্ত প্লেস করা অর্ডার দেখতে পাবেন। নতুন অর্ডার আসলে এখানে এন্ট্রি হবে।</p>
+                        </div>
+                        <button onclick="clearAllOrders()" class="text-xs bg-red-100 hover:bg-red-200 text-red-700 font-semibold px-3 py-1.5 rounded-lg transition">
+                            <i class="fa-solid fa-trash mr-1"></i> সব অর্ডার মুছুন
+                        </button>
+                    </div>
+                    <div id="admin-orders-list" class="space-y-3">
+                        <!-- Dynamic orders injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" role="dialog">
+        <div class="min-h-screen px-4 text-center flex items-center justify-center">
+            <div class="fixed inset-0 bg-stone-950/70 backdrop-blur-sm transition-opacity"></div>
+            <div class="inline-block w-full max-w-md text-center align-middle transition-all transform bg-white shadow-2xl rounded-2xl overflow-hidden relative z-10 p-6 sm:p-8 space-y-4">
+                <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="font-bengali text-2xl font-bold text-stone-900">অর্ডার সফলভাবে প্লেস হয়েছে!</h3>
+                <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                    ধন্যবাদ! আপনার অর্ডারটি গ্রহণ করা হয়েছে। অর্ডার আইডি: <strong id="success-order-id" class="text-stone-900">#ZURI-000</strong>। আমাদের টিম দ্রুত আপনার সাথে যোগাযোগ করবে।
+                </p>
+                <div class="pt-4">
+                    <button onclick="closeSuccessModal()" class="w-full bg-stone-900 hover:bg-stone-800 text-white font-medium py-3 rounded-xl transition text-sm">
+                        শপিং পেজে ফিরে যান
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-8 px-4 text-center text-xs border-t border-stone-800 mt-auto">
+        <div class="max-w-7xl mx-auto space-y-2">
+            <p class="font-bengali text-stone-200 text-sm font-bold">Zuri (জুড়ি) - এক্সক্লুসিভ ফ্যাশন ও জুয়েলারি কালেকশন</p>
+            <p>© 2026 Zuri Store. All rights reserved. Developed for high-speed local & Instagram sales.</p>
+        </div>
+    </footer>
+
+    <!-- Application JavaScript -->
+    <script>
+        // Clearance Stock Products (Priced at ₹105 - ₹110 as planned for quick clearance)
+        const products = [
+            {
+                id: 1,
+                name: "রয়েল গোল্ডেন ড্রপ ইয়ারিং",
+                price: 105,
+                originalPrice: 139,
+                tag: "ফ্ল্যাশ সেল",
+                image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=500",
+                desc: "প্রিমিয়াম ফিনিশিং, ডেইলি ইউজ করার জন্য একদম পারফেক্ট।"
+            },
+            {
+                id: 2,
+                name: "মুক্তো ছোঁয়া ক্লাসিক স্টাড",
+                price: 110,
+                originalPrice: 139,
+                tag: "বেস্টসেলার",
+                image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=500",
+                desc: "হালকা ও স্টাইলিশ, যেকোনো পোশাকের সাথে অনবদ্য মানায়।"
+            },
+            {
+                id: 3,
+                name: "অ্যান্টিফিসিয়েল ঝুমকা সেট",
+                price: 105,
+                originalPrice: 139,
+                tag: "লিমিটেড স্টক",
+                image: "https://images.unsplash.com/photo-1629222426573-d02436f5f9ef?auto=format&fit=crop&q=80&w=500",
+                desc: "মডার্ন ও ট্র্যাডিশনাল লুকের পারফেক্ট কম্বিনেশন।"
+            },
+            {
+                id: 4,
+                name: "মিনিমালিস্ট পার্ল হুপ ইয়ারিং",
+                price: 110,
+                originalPrice: 139,
+                tag: "ট্রেন্ডিং",
+                image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&q=80&w=500",
+                desc: "অফিস বা কলেজ যাওয়ার জন্য দারুণ ক্যাজুয়াল লুক।"
+            },
+            {
+                id: 5,
+                name: "রোজ গোল্ড ক্রিস্টাল লুপ",
+                price: 105,
+                originalPrice: 139,
+                tag: "ফ্ল্যাশ সেল",
+                image: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&q=80&w=500",
+                desc: "উজ্জ্বল শাইন ও প্রিমিয়াম পলিশ।"
+            },
+            {
+                id: 6,
+                name: "ভিন্টেজ ব্রোঞ্জ হ্যাংগিং",
+                price: 110,
+                originalPrice: 139,
+                tag: "জনপ্রিয়",
+                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=500",
+                desc: "বোহো ও ক্লাসি স্টাইলের জন্য সেরা পছন্দ।"
+            },
+            {
+                id: 7,
+                name: "সিলভার গ্লো স্টাড পিয়ার্স",
+                price: 105,
+                originalPrice: 139,
+                tag: "লাস্ট পিস",
+                image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=500",
+                desc: "সিম্পল এবং এলিগেন্ট ডেইলি ওয়ার জুয়েলারি।"
+            },
+            {
+                id: 8,
+                name: "বোহেমিয়ান গোল্ডেন লফ",
+                price: 110,
+                originalPrice: 139,
+                tag: "ক্লিয়ারেন্স",
+                image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=500",
+                desc: "শেষ ৮ পিসের মধ্যে অন্যতম আকর্ষণীয় ডিজাইন।"
+            }
+        ];
+
+        let cart = [];
+        let calculatedShippingFee = 0;
+        let selectedUpiAppType = '';
+
+        // Initialize App on DOM Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+        });
+
+        // Render Product Catalog
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = products.map(p => `
+                <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col group">
+                    <div class="relative h-60 overflow-hidden bg-stone-100">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x400/f5f5f4/78350f?text=Zuri+Jewelry'">
+                        <span class="absolute top-3 left-3 bg-amber-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">
+                            ${p.tag}
+                        </span>
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow justify-between space-y-3">
+                        <div>
+                            <h3 class="font-bengali font-bold text-stone-900 text-base mb-1">${p.name}</h3>
+                            <p class="text-stone-500 text-xs line-clamp-2">${p.desc}</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                            <div>
+                                <span class="text-lg font-bold text-stone-900">₹${p.price}</span>
+                                <span class="text-xs text-stone-400 line-through ml-1">₹${p.originalPrice}</span>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="bg-amber-50 hover:bg-amber-700 hover:text-white text-amber-900 font-semibold px-4 py-2 rounded-xl text-xs transition border border-amber-200 flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-cart-plus"></i> ব্যাগে নিন
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cart State Handlers
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+            toggleCart(true);
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById('cart-drawer');
+            if (forceOpen) {
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.toggle('hidden');
+            }
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const shippingEl = document.getElementById('cart-shipping');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
+            badge.textContent = totalCount;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-stone-300"></i>
+                        <p class="text-stone-500 font-bengali text-sm">আপনার ব্যাগ খালি আছে!</p>
+                    </div>
+                `;
+                subtotalEl.textContent = '₹0';
+                shippingEl.textContent = '₹0';
+                totalEl.textContent = '₹0';
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            let subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            
+            // Apply Buy 2+ items 10% extra discount offer
+            let discountAmount = 0;
+            if (totalCount >= 2) {
+                discountAmount = Math.round(subtotal * 0.10);
+            }
+
+            let effectiveSubtotal = subtotal - discountAmount;
+
+            container.innerHTML = cart.map(i => `
+                <div class="py-3 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <img src="${i.image}" class="w-14 h-14 object-cover rounded-xl border border-stone-200">
+                        <div>
+                            <h4 class="font-bengali font-bold text-stone-900 text-sm">${i.name}</h4>
+                            <p class="text-xs text-stone-500">₹${i.price} × ${i.qty}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="updateQuantity(${i.id}, -1)" class="w-7 h-7 bg-stone-100 hover:bg-stone-200 rounded-lg text-stone-700 flex items-center justify-center text-xs font-bold">-</button>
+                        <span class="text-sm font-semibold w-5 text-center">${i.qty}</span>
+                        <button onclick="updateQuantity(${i.id}, 1)" class="w-7 h-7 bg-stone-100 hover:bg-stone-200 rounded-lg text-stone-700 flex items-center justify-center text-xs font-bold">+</button>
+                    </div>
+                </div>
+            `).join('');
+
+            if (totalCount >= 2) {
+                container.innerHTML += `
+                    <div class="pt-2 text-xs text-amber-700 bg-amber-50 p-2 rounded-lg flex items-center justify-between font-semibold">
+                        <span>🔥 ২+ পিস কেনার জন্য ১০% কম্বো ডিসকাউন্ট</span>
+                        <span>-₹${discountAmount}</span>
+                    </div>
+                `;
+            }
+
+            subtotalEl.textContent = `₹${effectiveSubtotal}`;
+            shippingEl.textContent = `₹${calculatedShippingFee}`;
+            totalEl.textContent = `₹${effectiveSubtotal + calculatedShippingFee}`;
+        }
+
+        // Phone Number Validation Function (Must be valid 10-digit Indian mobile starting with 6-9)
+        function validatePhoneInput(input) {
+            const errorEl = document.getElementById('phone-error');
+            const cleanVal = input.value.replace(/\D/g, '').slice(0, 10);
+            input.value = cleanVal;
+
+            const regex = /^[6-9]\d{9}$/;
+            if (cleanVal.length === 10 && !regex.test(cleanVal)) {
+                errorEl.classList.remove('hidden');
+            } else if (cleanVal.length > 0 && cleanVal.length < 10) {
+                errorEl.classList.remove('hidden');
+            } else {
+                errorEl.classList.add('hidden');
+            }
+        }
+
+        // Smart Distance & Auto Shipping Calculation Based on Area
+        function calculateDistance() {
+            const select = document.getElementById('delivery-area');
+            const selectedOption = select.options[select.selectedIndex];
+            const km = parseFloat(selectedOption.getAttribute('data-km') || 0);
+
+            document.getElementById('display-km').textContent = `${km} KM`;
+            
+            // Rate: ₹10 per KM, minimum ₹20 delivery fee
+            calculatedShippingFee = Math.max(20, Math.round(km * 10));
+            document.getElementById('display-shipping-fee').textContent = `₹${calculatedShippingFee}`;
+
+            updateCartUI();
+        }
+
+        // Flipkart-Style UPI Payment Drawer Handler
+        function togglePaymentOptions(method) {
+            const drawer = document.getElementById('online-payment-drawer');
+            if (method === 'online') {
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+                selectedUpiAppType = '';
+                document.getElementById('upi-qr-box').classList.add('hidden');
+            }
+        }
+
+        function selectUpiApp(app) {
+            selectedUpiAppType = app;
+            document.querySelectorAll('.upi-app-btn').forEach(btn => {
+                btn.classList.remove('border-amber-600', 'bg-amber-50');
+            });
+            document.getElementById(`btn-${app}`).classList.add('border-amber-600', 'bg-amber-50');
+            document.getElementById('upi-qr-box').classList.remove('hidden');
+        }
+
+        // Checkout Modal Controllers
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            toggleCart(false);
+            
+            // Calculate initial shipping based on default area
+            document.getElementById('delivery-area').selectedIndex = 0;
+            calculatedShippingFee = 20;
+            document.getElementById('display-km').textContent = '1.5 KM';
+            document.getElementById('display-shipping-fee').textContent = `₹20`;
+            updateCartUI();
+
+            let subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            let totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
+            let discount = totalCount >= 2 ? Math.round(subtotal * 0.10) : 0;
+            let finalAmount = (subtotal - discount) + calculatedShippingFee;
+            document.getElementById('modal-final-total').textContent = `₹${finalAmount}`;
+
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        // Order Submission & Local Storage Persistence
+        function submitOrder(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const area = document.getElementById('delivery-area').value;
+            const address = document.getElementById('cust-address').value;
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+            const upiTxnId = document.getElementById('upi-txn-id').value;
+
+            // Validate Phone
+            if (!/^[6-9]\d{9}$/.test(phone)) {
+                alert('দয়া করে সঠিক ১০ ডিজিটের ভারতীয় মোবাইল নম্বর দিন!');
+                return;
+            }
+
+            // Validate Online Payment Transaction ID
+            if (paymentMethod === 'online' && !upiTxnId.trim()) {
+                alert('অনলাইন পেমেন্ট সম্পন্ন করে অনুগ্রহ করে ট্রানজেকশন ID অথবা UPI Ref No লিখুন!');
+                return;
+            }
+
+            let subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            let totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
+            let discount = totalCount >= 2 ? Math.round(subtotal * 0.10) : 0;
+            let finalAmount = (subtotal - discount) + calculatedShippingFee;
+
+            const orderId = '#ZURI-' + Math.floor(1000 + Math.random() * 9000);
+
+            const newOrder = {
+                orderId,
+                date: new Date().toLocaleString('bn-IN'),
+                customer: { name, phone, address, area },
+                items: [...cart],
+                subtotal,
+                discount,
+                shippingFee: calculatedShippingFee,
+                totalAmount: finalAmount,
+                paymentMethod: paymentMethod === 'online' ? `Online (${selectedUpiAppType.toUpperCase()} - Txn: ${upiTxnId})` : 'Cash on Delivery (COD)'
+            };
+
+            // Save to localStorage so admin orders tab can retrieve it
+            let orders = JSON.parse(localStorage.getItem('zuri_orders') || '[]');
+            orders.unshift(newOrder);
+            localStorage.setItem('zuri_orders', JSON.stringify(orders));
+
+            // Clear Cart & Close Checkout
+            cart = [];
+            updateCartUI();
+            closeCheckoutModal();
+
+            // Show Success Modal
+            document.getElementById('success-order-id').textContent = orderId;
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
+
+        // Admin Orders Modal Controllers
+        function openAdminModal() {
+            renderAdminOrders();
+            document.getElementById('admin-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        function renderAdminOrders() {
+            const listContainer = document.getElementById('admin-orders-list');
+            let orders = JSON.parse(localStorage.getItem('zuri_orders') || '[]');
+
+            if (orders.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-12 bg-stone-50 rounded-xl border border-stone-200">
+                        <i class="fa-solid fa-folder-open text-3xl text-stone-300 mb-2"></i>
+                        <p class="text-stone-500 text-sm">কোনো নতুন অর্ডার জমা হয়নি!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            listContainer.innerHTML = orders.map(o => `
+                <div class="bg-stone-50 border border-stone-200 rounded-xl p-4 space-y-3">
+                    <div class="flex items-center justify-between border-b border-stone-200 pb-2">
+                        <div>
+                            <span class="font-bold text-amber-800 text-sm">${o.orderId}</span>
+                            <span class="text-xs text-stone-500 ml-2">${o.date}</span>
+                        </div>
+                        <span class="bg-stone-200 text-stone-800 font-semibold text-xs px-2.5 py-1 rounded-full">${o.paymentMethod}</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-stone-700">
+                        <div><strong>গ্রাহক:</strong> ${o.customer.name}</div>
+                        <div><strong>ফোন:</strong> +91 ${o.customer.phone}</div>
+                        <div class="sm:col-span-2"><strong>ঠিকানা:</strong> ${o.customer.address} (${o.customer.area})</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-stone-200 space-y-1">
+                        <strong class="text-xs text-stone-900 block mb-1">পণ্য তালিকা:</strong>
+                        ${o.items.map(i => `<div class="text-xs text-stone-600 flex justify-between"><span>• ${i.name} (×${i.qty})</span><span>₹${i.price * i.qty}</span></div>`).join('')}
+                    </div>
+                    <div class="flex justify-between items-center pt-2 border-t border-stone-200 text-xs">
+                        <span class="text-stone-500">ডেলিভারি ফি: ₹${o.shippingFee} | ডিসকাউন্ট: -₹${o.discount}</span>
+                        <span class="font-bold text-base text-amber-700">মোট: ₹${o.totalAmount}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearAllOrders() {
+            if (confirm('আপনি কি সমস্ত অর্ডার হিস্ট্রি মুছে ফেলতে চান?')) {
+                localStorage.removeItem('zuri_orders');
+                renderAdminOrders();
+            }
+        }
+    </script>
+</body>
+</html>
