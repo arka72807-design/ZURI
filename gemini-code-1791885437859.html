@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Zuri - Statement Jewelry</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+        header {
+            background: #111;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .nav-btn, .cart-btn {
+            background: #d4af37;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .nav-btn {
+            background: transparent;
+            border: 1px solid #d4af37;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .banner {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .banner h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .banner p {
+            font-size: 15px;
+            color: #ddd;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+        }
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 12px;
+        }
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .product-price-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            color: #d4af37;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .product-old-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 13px;
+        }
+        .discount-badge {
+            background: #e74c3c;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .add-to-cart {
+            width: 100%;
+            background: #111;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        .add-to-cart:hover {
+            background: #d4af37;
+        }
+
+        /* Product Detail View */
+        .detail-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .detail-img {
+            max-width: 400px;
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .detail-info {
+            flex: 1;
+        }
+
+        /* Cart Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #fff;
+            width: 92%;
+            max-width: 500px;
+            border-radius: 8px;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 8px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .checkout-btn {
+            width: 100%;
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #payment-details {
+            display: none;
+            background: #fdf8e2;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 999;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Profile & Orders Styling */
+        .profile-card, .order-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: #d4af37;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .order-status {
+            font-weight: bold;
+            color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="switchPage('home')">ZURI</div>
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="switchPage('orders')">📦 Orders</button>
+            <button class="nav-btn" onclick="switchPage('profile')">👤 Profile</button>
+            <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="home-page" class="page active">
+            <div class="banner">
+                <h1>Exclusive Statement Jewelry</h1>
+                <p>Elevate your everyday look with Zuri's clearance collection.</p>
+            </div>
+            <h2 style="margin-bottom: 15px;">Clearance Stock (Limited Items)</h2>
+            <div class="products-grid" id="product-list">
+                <!-- Dynamic Products -->
+            </div>
+        </div>
+
+        <!-- PRODUCT DETAIL PAGE -->
+        <div id="detail-page" class="page">
+            <button class="nav-btn" style="color:#333; border-color:#ccc; margin-bottom:15px;" onclick="switchPage('home')">← Back to Home</button>
+            <div class="detail-container" id="product-detail-content">
+                <!-- Dynamic Detail -->
+            </div>
+            <h3 style="margin: 30px 0 15px 0;">Recommended For You</h3>
+            <div class="products-grid" id="recommended-list">
+                <!-- Recommended Items -->
+            </div>
+        </div>
+
+        <!-- ORDERS PAGE -->
+        <div id="orders-page" class="page">
+            <h2>Track Your Orders</h2>
+            <div id="orders-list" style="margin-top: 15px;">
+                <p>No active orders found. Place an order to track it here!</p>
+            </div>
+        </div>
+
+        <!-- PROFILE PAGE -->
+        <div id="profile-page" class="page">
+            <h2>My Profile & Info</h2>
+            <div class="profile-card" style="margin-top: 15px;">
+                <h3>Zuri Store Support</h3>
+                <p style="margin: 8px 0; color: #555;">Your destination for stylish everyday & occasion jewelry.</p>
+                <div class="social-links">
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
+                    <a href="https://facebook.com" target="_blank">Facebook</a>
+                </div>
+            </div>
+            <div class="profile-card">
+                <h3>Terms & Conditions</h3>
+                <p style="font-size: 14px; color: #666; margin-top: 5px;">All sales are final during clearance stock. Delivery charges depend on the selected distance zone.</p>
+            </div>
+            <div class="profile-card">
+                <h3>Help & Support</h3>
+                <p style="font-size: 14px; color: #666; margin-top: 5px;">Need assistance? Click the WhatsApp floating icon at the bottom right to chat directly with us!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Cart</h2>
+                <button class="close-btn" onclick="toggleCart()">&times;</button>
+            </div>
+            <div id="cart-items-container">
+                <p>Your cart is empty.</p>
+            </div>
+            <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                <p><strong>Subtotal: ₹<span id="subtotal">0</span></strong></p>
+                <p><strong>Delivery Fee: ₹<span id="delivery-fee">0</span></strong></p>
+                <p><strong>Total: ₹<span id="grand-total">0</span></strong></p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3>Checkout Details</h3>
+                <div class="form-group" style="margin-top: 10px;">
+                    <label>Full Name</label>
+                    <input type="text" id="cust-name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number (10 digits)</label>
+                    <input type="tel" id="cust-phone" maxlength="10" placeholder="e.g. 9876543210">
+                </div>
+                <div class="form-group">
+                    <label>Select Delivery Area (Auto Distance & Fee)</label>
+                    <select id="delivery-area" onchange="calculateDelivery()">
+                        <option value="0">-- Select Area --</option>
+                        <option value="2">Local Area (2 km - ₹20)</option>
+                        <option value="5">City Zone (5 km - ₹50)</option>
+                        <option value="10">Outer Area (10 km - ₹100)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="payment-method" onchange="togglePaymentBox()">
+                        <option value="cod">Cash on Delivery</option>
+                        <option value="online">Online Payment / UPI</option>
+                    </select>
+                </div>
+                <div id="payment-details">
+                    <p><strong>Scan & Pay via UPI:</strong></p>
+                    <p>UPI ID: <code>zuri@upi</code></p>
+                    <p style="margin-top: 5px;">After payment, enter Transaction ID / UTR below:</p>
+                    <input type="text" id="txn-id" placeholder="Enter 12-digit UPI Transaction ID" style="margin-top: 5px;">
+                </div>
+                <button class="checkout-btn" style="margin-top: 15px;" onclick="placeOrder()">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919876543210?text=Hi%20Zuri,%20I%20want%20to%20know%20more%20about%20your%20jewelry!" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        💬
+    </a>
+
+    <script>
+        const products = [
+            { id: 1, name: "Classic Pearl Earring", price: 105, oldPrice: 139, discount: "25% OFF", img: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=500&q=80", desc: "Perfect for daily office or college wear with fine glossy finish." },
+            { id: 2, name: "Minimalist Gold Drop", price: 105, oldPrice: 139, discount: "25% OFF", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80", desc: "Lightweight and elegant gold-plated everyday drop earring." },
+            { id: 3, name: "Chic Silver Hoops", price: 110, oldPrice: 139, discount: "20% OFF", img: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=500&q=80", desc: "Trendy silver hoops suited for casual hangouts and parties." },
+            { id: 4, name: "Boho Fringe Earring", price: 105, oldPrice: 139, discount: "25% OFF", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80", desc: "Artistic bohemian design to elevate ethnic and western outfits." },
+            { id: 5, name: "Ruby Stone Stud", price: 110, oldPrice: 139, discount: "20% OFF", img: "https://images.unsplash.com/photo-1629222479265-4d2919864222?auto=format&fit=crop&w=500&q=80", desc: "Vibrant ruby stone style for festive mini occasions." },
+            { id: 6, name: "Emerald Glint Earring", price: 105, oldPrice: 139, discount: "25% OFF", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80", desc: "Subtle emerald tone matching your daily ethnic wardrobe." },
+            { id: 7, name: "Royal Vintage Hangings", price: 110, oldPrice: 139, discount: "20% OFF", img: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=500&q=80", desc: "Classic royal look without compromising on comfort." },
+            { id: 8, name: "Dainty Butterfly Stud", price: 105, oldPrice: 139, discount: "25% OFF", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80", desc: "Cute butterfly design adored by teenagers and young professionals." }
+        ];
+
+        let cart = [];
+        let orders = [];
+        let deliveryFee = 0;
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId + '-page').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function renderProducts() {
+            const list = document.getElementById('product-list');
+            list.innerHTML = products.map(p => `
+                <div class="product-card" onclick="viewProduct(${p.id})">
+                    <img src="${p.img}" alt="${p.name}" class="product-img">
+                    <div class="product-info">
+                        <span class="discount-badge">${p.discount}</span>
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-price-box">
+                            <span class="product-price">₹${p.price}</span>
+                            <span class="product-old-price">₹${p.oldPrice}</span>
+                        </div>
+                        <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function viewProduct(id) {
+            const product = products.find(p => p.id === id);
+            const detailContent = document.getElementById('product-detail-content');
+            detailContent.innerHTML = `
+                <img src="${product.img}" alt="${product.name}" class="detail-img">
+                <div class="detail-info">
+                    <span class="discount-badge">${product.discount}</span>
+                    <h2 style="margin-bottom: 10px;">${product.name}</h2>
+                    <div class="product-price-box" style="font-size: 18px;">
+                        <span class="product-price">₹${product.price}</span>
+                        <span class="product-old-price">₹${product.oldPrice}</span>
+                    </div>
+                    <p style="margin: 15px 0; color: #555;">${product.desc}</p>
+                    <button class="add-to-cart" style="padding: 12px; font-size: 16px;" onclick="addToCart(${product.id})">Add to Cart</button>
+                </div>
+            `;
+
+            // Render recommended products (random 4 excluding current)
+            const recs = products.filter(p => p.id !== id).slice(0, 4);
+            const recList = document.getElementById('recommended-list');
+            recList.innerHTML = recs.map(p => `
+                <div class="product-card" onclick="viewProduct(${p.id})">
+                    <img src="${p.img}" alt="${p.name}" class="product-img">
+                    <div class="product-info">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-price">₹${p.price}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            switchPage('detail');
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCartUI();
+            alert(product.name + ' added to cart!');
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const container = document.getElementById('cart-items-container');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p>Your cart is empty.</p>';
+                document.getElementById('subtotal').innerText = '0';
+                document.getElementById('grand-total').innerText = '0';
+                return;
+            }
+
+            container.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <span>₹${item.price} <button onclick="removeFromCart(${index})" style="background:red; color:white; border:none; padding:2px 6px; cursor:pointer; margin-left:5px;">X</button></span>
+                </div>
+            `).join('');
+
+            let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            
+            if (cart.length >= 2) {
+                subtotal = Math.round(subtotal * 0.9); // 10% combo discount
+            }
+
+            document.getElementById('subtotal').innerText = subtotal;
+            document.getElementById('grand-total').innerText = subtotal + deliveryFee;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function calculateDelivery() {
+            const area = document.getElementById('delivery-area').value;
+            const km = parseInt(area);
+            deliveryFee = km * 10; 
+            document.getElementById('delivery-fee').innerText = deliveryFee;
+            updateCartUI();
+        }
+
+        function togglePaymentBox() {
+            const method = document.getElementById('payment-method').value;
+            document.getElementById('payment-details').style.display = method === 'online' ? 'block' : 'none';
+        }
+
+        function placeOrder() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const area = document.getElementById('delivery-area').value;
+            const method = document.getElementById('payment-method').value;
+            const txnId = document.getElementById('txn-id').value.trim();
+
+            if (!name || !phone) {
+                alert('Please fill in your name and phone number.');
+                return;
+            }
+
+            const phoneRegex = /^[6-9]\d{9}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('Please enter a valid 10-digit Indian mobile number.');
+                return;
+            }
+
+            if (area === "0") {
+                alert('Please select a delivery area.');
+                return;
+            }
+
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            if (method === 'online' && !txnId) {
+                alert('Please enter the online UPI Transaction ID to confirm payment.');
+                return;
+            }
+
+            const newOrder = {
+                id: 'ZURI-' + Math.floor(100000 + Math.random() * 900000),
+                items: [...cart],
+                total: parseInt(document.getElementById('grand-total').innerText),
+                status: 'Order Confirmed & Packed',
+                date: new Date().toLocaleDateString()
+            };
+
+            orders.push(newOrder);
+            renderOrders();
+
+            alert('Order placed successfully! Thank you, ' + name + '.');
+            cart = [];
+            toggleCart();
+            updateCartUI();
+            switchPage('orders');
+        }
+
+        function renderOrders() {
+            const container = document.getElementById('orders-list');
+            if (orders.length === 0) {
+                container.innerHTML = '<p>No active orders found. Place an order to track it here!</p>';
+                return;
+            }
+
+            container.innerHTML = orders.map(o => `
+                <div class="order-card">
+                    <h4>Order ID: ${o.id}</h4>
+                    <p style="font-size: 14px; color: #666; margin: 5px 0;">Date: ${o.date} | Total: ₹${o.total}</p>
+                    <p style="font-size: 14px; margin-bottom: 8px;">Items: ${o.items.map(i => i.name).join(', ')}</p>
+                    <p>Status: <span class="order-status">${o.status}</span></p>
+                </div>
+            `).join('');
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
