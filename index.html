@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juri (জুড়ি) | Handmade Luxury Jewelry & E-Commerce</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Google Maps API for dynamic distance calculation -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-PlaceholderKey-ChangeIfNeeded&libraries=geometry"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA8C2C',
+                        },
+                        luxury: {
+                            bg: '#0F0F0F',
+                            card: '#1A1A1A',
+                            border: '#333333'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F0F0F;
+            color: #E5E7EB;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-luxury-bg text-gray-100 min-h-screen flex flex-col selection:bg-gold selection:text-black">
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-gold text-black font-semibold px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-lg"></i>
+        <span id="toast-message">Item added to cart successfully!</span>
+    </div>
+
+    <!-- Top Sliding Marquee Banner -->
+    <div class="bg-gold text-black font-semibold text-xs sm:text-sm py-2 overflow-hidden whitespace-nowrap z-50 shadow-inner">
+        <div class="animate-marquee">
+            <span class="mx-8"><i class="fa-solid fa-gift mr-2"></i> Buy 2 items together & get extra 10% OFF!</span>
+            <span class="mx-8">&bull;</span>
+            <span class="mx-8">একসাথে দুটো কিনলে এক্সট্রা ১০% অফ! (Buy 2 items get extra 10% OFF)</span>
+            <span class="mx-8">&bull;</span>
+            <span class="mx-8"><i class="fa-solid fa-gem mr-2"></i> Handcrafted Artisan Jewelry by Juri (জুড়ি)</span>
+        </div>
+    </div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-luxury-bg/90 backdrop-blur-md border-b border-luxury-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="font-serif text-3xl font-bold tracking-wider text-gold group-hover:text-gold-light transition-colors">
+                    Juri <span class="text-xs font-sans tracking-normal uppercase border border-gold/40 px-1.5 py-0.5 rounded text-gold-light ml-1">জুড়ি</span>
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#home" class="hover:text-gold transition-colors">Home (হোম)</a>
+                <a href="#collection" class="hover:text-gold transition-colors">Collection (কালেকশন)</a>
+                <a href="#combos" class="hover:text-gold transition-colors">Combo Offers (কম্বো অফার)</a>
+                <a href="#about" class="hover:text-gold transition-colors">About (আমাদের সম্পর্কে)</a>
+                <a href="#contact" class="hover:text-gold transition-colors">Contact (যোগাযোগ)</a>
+            </nav>
+
+            <!-- Actions (Cart & Mobile Menu Toggle) -->
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCart()" class="relative p-2.5 rounded-full bg-luxury-card border border-luxury-border hover:border-gold transition-colors text-gold">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-gold text-black font-bold text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-full bg-luxury-card border border-luxury-border text-gray-300 hover:text-gold">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-luxury-card border-b border-luxury-border px-6 py-4 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-1">Home (হোম)</a>
+            <a href="#collection" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-1">Collection (কালেকশন)</a>
+            <a href="#combos" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-1">Combo Offers (কম্বো অফার)</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-1">About (আমাদের সম্পর্কে)</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-gold py-1">Contact (যোগাযোগ)</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative overflow-hidden py-20 lg:py-32 border-b border-luxury-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 text-center lg:text-left">
+                <span class="inline-block px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold tracking-widest uppercase border border-gold/20">
+                    Handmade Artistry &bull; এক্সক্লুসিভ জুয়েলারি কালেকশন
+                </span>
+                <h1 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight leading-tight">
+                    Timeless Elegance in Every <span class="text-gold italic">Handcrafted Piece</span>
+                </h1>
+                <p class="text-gray-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light">
+                    Discover exquisite handmade earrings and statement jewelry created with artistic passion by **Juri (জুড়ি)**.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#collection" class="px-8 py-4 bg-gold hover:bg-gold-dark text-black font-semibold rounded-xl shadow-lg shadow-gold/20 transition-all text-center">
+                        Explore Collection (কালেকশন দেখুন)
+                    </a>
+                    <a href="#combos" class="px-8 py-4 bg-luxury-card hover:bg-luxury-border text-gold border border-gold/40 rounded-xl transition-all text-center">
+                        View Combo Offers (কম্বো অফার)
+                    </a>
+                </div>
+            </div>
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-gold to-amber-600 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
+                <div class="relative rounded-3xl overflow-hidden border border-luxury-border bg-luxury-card aspect-[4/5] shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" 
+                         alt="Juri Handmade Jewelry" class="w-full h-full object-cover transform hover:scale-105 transition duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Collection Section -->
+    <section id="collection" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-gold">The Artisan Collection (আর্টিজান কালেকশন)</h2>
+            <p class="text-gray-400 text-sm sm:text-base">Meticulously crafted handmade earrings and jewelry designed for absolute elegance.</p>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic Products Injected via JS -->
+        </div>
+    </section>
+
+    <!-- Combo Offers Section -->
+    <section id="combos" class="py-20 bg-luxury-card border-y border-luxury-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-xs uppercase tracking-widest text-gold font-semibold">Special Savings (বিশেষ ছাড়)</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold tracking-tight">Exclusive Combo Deals (কম্বো ডিল)</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Buy any 2 items and get automatic extra 10% discount on your order!</p>
+            </div>
+
+            <div id="combo-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Dynamic Combos Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="rounded-3xl overflow-hidden border border-luxury-border bg-luxury-card aspect-[4/3] shadow-xl">
+                <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&q=80" 
+                     alt="About Juri" class="w-full h-full object-cover">
+            </div>
+            <div class="space-y-6">
+                <span class="text-xs uppercase tracking-widest text-gold font-semibold">The Story Behind Juri (আমাদের গল্প)</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-gray-100">Handcrafted Art Pieces Made With Love</h2>
+                <p class="text-gray-400 leading-relaxed font-light">
+                    At **Juri (জুড়ি)**, every single pair of earrings and jewelry piece is meticulously handmade by skilled artisans, ensuring unique artistic flair, supreme quality, and absolute perfection.
+                </p>
+                <div class="grid grid-cols-2 gap-6 pt-2">
+                    <div class="p-4 rounded-2xl bg-luxury-card border border-luxury-border">
+                        <i class="fa-solid fa-gem text-gold text-2xl mb-2"></i>
+                        <h4 class="font-semibold text-gray-200">100% Handmade</h4>
+                        <p class="text-xs text-gray-400 mt-1">Crafted with precise artistic details.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-luxury-card border border-luxury-border">
+                        <i class="fa-solid fa-medal text-gold text-2xl mb-2"></i>
+                        <h4 class="font-semibold text-gray-200">Premium Finish</h4>
+                        <p class="text-xs text-gray-400 mt-1">Durable polish for lasting radiance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact Section -->
+    <footer id="contact" class="bg-luxury-card border-t border-luxury-border mt-auto pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div class="space-y-4">
+                <span class="font-serif text-2xl font-bold text-gold">Juri <span class="text-xs font-sans tracking-normal uppercase border border-gold/40 px-1.5 py-0.5 rounded text-gold-light ml-1">জুড়ি</span></span>
+                <p class="text-gray-400 text-sm font-light">
+                    Your premier destination for exquisite handmade earrings and statement jewelry pieces.
+                </p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-gold font-semibold tracking-wider text-sm uppercase">Quick Links (কুইক লিঙ্ক)</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#home" class="hover:text-gold transition-colors">Home (হোম)</a></li>
+                    <li><a href="#collection" class="hover:text-gold transition-colors">Collection (কালেকশন)</a></li>
+                    <li><a href="#combos" class="hover:text-gold transition-colors">Combo Offers (কম্বো অফার)</a></li>
+                    <li><a href="#about" class="hover:text-gold transition-colors">About Us (আমাদের সম্পর্কে)</a></li>
+                </ul>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-gold font-semibold tracking-wider text-sm uppercase">Connect & Order (যোগাযোগ)</h4>
+                <p class="text-sm text-gray-400">Have inquiries or wish to order directly on WhatsApp?</p>
+                <a href="https://wa.me/919876543210?text=Hello%20Juri%20(জুড়ি),%20I%20would%20like%20to%20know%20more%20about%20your%20jewelry." target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-medium text-sm transition-colors shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-luxury-border text-center text-xs text-gray-500">
+            &copy; 2026 Juri (জুড়ি). All rights reserved. Handcrafted with elegance.
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Drawer Overlay -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden transition-opacity opacity-0" onclick="toggleCart()"></div>
+
+    <!-- Shopping Cart Drawer Panel -->
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[460px] bg-luxury-card border-l border-luxury-border z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <div class="p-6 border-b border-luxury-border flex items-center justify-between">
+            <h3 class="font-serif text-xl font-bold text-gold flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping"></i> Your Shopping Bag (শপিং ব্যাগ)
+            </h3>
+            <button onclick="toggleCart()" class="p-2 rounded-full hover:bg-luxury-border text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-luxury-border">
+            <!-- Cart items populated via JS -->
+        </div>
+
+        <div id="cart-footer" class="p-6 border-t border-luxury-border bg-luxury-bg space-y-4">
+            <!-- Combo Discount Notice Banner -->
+            <div id="combo-notice" class="hidden bg-gold/10 border border-gold/30 rounded-xl p-3 text-xs text-gold flex items-center gap-2">
+                <i class="fa-solid fa-percent text-base"></i>
+                <span>Combo Offer Active: Extra 10% OFF applied for buying 2+ items! (১০% এক্সট্রা অফ অ্যাপ্লাইড)</span>
+            </div>
+
+            <!-- Distance & Shipping Calc Box -->
+            <div class="space-y-2 bg-luxury-card p-4 rounded-xl border border-luxury-border">
+                <div class="flex justify-between items-center text-xs text-gray-400">
+                    <span>Delivery Location (লোকেশন):</span>
+                    <button onclick="detectLocation()" class="text-gold hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-location-crosshairs"></i> Auto-Detect
+                    </button>
+                </div>
+                <div id="location-status" class="text-xs text-emerald-400 font-medium">Store location detected via GPS. Distance: <span id="distance-val">3.5</span> km</div>
+                <div class="text-xs text-gray-400">Delivery Charge (@ ₹3/km): <span id="shipping-cost" class="text-gold font-semibold">₹11</span></div>
+            </div>
+
+            <!-- Customer Details Form -->
+            <div class="space-y-3">
+                <div class="flex rounded-xl overflow-hidden border border-luxury-border focus-within:border-gold">
+                    <span class="bg-luxury-card px-3 py-2.5 text-xs text-gray-300 flex items-center border-r border-luxury-border font-semibold">+91</span>
+                    <input type="tel" id="cust-phone" placeholder="Enter 10-digit mobile number" maxlength="10" class="w-full bg-luxury-bg px-3 py-2.5 text-xs text-gray-100 focus:outline-none">
+                </div>
+                
+                <!-- Payment Method Selection -->
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" onclick="setPaymentMethod('upi')" id="pay-upi-btn" class="py-2 px-3 rounded-xl border border-gold bg-gold/10 text-gold text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-qrcode"></i> UPI Payment
+                    </button>
+                    <button type="button" onclick="setPaymentMethod('cod')" id="pay-cod-btn" class="py-2 px-3 rounded-xl border border-luxury-border bg-luxury-card text-gray-400 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-wallet"></i> COD (+₹9 extra)
+                    </button>
+                </div>
+
+                <!-- UPI Details Container -->
+                <div id="upi-container" class="space-y-2 pt-1">
+                    <input type="text" id="upi-id-input" placeholder="Enter your UPI ID (e.g. username@oksbi)" class="w-full bg-luxury-bg border border-luxury-border rounded-xl px-3 py-2.5 text-xs text-gray-100 focus:border-gold focus:outline-none">
+                    <div class="flex items-center justify-between text-[11px] text-gray-400 px-1">
+                        <label class="flex items-center gap-1.5 cursor-pointer">
+                            <input type="checkbox" id="save-upi-chk" class="accent-[#D4AF37]"> Save UPI for next time
+                        </label>
+                        <span class="text-emerald-400 font-mono">Merchant UPI: juri.jewels@okhdfc</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-1.5 pt-2 border-t border-luxury-border">
+                <div class="flex justify-between text-xs text-gray-400">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">₹0</span>
+                </div>
+                <div id="discount-row" class="flex justify-between text-xs text-emerald-400 hidden">
+                    <span>Combo 10% Discount:</span>
+                    <span id="cart-discount">-₹0</span>
+                </div>
+                <div class="flex justify-between text-xs text-gray-400">
+                    <span>Delivery Fee:</span>
+                    <span id="cart-shipping-fee">₹0</span>
+                </div>
+                <div id="cod-row" class="flex justify-between text-xs text-gray-400 hidden">
+                    <span>COD Extra Charge:</span>
+                    <span>₹9</span>
+                </div>
+                <div class="flex justify-between text-base font-semibold pt-1">
+                    <span class="text-gray-400">Total Amount:</span>
+                    <span id="cart-total" class="text-gold text-xl font-serif">₹0</span>
+                </div>
+            </div>
+
+            <button onclick="proceedToCheckout()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm">
+                <i class="fa-solid fa-shield-halved text-lg"></i> Pay & Place Order (অর্ডার কনফার্ম করুন)
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Realistic Handmade Jewelry Database for Juri (জুড়ি) with accurate pricing
+        const products = [
+            {
+                id: 1,
+                name: "Aura Golden Dangle Earrings",
+                category: "Earrings",
+                price: 499,
+                image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&w=500&q=80",
+                description: "Handcrafted intricate golden dangling earrings with delicate gemstone accents."
+            },
+            {
+                id: 2,
+                name: "Royal Velvet Statement Jhumka",
+                category: "Ethnic",
+                price: 699,
+                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80",
+                description: "Traditional heritage craftsmanship with a modern luxury golden finish."
+            },
+            {
+                id: 3,
+                name: "Celestial Pearl Drop Earrings",
+                category: "Minimalist",
+                price: 399,
+                image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80",
+                description: "Subtle elegance featuring luminous freshwater pearls and fine metallic work."
+            },
+            {
+                id: 4,
+                name: "Boho Chic Artisanal Hoops",
+                category: "Modern",
+                price: 349,
+                image: "https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=500&q=80",
+                description: "Lightweight, artistic textured hoops designed for everyday sophistication."
+            },
+            {
+                id: 5,
+                name: "Emerald Grace Chandbali",
+                category: "Ethnic",
+                price: 899,
+                image: "https://images.unsplash.com/photo-1611591478371-30e4fe31171f?auto=format&fit=crop&w=500&q=80",
+                description: "Stunning handcrafted chandbali adorned with rich green stone highlights."
+            },
+            {
+                id: 6,
+                name: "Solaris Geometric Studs",
+                category: "Minimalist",
+                price: 299,
+                image: "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=500&q=80",
+                description: "Bold geometric shapes combined with refined minimal luxury aesthetic."
+            }
+        ];
+
+        // Combo Offers Database
+        const combos = [
+            {
+                id: 'c1',
+                name: "Festive Dual Elegance Set",
+                items: "Aura Golden Dangle + Royal Velvet Jhumka",
+                price: 1099,
+                originalPrice: 1198,
+                discountBadge: "Save ₹100 + Extra 10% OFF",
+                image: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 'c2',
+                name: "Minimalist Everyday Duo",
+                items: "Celestial Pearl Drop + Solaris Geometric Studs",
+                price: 649,
+                originalPrice: 698,
+                discountBadge: "Save ₹50 + Extra 10% OFF",
+                image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // Shopping Cart State
+        let cart = [];
+        let paymentMethod = 'upi'; // 'upi' or 'cod'
+        let calculatedDistance = 3.5; // default in km
+
+        // Store Coordinates (e.g. Kolkata / North Dumdum reference center)
+        const storeCoords = { lat: 22.6515, lng: 88.4022 };
+
+        // Initialize Store on Load
+        window.onload = function() {
+            renderStore();
+            loadSavedUPI();
+            detectLocation(); // Auto check location on load
+        };
+
+        function renderStore() {
+            // Render Products
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = products.map(p => `
+                <div class="group bg-luxury-card rounded-3xl border border-luxury-border hover:border-gold/50 transition-all duration-300 overflow-hidden flex flex-col shadow-lg">
+                    <div class="relative aspect-[4/5] overflow-hidden bg-luxury-bg">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 bg-luxury-bg/80 backdrop-blur-md text-gold text-xs px-3 py-1 rounded-full border border-gold/30 font-medium">
+                            ${p.category}
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1 justify-between space-y-4">
+                        <div class="space-y-2">
+                            <h3 class="font-serif text-xl font-bold text-gray-100 group-hover:text-gold transition-colors">${p.name}</h3>
+                            <p class="text-gray-400 text-xs line-clamp-2 font-light">${p.description}</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <span class="text-2xl font-serif font-bold text-gold">₹${p.price}</span>
+                            <button onclick="addToCart('${p.id}', 'product')" class="px-4 py-2.5 bg-gold hover:bg-gold-dark text-black font-semibold rounded-xl text-sm transition-all shadow-md flex items-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Combos
+            const comboGrid = document.getElementById('combo-grid');
+            comboGrid.innerHTML = combos.map(c => `
+                <div class="group bg-luxury-bg rounded-3xl border border-luxury-border hover:border-gold/50 transition-all duration-300 overflow-hidden flex flex-col sm:flex-row shadow-lg">
+                    <div class="sm:w-1/2 relative overflow-hidden bg-luxury-card aspect-[4/3] sm:aspect-auto">
+                        <img src="${c.image}" alt="${c.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-3 py-1 rounded-full font-bold shadow">
+                            ${c.discountBadge}
+                        </span>
+                    </div>
+                    <div class="sm:w-1/2 p-6 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <h3 class="font-serif text-xl font-bold text-gray-100 group-hover:text-gold transition-colors">${c.name}</h3>
+                            <p class="text-gray-400 text-xs font-light">${c.items}</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-2xl font-serif font-bold text-gold">₹${c.price}</span>
+                                <span class="text-sm text-gray-500 line-through ml-2">₹${c.originalPrice}</span>
+                            </div>
+                            <button onclick="addToCart('${c.id}', 'combo')" class="px-4 py-2.5 bg-gold hover:bg-gold-dark text-black font-semibold rounded-xl text-sm transition-all shadow-md flex items-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Grab
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Add Item to Cart
+        function addToCart(id, type) {
+            let item = type === 'product' ? products.find(p => p.id == id) : combos.find(c => c.id == id);
+            const existing = cart.find(i => i.id === id && i.type === type);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ id: item.id, name: item.name, price: item.price, type: type, qty: 1, image: item.image });
+            }
+            updateCartUI();
+            showToast(`Added "${item.name}" to bag!`);
+        }
+
+        // Update Cart UI, apply 10% combo discount if total quantity >= 2
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const discountRow = document.getElementById('discount-row');
+            const discountEl = document.getElementById('cart-discount');
+            const shippingFeeEl = document.getElementById('cart-shipping-fee');
+            const codRow = document.getElementById('cod-row');
+            const totalEl = document.getElementById('cart-total');
+            const comboNotice = document.getElementById('combo-notice');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            badge.innerText = totalCount;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-gray-600"></i>
+                        <p class="text-gray-400 text-sm">Your shopping bag is empty.</p>
+                    </div>
+                `;
+                subtotalEl.innerText = '₹0';
+                totalEl.innerText = '₹0';
+                comboNotice.classList.add('hidden');
+                discountRow.classList.add('hidden');
+                codRow.classList.add('hidden');
+                return;
+            }
+
+            let subtotal = 0;
+            container.innerHTML = cart.map((item, index) => {
+                subtotal += item.price * item.qty;
+                return `
+                    <div class="py-4 flex items-center gap-4">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl border border-luxury-border">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-sm text-gray-200">${item.name}</h4>
+                            <span class="text-gold text-sm font-serif">₹${item.price}</span>
+                            <div class="flex items-center gap-3 mt-2">
+                                <button onclick="changeQty(${index}, -1)" class="w-6 h-6 rounded bg-luxury-border text-gray-300 hover:text-white flex items-center justify-center text-xs">-</button>
+                                <span class="text-xs font-semibold">${item.qty}</span>
+                                <button onclick="changeQty(${index}, 1)" class="w-6 h-6 rounded bg-luxury-border text-gray-300 hover:text-white flex items-center justify-center text-xs">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-gray-500 hover:text-red-400 p-2">
+                            <i class="fa-solid fa-trash-can text-sm"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            subtotalEl.innerText = `₹${subtotal}`;
+
+            // Check if 2 or more items total in cart for automatic extra 10% discount
+            let discount = 0;
+            if (totalCount >= 2) {
+                discount = Math.round(subtotal * 0.10);
+                comboNotice.classList.remove('hidden');
+                discountRow.classList.remove('hidden');
+                discountEl.innerText = `-₹${discount}`;
+            } else {
+                comboNotice.classList.add('hidden');
+                discountRow.classList.add('hidden');
+            }
+
+            // Shipping Fee calculation at ₹3 per km
+            let shippingFee = Math.round(calculatedDistance * 3);
+            if (shippingFee < 10) shippingFee = 10; // minimum delivery floor
+            shippingFeeEl.innerText = `₹${shippingFee} (${calculatedDistance} km @ ₹3/km)`;
+
+            // COD extra charge check
+            let codCharge = 0;
+            if (paymentMethod === 'cod') {
+                codCharge = 9;
+                codRow.classList.remove('hidden');
+            } else {
+                codRow.classList.add('hidden');
+            }
+
+            const grandTotal = subtotal - discount + shippingFee + codCharge;
+            totalEl.innerText = `₹${grandTotal}`;
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-overlay');
+            const isOpen = drawer.classList.contains('translate-x-full');
+
+            if (isOpen) {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            } else {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // Automatic GPS Geolocation & Distance Calculation from Store
+        function detectLocation() {
+            const statusEl = document.getElementById('location-status');
+            statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Detecting your location via GPS...';
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const userLat = position.coords.latitude;
+                    const userLng = position.coords.longitude;
+                    
+                    // Calculate distance using Haversine formula
+                    calculatedDistance = calculateHaversineDistance(storeCoords.lat, storeCoords.lng, userLat, userLng);
+                    calculatedDistance = Math.max(1.0, parseFloat(calculatedDistance.toFixed(1)));
+                    
+                    document.getElementById('distance-val').innerText = calculatedDistance;
+                    statusEl.innerHTML = `<span class="text-emerald-400">GPS Location Connected! Distance: ${calculatedDistance} km</span>`;
+                    updateCartUI();
+                }, error => {
+                    // Fallback default distance if GPS denied
+                    calculatedDistance = 3.5;
+                    document.getElementById('distance-val').innerText = calculatedDistance;
+                    statusEl.innerHTML = `<span class="text-amber-400">Using standard delivery zone (${calculatedDistance} km).</span>`;
+                    updateCartUI();
+                });
+            } else {
+                calculatedDistance = 3.5;
+                updateCartUI();
+            }
+        }
+
+        function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the earth in km
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI/180);
+        }
+
+        // Payment Method selection
+        function setPaymentMethod(method) {
+            paymentMethod = method;
+            const upiBtn = document.getElementById('pay-upi-btn');
+            const codBtn = document.getElementById('pay-cod-btn');
+            const upiContainer = document.getElementById('upi-container');
+
+            if (method === 'upi') {
+                upiBtn.className = "py-2 px-3 rounded-xl border border-gold bg-gold/10 text-gold text-xs font-semibold flex items-center justify-center gap-2 transition-all";
+                codBtn.className = "py-2 px-3 rounded-xl border border-luxury-border bg-luxury-card text-gray-400 text-xs font-semibold flex items-center justify-center gap-2 transition-all";
+                upiContainer.classList.remove('hidden');
+            } else {
+                codBtn.className = "py-2 px-3 rounded-xl border border-gold bg-gold/10 text-gold text-xs font-semibold flex items-center justify-center gap-2 transition-all";
+                upiBtn.className = "py-2 px-3 rounded-xl border border-luxury-border bg-luxury-card text-gray-400 text-xs font-semibold flex items-center justify-center gap-2 transition-all";
+                upiContainer.classList.add('hidden');
+            }
+            updateCartUI();
+        }
+
+        function loadSavedUPI() {
+            const savedUpi = localStorage.getItem('juri_user_upi');
+            if (savedUpi) {
+                document.getElementById('upi-id-input').value = savedUpi;
+                document.getElementById('save-upi-chk').checked = true;
+            }
+        }
+
+        // Order Checkout Validation & Processing
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showToast("Your shopping bag is empty!");
+                return;
+            }
+
+            const phoneInput = document.getElementById('cust-phone').value.trim();
+            // Validate Indian 10 digit mobile number
+            const phoneRegex = /^[6-9]\d{9}$/;
+            if (!phoneRegex.test(phoneInput)) {
+                showToast("Please enter a valid 10-digit Indian mobile number (+91).");
+                document.getElementById('cust-phone').focus();
+                return;
+            }
+
+            let upiId = "";
+            if (paymentMethod === 'upi') {
+                upiId = document.getElementById('upi-id-input').value.trim();
+                if (!upiId || !upiId.includes('@')) {
+                    showToast("Please enter a valid UPI ID (e.g. name@oksbi).");
+                    document.getElementById('upi-id-input').focus();
+                    return;
+                }
+                if (document.getElementById('save-upi-chk').checked) {
+                    localStorage.setItem('juri_user_upi', upiId);
+                } else {
+                    localStorage.removeItem('juri_user_upi');
+                }
+
+                // Attempt to trigger UPI app intent (gpay / phonepe / paytm)
+                const totalText = document.getElementById('cart-total').innerText;
+                const upiDeepLink = `upi://pay?pa=juri.jewels@okhdfc&pn=Juri%20Jewelry&am=${totalText.replace('₹','')}&cu=INR`;
+                window.location.href = upiDeepLink;
+            }
+
+            // Construct WhatsApp Order Message with Complete Details
+            let message = `🛍️ *NEW ORDER - JURI (জুড়ি)*\n\n`;
+            message += `📱 *Phone:* +91 ${phoneInput}\n`;
+            message += `💳 *Payment:* ${paymentMethod === 'upi' ? 'UPI (' + upiId + ')' : 'Cash on Delivery (+₹9)'}\n`;
+            message += `📍 *Distance:* ${calculatedDistance} km from store\n\n`;
+            message += `*Items Ordered:*\n`;
+
+            let subtotal = 0;
+            cart.forEach((item, idx) => {
+                message += `${idx + 1}. ${item.name} (x${item.qty}) - ₹${item.price * item.qty}\n`;
+                subtotal += item.price * item.qty;
+            });
+
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            let discount = totalCount >= 2 ? Math.round(subtotal * 0.10) : 0;
+            let shippingFee = Math.max(10, Math.round(calculatedDistance * 3));
+            let codFee = paymentMethod === 'cod' ? 9 : 0;
+            let finalTotal = subtotal - discount + shippingFee + codFee;
+
+            message += `\nSubtotal: ₹${subtotal}`;
+            if (discount > 0) message += `\nCombo Discount (10%): -₹${discount}`;
+            message += `\nDelivery Fee (${calculatedDistance}km): ₹${shippingFee}`;
+            if (codFee > 0) message += `\nCOD Charge: ₹9`;
+            message += `\n*Final Total: ₹${finalTotal}*\n\n_Please confirm my order!_`;
+
+            const encodedMsg = encodeURIComponent(message);
+            // Open direct WhatsApp order to store owner
+            window.open(`https://wa.me/919876543210?text=${encodedMsg}`, '_blank');
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = text;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3500);
+        }
+    </script>
+</body>
+</html>
+```
+eof
+
+I have successfully updated the **Juri (জুড়ি)** e-commerce application with all your requested enhancements:
+1. **Scrolling Combo Banner:** Added a top marquee banner reading *"Buy 2 items together & get extra 10% OFF! / একসাথে দুটো কিনলে এক্সট্রা ১০% অফ!"*.
+2. **Automatic 10% Combo Discount:** Whenever 2 or more items are added to the cart, the system automatically applies an extra 10% discount on the subtotal.
+3. **GPS Location & Shipping Rate:** Fully integrated automatic geolocation distance calculation from the store at **₹3 per km** (replacing the old ₹10 rate).
+4. **Phone Validation:** Enforced the **+91** Indian mobile prefix with strict 10-digit validation prior to placing orders.
+5. **Direct UPI & Saved UPI:** Integrated seamless UPI payment options with auto-saving capability and direct app linking, plus revised **COD extra charge to ₹9**.
